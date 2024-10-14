@@ -1,0 +1,276 @@
+* {
+    font-family: 'Cairo', 'arial', sans-serif;
+  }
+  .badge-primary-soft {
+      background-color: #FBA952 !important;
+      color: #f9fafb !important;
+      font-size:16px ;
+  }
+  
+   .bg-primary{
+    background-color: #2B2F2E !important;
+  }
+  
+  .navbar-dark #header-wrap.fixed-header{
+    background-color: #2B2F2E !important;
+  }
+   
+   .top2{
+    top: 25%;
+   }
+   .top4{
+    top: 11.2vw;
+  }
+  
+  .centerText {
+    position: absolute;
+    width: 50%;
+    right: 50%;
+    text-align: center;
+    font-weight: bold;
+  }
+  
+  .radius{
+    border-radius: 15%;
+  }
+  .centerImage{
+    margin-left: auto;
+      margin-right: auto;
+      display: block;
+  }
+  
+  .centerContent{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .bg-dark{
+    background-color: #2B2F2E !important;
+  }
+  
+  .h2text {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .myTitle span {
+   
+    margin: 0 15px;
+    font-size:22px;
+    font-weight: 1000;
+      color:#FBA952;
+  }
+  
+  .myTitle:before,
+  .myTitle:after {
+    background: #FBA952;
+    height: 2px;
+    flex: 1;
+    content: '';
+  }
+  
+  .smallH:before,
+  .smallH:after
+  {
+    height: 1px;
+  }
+  
+  .wordsbreak{
+    word-wrap: break-word;
+      width: 38%;
+      font-size:16px;
+  }
+  .btn-primary {
+      color: #fff;
+      background-color: #FBA952;
+      border-color: #FBA952;
+  }
+
+  .btn-primary:visited,.btn-primary:link, .btn-primary:active {
+    color: #fff;
+    background-color: #FBA952;
+    border-color: #FBA952;
+}
+  .scroll-top a {
+    background-color: #FBA952;
+  }
+  .loader p{
+    color: #FBA952;
+  }
+  
+  .text-light{
+    color: #FBA952 !important;
+    font-weight: bold;
+  }
+  
+  .textFatures{
+  color: white;
+  line-height: 1.7;
+  font-size: 1.25rem;
+  margin-right:30px ;
+  }
+  
+  .titlePrice{
+      background-color: #797979 !important;
+      color: #f9fafb !important;
+      font-size: 16px;
+      cursor: auto;
+      font-weight: 500;
+      padding: 0.75rem 1rem;
+      text-align: center;
+  }  
+  
+  .mainBtn, .mainBtn:link, .mainBtn:visited, .mainBtn:active{
+    color: white;
+    border: solid 1px #3D3D3D;
+    border-radius:2px ;
+    font-size: 15px;
+    padding: 10px;
+    font-size: 13px;
+    margin: 3px;
+  }
+
+  .mainBtn:hover{background-color:white;color: black;}
+  
+  .mainBtnNav, .mainBtnNav:link, .mainBtnNav:visited, .mainBtnNav:active{
+    
+    font-size: 14px;
+    color: white;
+    border-color: white; 
+    display: none;
+  }
+  .mainBtnNav:hover{background-color:white;color: black;}
+  
+  .secondBtnNav , .secondBtnNav:link, .secondBtnNav:visited, .secondBtnNav:active{
+   
+    background-color:white;
+    color: black;
+    font-size: 14px;
+    display: none;
+  }
+  .secondBtnNav:hover{background-color:white;color: black;}
+  
+  .secondBtn , .secondBtn:link, .secondBtn:visited, .secondBtn:active{
+  
+    padding: 10px;
+    border-radius:2px;
+      color: black;
+      background-color: white;
+      font-size: 13px;
+      margin: 3px;
+  }
+
+  .secondBtn:hover{background-color:white;color: black;}
+  
+  .testUse{
+    text-align: center;
+    background-color:#f6f6f6;
+    color: #b2b2b2;
+    padding: 15px;
+    border-radius: 12px;
+    margin: 5% 25%;
+    width: 50%;
+  }
+  
+ /* .navbar-light .navbar-toggler-icon {
+      background-image: url();
+  }*/
+  
+   .tooltiptext {
+    box-shadow: 2px 5px 5px rgb(189 189 189);
+      visibility: hidden;
+      width: 140px;
+      background-color: white;
+      color: black;
+      text-align: center;
+      border-radius: 6px;
+      padding: 5px 0;
+      position: absolute;
+      z-index: 1;
+      border: solid #fafafa;
+      top: 0px;
+      right: 15%;
+  }
+  
+  #whatsApp:hover .tooltiptext{
+    visibility: visible;
+  }
+   
+  .site-header.navbar-dark .navbar-nav .nav-link:hover {
+     color: #FBA952; 
+     font-weight: normal;
+  }
+  
+  .features{
+    border: solid #2F3332 1px;
+    border-radius: 5px;
+    background-color: #2F3332;
+  }
+  
+
+  .hoverChoice{
+
+    font-size: 22px;
+    color: #797979 ;
+    background-color: WHITE;
+    border-radius: 25px;
+    border-color: #797979;
+
+  }
+  .hoverChoice:hover{
+    background-color: #FBA952;
+    border-color: #FBA952;
+    color: WHITE;
+    border-color: WHITE;
+  }
+  
+  .FSizeNormal{
+    font-size: 1.25rem;
+  }
+  
+  .linkMedia{
+    font-size:13px;font-weight: lighter;color: white;margin-left: 3px;
+  }
+  
+  .gabContent{
+    display: flex;gap: 10px;
+  }
+  
+  .backGroundHeader{
+    background-image:Url('../assets/d2.png');
+    background-position: center;
+    background-repeat: no-repeat; 
+    background-size: cover;
+  }
+  
+  
+  .support{
+    text-align: center;margin-top: 50px;padding: 20px;color:#FBB154;
+  }
+  
+  .offers{
+   
+    height: 100px;
+    position: absolute;
+    top: -13px;
+    right: -30px;
+    font-size: 25px;
+    /*
+    width: 140px;
+     text-align: center; 
+    font-family: system-ui,Cairo; 
+       border-radius: 10px;*/
+  }
+
+  .contectUs ,.contectUs:visited ,.contectUs:active ,.contectUs:link{
+    color:  #2F3332;font-size: 20px;
+    background-color: #FBA952;
+    border-color: #FBA952;
+  }
+  
+  .btn-form{
+    color: #fff;
+    background-color: #FBA952;
+    border-color: #FBA952;
+  }

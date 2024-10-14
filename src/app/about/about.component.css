@@ -1,0 +1,22 @@
+/* Services Section */
+.services .service {
+    margin-bottom: 30px;
+  }
+  
+  .services .service:nth-child(odd) .img-fluid {
+    order: -1;
+  }
+  
+  .services h3 {
+    color: #2ecc71;
+    
+  }
+  .services image {
+    margin: 20px;
+    
+  }
+  
+  .services p {
+    font-size: 1.1em;
+  }
+  
