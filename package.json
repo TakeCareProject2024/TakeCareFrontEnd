@@ -4,7 +4,7 @@
  "scripts": {
   "ng": "ng",
   "start": "ng serve",
-  "build": "npx ng build --configuration production && mv dist/cleaner-app _static",
+  "build": "./node_modules/.bin/ng build --configuration production && mv dist/cleaner-app _static",
   "test": "ng test",
   "lint": "ng lint"
 },
