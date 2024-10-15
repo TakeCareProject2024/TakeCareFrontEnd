@@ -2,11 +2,12 @@
   "name": "cleaner-app",
   "version": "0.0.0",
  "scripts": {
-  "ng": "ng",
-  "start": "ng serve",
-  "build": "ng build --configuration production && mv dist/cleaner-app _static",
-  "test": "ng test",
-  "lint": "ng lint"
+    "ng": "ng",
+    "start": "ng serve",
+    "build": "ng build",
+    "watch": "ng build --watch --configuration development",
+    "test": "ng test",
+    "lint": "ng lint"
 },
   "private": true,
   "dependencies": {
