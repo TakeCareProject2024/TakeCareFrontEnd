@@ -33,19 +33,3 @@
   }
   
   
-.fae {
-  transition: color 0.2s ease-in-out;
-}
-
-.fastaro {
-  color: #ccc; /* Color for the empty star */
-}
-
-.fastar {
-  color: #2ecc71;
-}
-
-.fae:hover {
-  transform: scale(1.2); /* Slight hover effect to make stars grow */
-}
-
