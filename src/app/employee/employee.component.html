@@ -1,5 +1,5 @@
 
-<section class="headEmpl">
+<section class="headEmpl" id="headEmpl">
   <br>
   <div class="row">
     <div class="col-md-1 "></div>  
@@ -27,27 +27,45 @@
   
   <br>
   <br>
+
+<div *ngIf="employees && employees.length > 0; else  noDataTemplate">
+
+
   <div *ngFor="let row of employees | slice:0:(employees.length/4 | ceil); let rowIndex = index" class="row">
-      <div *ngFor="let employee of employees | slice:(rowIndex * 4):(rowIndex * 4 + 4)" class="col-md-3">
-        <div class="card">
-          <div class="card-image">
-              <img src="../../assets/aa.png" alt="Employee Image">
-          </div>
-          <div class="card-content">
-              <h2 class="card-title">{{ employee.firstName }} {{ employee.lastName }} <i><small> - {{ getAge(employee.birthDate) }}</small></i> </h2>
-              <p><span *ngFor="let star of getBooleanArray(employee.valid)"> <i class="fas fa-star" style="color:#2ecc71;"></i> </span> </p>
-              <p class="card-description">{{ employee.firstName }} is <strong>{{ employee.position }}</strong>, {{ employee.jobDescription }}</p>              
-          </div>
-          <div class="text-align:center">
-            <div class="input-group" style="padding: 20px;">
-              <a class="btn btn-success" style="background-color: #2ecc71;" (click)="openEditEmployeePopup(employee)">Edit</a>
-              <a class="btn btn-secondary" (click)="deleteEmployee(employee.id)"><span> <i class="fa fa-trash"></i> </span></a>
-            </div>
-          </div>
-          
+    <div *ngFor="let employee of employees | slice:(rowIndex * 4):(rowIndex * 4 + 4)" class="col-md-3">
+      <div class="card">
+        <div class="card-image">
+            <img src="../../assets/aa.png" alt="Employee Image">
         </div>
+        <div class="card-content">
+            <h2 class="card-title">{{ employee.firstName }} {{ employee.lastName }} <i><small> - {{ getAge(employee.birthDate) }}</small></i> </h2>
+            <p><span *ngFor="let star of getBooleanArray(employee.valid)"> <i class="fas fa-star" style="color:#2ecc71;"></i> </span> </p>
+            <p class="card-description">{{ employee.firstName }} is <strong>{{ employee.position }}</strong>, {{ employee.jobDescription }}</p>              
+        </div>
+        <div class="text-align:center">
+          <div class="input-group" style="padding: 20px;">
+            <a class="btn btn-success" style="background-color: #2ecc71;" (click)="openEditEmployeePopup(employee)">Edit</a>
+            <a class="btn btn-secondary" (click)="deleteEmployee(employee.id)"><span> <i class="fa fa-trash"></i> </span></a>
+          </div>
+        </div>
+        
       </div>
-  </div>
+    </div>
+</div>
+</div>
+
+  <!-- Template for no data -->
+  <ng-template #noDataTemplate >
+    <div class="no-data">
+      <br>
+      <br>
+      <i class="fas fa-info-circle"></i>
+      <p>No data available to display.</p>
+      <br>
+      <br>
+    </div>
+  </ng-template>
+
   <br>
   <br>
 

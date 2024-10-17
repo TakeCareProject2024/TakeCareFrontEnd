@@ -18,13 +18,13 @@ export class EmployeeComponent  implements OnInit{
 
 
   constructor(private apiService: ApiService,private modalService: NgbModal) { 
-
+/*
     this.employees = [
       { id:1 , firstName: 'John',lastName:"Doe",age:22,personalPhotos:"",valid:3,position:"cleaner",jobDescription:"employee to clean company ", birthDate:new Date("2002-5-5"),image:null ,imagePath:"../assets/aa.png" },
       { id:2 ,firstName: 'John',lastName:"Doe",age:22,personalPhotos:"",valid:3,position:"cleaner",jobDescription:"employee to clean company " , birthDate:new Date("2002-5-5"),image:null,imagePath:"../assets/aa.png"},
       { id:3 , firstName: 'John',lastName:"Doe",age:22,personalPhotos:"",valid:3,position:"cleaner",jobDescription:"employee to clean company " , birthDate:new Date("2002-5-5"),image:null,imagePath:""},
       { id:4 , firstName: 'John',lastName:"Doe",age:22,personalPhotos:"",valid:3,position:"cleaner",jobDescription:"employee to clean company " , birthDate:new Date("2002-5-5"),image:null,imagePath:""},    
-    ];
+    ];*/
 
   }
 

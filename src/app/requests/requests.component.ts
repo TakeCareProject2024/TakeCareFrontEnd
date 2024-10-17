@@ -14,7 +14,9 @@ export class RequestsComponent {
   searchCriteria = {
     name: '',        // Filter by name
     dateAdded: '',   // Filter by date added
-    state: ''        // Filter by request status
+    state: ''  ,      // Filter by request status
+    order:'created',
+    valid:''
   };
 
   requests:Request[] = [

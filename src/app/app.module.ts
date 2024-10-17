@@ -17,7 +17,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ReactiveFormsModule } from '@angular/forms';
 import { AddRequestComponent } from './add-request/add-request.component';
 import { MyMapComponent } from './my-map/my-map.component';
-import { CommonModule } from '@angular/common';  // Import CommonModule
+import { CommonModule } from '@angular/common';
+import { RequestElementComponent } from './request-element/request-element.component';  // Import CommonModule
 
 @NgModule({
   declarations: [
@@ -30,6 +31,7 @@ import { CommonModule } from '@angular/common';  // Import CommonModule
     AddEditEmployeeComponent,
     AddRequestComponent,
     MyMapComponent,
+    RequestElementComponent,
   ],
   imports: [
     BrowserModule,

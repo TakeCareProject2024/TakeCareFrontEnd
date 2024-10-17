@@ -74,3 +74,21 @@
   transform: scale(1.2); /* Slight hover effect to make stars grow */
 }
 
+.no-data {
+  text-align: center;
+  padding: 20px;
+  color: #999;
+  font-size: 18px;
+}
+
+.no-data i {
+  font-size: 48px;
+  color: #ccc;
+  margin-bottom: 10px;
+}
+
+.no-data p {
+  margin: 0;
+  font-weight: bold;
+  color: #666;
+}

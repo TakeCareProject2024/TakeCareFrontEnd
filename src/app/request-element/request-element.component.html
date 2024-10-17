@@ -1,0 +1,56 @@
+<div class="col-md-12">
+    <div class="card request-card mb-3">
+    
+      <div class="card-body">
+        <!-- Request Main Info -->
+        <div class="row">
+          <div class="col-md-4">
+            <h5>{{ request.firstName }} {{ request.lastName }}</h5>
+            <p>
+              <a [href]="'mailto:' + request.Email"> {{ request.Email }}</a> <!-- Click to email -->
+            </p>
+            <p>
+              <a [href]="'https://wa.me/' + request.Whatsapp" target="_blank"> {{ request.Whatsapp }}</a> <!-- Click to WhatsApp -->
+            </p>
+            <p>
+              <a [href]="'https://www.google.com/maps/search/?api=1&query=' + request.address" target="_blank">
+                <i class="fa fa-map-marker-alt"></i> 
+              {{ request.address }} 
+              </a>
+               
+            </p>
+          </div>
+
+          <!-- Request Info -->
+          <div class="col-md-4">
+            <p><strong>Date Added:</strong> {{ request.dateRequest | date }}</p>
+            <p><strong>Date of Service:</strong> {{ request.dateExecute | date }}</p>
+            <p><strong>Period:</strong> {{ request.period }} hours</p>
+            
+            <p><strong>Valid: &nbsp; </strong>
+              <span *ngFor="let star of stars;let i = index"> 
+              <i class="fa fae"
+                [ngClass]="i > request.evalute ? 'fa-star-o fastaro' : 'fa-star fastar'"
+              
+                 (click)="changeValid(request, i)"
+                 style="cursor: pointer; font-size: 24px;"
+                 ></i> </span> </p>
+          </div>
+
+          <!-- Request State and Actions -->
+          <div class="col-md-4">
+            <p><strong>Status:</strong></p>
+            <button class="btn btn-sm"
+                    [ngClass]="{'btn-success': request.state === 3, 'btn-warning': request.state === 2, 'btn-info': request.state === 1}"
+                    (click)="changeState(request, 'add')">Add</button>
+            <button class="btn btn-sm"
+                    [ngClass]="{'btn-success': request.state === 3, 'btn-warning': request.state === 2, 'btn-info': request.state === 1}"
+                    (click)="changeState(request, 'in')">In Progress</button>
+            <button class="btn btn-sm"
+                    [ngClass]="{'btn-success': request.state === 3, 'btn-warning': request.state === 2, 'btn-info': request.state === 1}"
+                    (click)="changeState(request, 'done')">Done</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
