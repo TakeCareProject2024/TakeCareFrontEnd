@@ -1,0 +1,59 @@
+
+  /* Request Card Styles */
+  .request-card {
+    border: 1px solid #e3e3e3;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 15px;
+  }
+  
+  .request-card h5 {
+    color: #2ecc71;
+  }
+  
+  .request-card p {
+    margin: 5px 0;
+  }
+  
+  /* Small buttons for the request state */
+  .btn-sm {
+    margin-right: 5px;
+    color: white;
+  }
+  
+  /* Different button styles based on state */
+  .btn-info {
+    background-color: #3498db;
+    border-color: #3498db;
+  }
+  
+  .btn-warning {
+    background-color: #f39c12;
+    border-color: #f39c12;
+  }
+  
+  .btn-success {
+    background-color: #2ecc71;
+    border-color: #2ecc71;
+  }
+  
+  /*---------------*/
+  .star-rating {
+    display: inline-block;
+  }
+  
+  .fae {
+    transition: color 0.2s ease-in-out;
+  }
+  
+  .fastaro {
+    color: #ccc; /* Color for the empty star */
+  }
+  
+  .fastar {
+    color: #2ecc71;
+  }
+  
+  .fae:hover {
+    transform: scale(1.2); /* Slight hover effect to make stars grow */
+  }

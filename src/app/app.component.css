@@ -1,0 +1,169 @@
+/*nave bar*/
+
+.header .navbar {
+  background-color: white;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  height: 50px;
+    margin-top: 10px;
+    border-radius: 7px;
+    
+}
+
+.navbar-brand img {
+  height: 50px;
+}
+
+.nav-link {
+  font-size: 1.1em;
+  color:rgb(28 32 38);
+  margin: 0 ;
+}
+
+.nav-link:hover {
+  color:white;
+}
+
+.nav-item{
+     margin: 0; 
+      padding: -1px;
+      border: none;
+      font-size: inherit;
+      text-align: inherit;
+      line-height: inherit;
+  }
+
+.nav-item:hover {
+  background-color:#2ecc71;
+}
+
+/* Hero Section */
+.hero {
+  height: 100vh;
+  background-size: cover;
+  background-position: center;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.hero h1 {
+  font-size: 3em;
+}
+
+.hero p {
+  font-size: 1.5em;
+}
+
+.btn-primary {
+  background-color: #2ecc71;
+  border-color: #2ecc71;
+}
+
+.btn-primary:hover {
+  background-color: #27ae60;
+  border-color: #27ae60;
+}
+
+/*-------------------*/
+/* Full height for the carousel */
+#backgroundCarousel {
+  position: relative;
+  height: 100vh; /* Full viewport height */
+  overflow: hidden;
+}
+
+/* Full screen background images */
+.carousel-inner .carousel-item {
+  height: 100vh; /* Full viewport height */
+}
+
+.carousel-bg-image {
+  object-fit: cover; /* Cover the entire container */
+  height: 100vh; /* Full viewport height */
+}
+
+/* Overlay Content */
+.carousel-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center; /* Center vertically */
+  justify-content: center; /* Center horizontally */
+  background: rgba(0, 0, 0, 0.5); /* Optional: Semi-transparent black background for contrast */
+}
+
+.carousel-overlay h1 {
+  font-size: 4rem; /* Adjust the size as needed */
+  font-weight: bold;
+  color: #fff; /* White color */
+}
+
+.carousel-overlay p {
+  font-size: 1.5rem; /* Adjust the size as needed */
+  color: #f8f9fa; /* Light color */
+}
+
+
+
+/* ----------------------------- */
+.social-icons i {
+  color: #fff; /* White color for the icons */
+  margin: 0 15px; /* Spacing between icons */
+}
+
+
+/* Default styling for the social icons */
+.social-icons a {
+  text-decoration: none;
+  transition: transform 0.3s ease, color 0.3s ease; /* Smooth animation for transform and color */
+  display: inline-block;
+  margin: 0 15px; /* Add spacing between icons */
+}
+
+/* Hover animation: scaling up and adding shadow */
+.social-icons a:hover {
+  transform: scale(1.2) rotate(10deg); /* Scale and rotate on hover */
+  color: #00ff00; /* Change the icon color */
+}
+
+/* Adding a shadow on hover */
+.social-icons a:hover i {
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3); /* Optional shadow effect */
+}
+
+/* Footer Section */
+.footer {
+  background-color: #333;
+}
+
+.footer p {
+  margin: 0;
+  font-size: 1.1em;
+}
+
+.footer a {
+  margin: 0 10px;
+  font-size: 1.5em;
+  color: white;
+}
+
+.footer a:hover {
+  color: #2ecc71;
+}
+
+.fixedButton {
+  
+  bottom: 25px; 
+  opacity: 1; 
+  transition: opacity 0.5s ease 0s; 
+  box-sizing: border-box; 
+  direction: rtl; 
+  position: fixed !important; 
+  z-index: 16000160 !important;
+}
+
