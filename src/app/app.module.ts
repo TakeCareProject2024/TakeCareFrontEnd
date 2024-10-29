@@ -18,7 +18,8 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { AddRequestComponent } from './add-request/add-request.component';
 import { MyMapComponent } from './my-map/my-map.component';
 import { CommonModule } from '@angular/common';
-import { RequestElementComponent } from './request-element/request-element.component';  // Import CommonModule
+import { RequestElementComponent } from './request-element/request-element.component';
+import { DashBoardComponent } from './dash-board/dash-board.component';
 
 @NgModule({
   declarations: [
@@ -32,6 +33,7 @@ import { RequestElementComponent } from './request-element/request-element.compo
     AddRequestComponent,
     MyMapComponent,
     RequestElementComponent,
+    DashBoardComponent,
   ],
   imports: [
     BrowserModule,
