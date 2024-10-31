@@ -1,7 +1,8 @@
 // src/app/services/api.service.ts
 import { Injectable } from '@angular/core';
 import { HttpClient ,HttpParams} from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
+import { tap } from 'rxjs/operators';
 
 import { Employee } from '../models/Employee';
 import { MainInfo } from '../models/MainInfo';
@@ -13,8 +14,33 @@ import { Request } from  '../models/Request';
 export class ApiService {
 
   private apiUrlEmployee = 'your-api-url/employees';
-  
+  private isAdminSubject = new BehaviorSubject<boolean>(false);
+  public isAdmin$ = this.isAdminSubject.asObservable();
+
   constructor(private http: HttpClient) {}
+
+  stateAdmin(state:boolean){
+    this.isAdminSubject.next(state);
+  }
+
+  checkPassword(password: string): Observable<boolean> {
+    return this.http.post<boolean>('/api/check-password', { password }).pipe(
+      tap((isValid) => {
+        if (isValid) {
+          this.isAdminSubject.next(true);
+          localStorage.setItem('isAdmin', JSON.stringify(true)); // Save to local storage
+        }else{
+          this.isAdminSubject.next(false);
+          localStorage.setItem('isAdmin', JSON.stringify(false)); // Save to local storage
+          
+        }
+      })
+    );
+  }
+
+  private getAdminFromStorage(): boolean {
+    return JSON.parse(localStorage.getItem('isAdmin') || 'false');
+  }
 
   getEmployees(search?: string, valid?: number): Observable<Employee[]> {
     return this.http.get<Employee[]>(`${this.apiUrlEmployee}?search=${search}&valid=${valid}`);

@@ -8,9 +8,15 @@ import { ApiService } from '../services/api.service';
   styleUrls: ['./requests.component.css']
 })
 export class RequestsComponent {
+  isAdmin=false;
+  
+  constructor(private requestService: ApiService) {
+    this.requestService.isAdmin$.subscribe((isAdmin) => {
+      this.isAdmin = isAdmin;
+    });
 
-  constructor(private requestService: ApiService) { }
-
+ 
+   }
   searchCriteria = {
     name: '',        // Filter by name
     dateAdded: '',   // Filter by date added

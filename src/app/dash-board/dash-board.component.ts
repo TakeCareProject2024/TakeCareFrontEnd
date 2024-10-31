@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { ApiService } from '../services/api.service';
 
 @Component({
   selector: 'app-dash-board',
@@ -7,7 +8,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./dash-board.component.css']
 })
 export class DashBoardComponent {
-  isAdmin = true;
+  isAdmin = false;
   newPassword="";
   oldPassword="";
   confirmPassword="";
@@ -27,7 +28,38 @@ export class DashBoardComponent {
     instagramLink: 'https://instagram.com/yourcompany'
   };
 
-  constructor(private router: Router) {}
+  constructor(private router: Router,private apiService: ApiService) {
+    
+    this.apiService.isAdmin$.subscribe((isAdmin) => {
+      this.isAdmin = isAdmin;
+    });
+    console.log(this.isAdmin);
+    if(!this.isAdmin){
+      const password = prompt("Please enter the admin password:");
+      /*
+      this.authService.checkPassword(this.password).subscribe((isValid) => {
+      if (isValid) {
+        // Close the prompt if the password is valid
+        console.log('Password valid. Access granted.');
+      } else {
+        alert('Incorrect password. Please try again.');
+      }
+    });
+      */
+    console.log(this.isAdmin)
+      if(password=="12345"){
+        this.apiService.stateAdmin(true);
+        console.log(this.isAdmin)
+      }
+        
+      else{
+        this.apiService.stateAdmin(false);
+        alert("error password");
+        this.router.navigate(['/home']);
+      }
+    }
+    
+  }
 
 
   changePassword() {
@@ -47,8 +79,20 @@ export class DashBoardComponent {
   
 
   logout() {
-    this.isAdmin = false;
+    this.apiService.stateAdmin(false);
     this.router.navigate(['/home']);
+  } 
+
+  submitPassword() {
+    
+    /*this.authService.pass(this.password).subscribe((isValid) => {
+      if (isValid) {
+        // Close the prompt if the password is valid
+        console.log('Password valid. Access granted.');
+      } else {
+        alert('Incorrect password. Please try again.');
+      }
+    });*/
   }
   
   

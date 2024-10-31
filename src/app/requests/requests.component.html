@@ -46,7 +46,7 @@
   <br>
   <br>
   <section class="container">
-    <div *ngIf="requests && requests.length > 0; else  noDataTemplate">
+    <div *ngIf="isAdmin && requests && requests.length > 0; else  noDataTemplate">
 
       <div class="row" *ngFor="let request of requests">
         

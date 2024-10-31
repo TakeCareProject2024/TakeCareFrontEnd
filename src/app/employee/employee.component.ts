@@ -15,9 +15,15 @@ export class EmployeeComponent  implements OnInit{
   employees: Employee[] = [];
   searchName: string = '';
   searchValid: number = 0;
+  isAdmin=false;
 
 
   constructor(private apiService: ApiService,private modalService: NgbModal) { 
+    this.apiService.isAdmin$.subscribe((isAdmin) => {
+      this.isAdmin = isAdmin;
+    });
+
+
 /*
     this.employees = [
       { id:1 , firstName: 'John',lastName:"Doe",age:22,personalPhotos:"",valid:3,position:"cleaner",jobDescription:"employee to clean company ", birthDate:new Date("2002-5-5"),image:null ,imagePath:"../assets/aa.png" },

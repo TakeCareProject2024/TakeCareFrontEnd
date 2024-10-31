@@ -12,6 +12,7 @@ import { Request } from '../app/models/Request';
 })
 export class AppComponent {
   title = 'cleaner-app';
+  isAdmin = false;
   request:Request ={
     id: 2,
     dateRequest: new Date('2024-10-01'),
@@ -32,8 +33,11 @@ export class AppComponent {
   };
 
   constructor(private apiService: ApiService,private modalService: NgbModal) {
+    this.apiService.isAdmin$.subscribe((isAdmin) => {
+      this.isAdmin = isAdmin;
+    });
 
-    this.generalInfo= {
+this.generalInfo= {
       id: 1,
       name: "Cleaner",
       description: "your trusted partner for residential and commercial cleaninig services",
