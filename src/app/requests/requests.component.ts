@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { Request } from '../models/Request';
 import { ApiService } from '../services/api.service';
 
@@ -8,15 +8,12 @@ import { ApiService } from '../services/api.service';
   styleUrls: ['./requests.component.css']
 })
 export class RequestsComponent {
-  isAdmin=false;
+  isAdmin: boolean= false;
   
   constructor(private requestService: ApiService) {
-    this.requestService.isAdmin$.subscribe((isAdmin) => {
-      this.isAdmin = isAdmin;
-    });
-
- 
+    this.isAdmin=requestService.getIsAdminFromLocalStorage();
    }
+   
   searchCriteria = {
     name: '',        // Filter by name
     dateAdded: '',   // Filter by date added

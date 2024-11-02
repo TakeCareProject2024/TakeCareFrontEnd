@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { ApiService } from '../services/api.service';
 import { Employee } from '../models/Employee';
 import { AddEditEmployeeComponent } from '../add-edit-employee/add-edit-employee.component';
@@ -15,13 +15,12 @@ export class EmployeeComponent  implements OnInit{
   employees: Employee[] = [];
   searchName: string = '';
   searchValid: number = 0;
-  isAdmin=false;
-
+  isAdmin: boolean= false;
+  
 
   constructor(private apiService: ApiService,private modalService: NgbModal) { 
-    this.apiService.isAdmin$.subscribe((isAdmin) => {
-      this.isAdmin = isAdmin;
-    });
+    this.isAdmin=apiService.getIsAdminFromLocalStorage();
+      
 
 
 /*

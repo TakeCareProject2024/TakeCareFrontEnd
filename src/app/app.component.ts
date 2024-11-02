@@ -33,9 +33,10 @@ export class AppComponent {
   };
 
   constructor(private apiService: ApiService,private modalService: NgbModal) {
-    this.apiService.isAdmin$.subscribe((isAdmin) => {
+    this.isAdmin=apiService.getIsAdminFromLocalStorage();
+    /*this.apiService.isAdmin$.subscribe((isAdmin) => {
       this.isAdmin = isAdmin;
-    });
+    });*/
 
 this.generalInfo= {
       id: 1,

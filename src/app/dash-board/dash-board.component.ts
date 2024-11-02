@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { Router } from '@angular/router';
 import { ApiService } from '../services/api.service';
 
@@ -8,12 +8,12 @@ import { ApiService } from '../services/api.service';
   styleUrls: ['./dash-board.component.css']
 })
 export class DashBoardComponent {
-  isAdmin = false;
   newPassword="";
   oldPassword="";
   confirmPassword="";
   showEditModal = false;
   showPasswordModal = false;
+  isAdmin: boolean= false;
 
 
   company = {
@@ -30,35 +30,24 @@ export class DashBoardComponent {
 
   constructor(private router: Router,private apiService: ApiService) {
     
-    this.apiService.isAdmin$.subscribe((isAdmin) => {
-      this.isAdmin = isAdmin;
-    });
     console.log(this.isAdmin);
+    this.isAdmin=apiService.getIsAdminFromLocalStorage();
     if(!this.isAdmin){
       const password = prompt("Please enter the admin password:");
-      /*
-      this.authService.checkPassword(this.password).subscribe((isValid) => {
-      if (isValid) {
-        // Close the prompt if the password is valid
-        console.log('Password valid. Access granted.');
-      } else {
-        alert('Incorrect password. Please try again.');
-      }
-    });
-      */
-    console.log(this.isAdmin)
-      if(password=="12345"){
-        this.apiService.stateAdmin(true);
-        console.log(this.isAdmin)
-      }
+      if(password!=null){
+        var result=this.apiService.checkPassword(password);
         
-      else{
-        this.apiService.stateAdmin(false);
-        alert("error password");
-        this.router.navigate(['/home']);
+        if(!result){
+          alert("error password");
+          window.location.assign('/');
+        }else{
+          this.isAdmin=true;
+          window.location.reload();
+        }
+          
       }
     }
-    
+
   }
 
 
@@ -79,8 +68,10 @@ export class DashBoardComponent {
   
 
   logout() {
-    this.apiService.stateAdmin(false);
-    this.router.navigate(['/home']);
+    this.apiService.setIsAdmin(false);
+    //window.location.origin
+    window.location.assign('/');
+    //this.router.navigate(['/home']);
   } 
 
   submitPassword() {

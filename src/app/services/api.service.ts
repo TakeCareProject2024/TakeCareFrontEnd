@@ -13,34 +13,44 @@ import { Request } from  '../models/Request';
 })
 export class ApiService {
 
-  private apiUrlEmployee = 'your-api-url/employees';
-  private isAdminSubject = new BehaviorSubject<boolean>(false);
-  public isAdmin$ = this.isAdminSubject.asObservable();
-
   constructor(private http: HttpClient) {}
 
-  stateAdmin(state:boolean){
-    this.isAdminSubject.next(state);
+  private apiUrlEmployee = 'your-api-url/employees';
+
+  //---------------------------------------------------------
+  
+  //private isAdminSubject = new BehaviorSubject<boolean>(false);
+  //public isAdmin$ = this.isAdminSubject.asObservable();
+
+  setIsAdmin(isAdmin: boolean): void {
+    //this.isAdminSubject.next(isAdmin);
+    localStorage.setItem('isAdmin', isAdmin.toString());
   }
 
-  checkPassword(password: string): Observable<boolean> {
+  checkPassword(password: string): boolean {
+    if(password=="12345"){
+      this.setIsAdmin(true);
+      return true;
+    }
+    else{
+      this.setIsAdmin(false);
+      return false;
+    }
+    
+  }
+  /*checkPassword(password: string): Observable<boolean> {
     return this.http.post<boolean>('/api/check-password', { password }).pipe(
       tap((isValid) => {
-        if (isValid) {
-          this.isAdminSubject.next(true);
-          localStorage.setItem('isAdmin', JSON.stringify(true)); // Save to local storage
-        }else{
-          this.isAdminSubject.next(false);
-          localStorage.setItem('isAdmin', JSON.stringify(false)); // Save to local storage
-          
-        }
+        this.setIsAdmin(isValid);
       })
     );
+  }*/
+
+  public getIsAdminFromLocalStorage(): boolean {
+    return localStorage.getItem('isAdmin') === 'true';
   }
 
-  private getAdminFromStorage(): boolean {
-    return JSON.parse(localStorage.getItem('isAdmin') || 'false');
-  }
+  //-----------------------
 
   getEmployees(search?: string, valid?: number): Observable<Employee[]> {
     return this.http.get<Employee[]>(`${this.apiUrlEmployee}?search=${search}&valid=${valid}`);

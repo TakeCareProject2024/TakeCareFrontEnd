@@ -45,7 +45,6 @@ export class HomeComponent implements OnInit {
    customerComments:any[]=[];
    @Input() src:string="";
    @Input() whatsAppLink:string="";
-
   
    ngOnInit(): void {
     this.comments.forEach(element => {
