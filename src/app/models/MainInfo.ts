@@ -1,20 +1,27 @@
+export interface MainInfoResponse {
+  data: MainInfo;
+  message: string;
+}
 export interface MainInfo {
     id: number;
-    name: string;
+    companyName: string;
     description: string;
-    ourVession: string;
-    ourServices: string[];
-    comments: string[];
-    
+    services: string;
+    phone1: string;
+    phone2: string;
+    Email: string;
     address: string;
+  
+    comments: string;  
+  
     lat: string;
     lang: string;
     facebook: string;
     youtube: string;
     instagram: string;
-    Phone: string;
-    Whatsapp: string;
-    Email: string;
+
     Profile:string[];
   }
+
+
   

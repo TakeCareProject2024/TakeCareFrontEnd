@@ -6,15 +6,15 @@
             <div class="col-12">
                 <div class="card">
                     <div class="card-content">
-                        <h2 class="card-title">{{ company.name }} <i><small> - {{ company.phone }}</small></i></h2>
-                            <p class="card-description">{{ company.name }} is <strong>Location in </strong> {{ company.address }}</p>
-                            <p class="card-description">{{ company.name }} is <br>{{ company.description }}</p>
-                        <p class="card-description">{{ company.name }} is <strong>is service :</strong><br> {{ company.services }}</p>              
-                        <p class="card-description">{{ company.name }} is <strong>have feedback :</strong><br> {{ company.comments }}</p>
+                        <h2 class="card-title">{{ generalInfo.companyName }} <i><small> - {{ generalInfo.phone1 }}</small></i></h2>
+                            <p class="card-description">{{ generalInfo.companyName }} is <strong>Location in </strong> {{ generalInfo.address }}</p>
+                            <p class="card-description">{{ generalInfo.companyName }} is <br>{{ generalInfo.description }}</p>
+                        <p class="card-description">{{ generalInfo.companyName }} is <strong>is service :</strong><br> {{ generalInfo.services }}</p>              
+                        <p class="card-description">{{ generalInfo.companyName }} is <strong>have feedback :</strong><br> {{ generalInfo.comments }}</p>
                         <p class="card-description"><strong>To Contact  </strong> 
-                            <a [href]="company.email" target="_blank"> Email</a> |
-                            <a [href]="company.facebookLink" target="_blank"> Facebook</a> |
-                            <a [href]="company.instagramLink" target="_blank"> Instagram</a>
+                            <a [href]="generalInfo.Email" target="_blank"> Email</a> |
+                            <a [href]="generalInfo.facebook" target="_blank"> Facebook</a> |
+                            <a [href]="generalInfo.instagram" target="_blank"> Instagram</a>
                         </p>
                     </div>
                     <div class="text-align:center">
@@ -61,14 +61,14 @@
                     <div class="col-md-6">
                         <div class="mb-3">
                             <label for="companyName" class="form-label">Company Name</label>
-                            <input type="text" class="form-control" id="companyName" [(ngModel)]="company.name" name="companyName" />
+                            <input type="text" class="form-control" id="companyName" [(ngModel)]="generalInfo.companyName" name="companyName" />
                           </div>                          
                     </div>
 
                     <div class="col-md-6">
                         <div class="mb-3">
                             <label for="description" class="form-label">Description</label>
-                            <input type="text" class="form-control" id="description" [(ngModel)]="company.description" name="description" />
+                            <input type="text" class="form-control" id="description" [(ngModel)]="generalInfo.description" name="description" />
                         </div>                          
                     </div>
                 </div>
@@ -77,48 +77,37 @@
                     <div class="col-md-6">
                         <div class="mb-3">
                             <label for="servicesa" class="form-label">Services 1</label>
-                            <input type="text" class="form-control" id="servicesa" [(ngModel)]="company.description" name="servicesa" />
+                            <input type="text" class="form-control" id="services" [(ngModel)]="generalInfo.services" name="servicesa" />
                           </div>                          
-                    </div>
-
-                    <div class="col-md-6">
-                        <div class="mb-3">
-                            <label for="servicesb" class="form-label">Services 2</label>
-                            <input type="text" class="form-control" id="servicesb" [(ngModel)]="company.description" name="servicesb" />
-                          </div>            
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-md-6">
                         <div class="mb-3">
-                            <label for="commanta" class="form-label">Commant 1</label>
-                            <input type="text" class="form-control" id="commanta" [(ngModel)]="company.description" name="commanta" />
+                            <label for="comments" class="form-label">Commant 1</label>
+                            <input type="text" class="form-control" id="comments" [(ngModel)]="generalInfo.comments" name="comments" />
                           </div>
-                    </div>
-
-                    <div class="col-md-6">                        
-                        <div class="mb-3">
-                            <label for="commantb" class="form-label">Commant 1</label>
-                            <input type="text" class="form-control" id="commantb" [(ngModel)]="company.description" name="commantb" />
-                        </div>
                     </div>
                 </div>
 
                 <label for="commanta" class="form-label">connect</label>
                 <div class="row">
                     <div class="col-md-6">
-                        <input type="number" class="form-control" id="phone" [(ngModel)]="company.phone" name="phone" />
+                        <input type="text" class="form-control" id="phone1" [(ngModel)]="generalInfo.phone1" name="phone1" />
+                    </div>
+                    <div class="col-md-6">
+                        <input type="text" class="form-control" id="phone2" [(ngModel)]="generalInfo.phone2" name="phone2" />
                     </div>
                     <div class="col-md-6">    
-                        <input type="text" class="form-control" id="email" [(ngModel)]="company.email" name="email" />
+                        <input type="text" class="form-control" id="Email" [(ngModel)]="generalInfo.Email" name="Email" />
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-md-6">
-                        <input type="text" class="form-control" id="facbook" [(ngModel)]="company.facebookLink" name="facebookLink" />
+                        <input type="text" class="form-control" id="facebook" [(ngModel)]="generalInfo.facebook" name="facebook" />
                     </div>
                     <div class="col-md-6">
-                        <input type="text" class="form-control" id="instagramLink" [(ngModel)]="company.instagramLink" name="instagramLink" />
+                        <input type="text" class="form-control" id="instagram" [(ngModel)]="generalInfo.instagram" name="instagram" />
                     </div>
                 </div>
                 

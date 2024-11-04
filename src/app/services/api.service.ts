@@ -5,7 +5,7 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
 
 import { Employee } from '../models/Employee';
-import { MainInfo } from '../models/MainInfo';
+import { MainInfo, MainInfoResponse } from '../models/MainInfo';
 import { Request } from  '../models/Request';
 
 @Injectable({
@@ -19,11 +19,7 @@ export class ApiService {
 
   //---------------------------------------------------------
   
-  //private isAdminSubject = new BehaviorSubject<boolean>(false);
-  //public isAdmin$ = this.isAdminSubject.asObservable();
-
   setIsAdmin(isAdmin: boolean): void {
-    //this.isAdminSubject.next(isAdmin);
     localStorage.setItem('isAdmin', isAdmin.toString());
   }
 
@@ -35,9 +31,9 @@ export class ApiService {
     else{
       this.setIsAdmin(false);
       return false;
-    }
-    
+    } 
   }
+
   /*checkPassword(password: string): Observable<boolean> {
     return this.http.post<boolean>('/api/check-password', { password }).pipe(
       tap((isValid) => {
@@ -49,7 +45,6 @@ export class ApiService {
   public getIsAdminFromLocalStorage(): boolean {
     return localStorage.getItem('isAdmin') === 'true';
   }
-
   //-----------------------
 
   getEmployees(search?: string, valid?: number): Observable<Employee[]> {
@@ -74,14 +69,14 @@ export class ApiService {
   }
 
   //maininfo
-  private apiUrlMainInfo = 'your-api-url/employees';
+  private apiUrlMainInfo = 'http://137.184.119.246/api/companies';
   
-  getMainInfo(): Observable<MainInfo> {
-    return this.http.get<MainInfo>(this.apiUrlMainInfo);
+  getMainInfo(): Observable<MainInfoResponse> {
+    return this.http.get<MainInfoResponse>(this.apiUrlMainInfo+"/1");
   }
   
-  updateMainInfo(mainInfo: MainInfo): Observable<MainInfo> {
-    return this.http.put<MainInfo>(`${this.apiUrlEmployee}/${mainInfo.id}`, mainInfo);
+  updateMainInfo(mainInfo: MainInfo): Observable<MainInfoResponse> {
+    return this.http.put<MainInfoResponse>(`${this.apiUrlMainInfo}/${mainInfo.id}`, mainInfo);
   }
 
 
