@@ -1,20 +1,29 @@
+export interface EmployeeResponse {
+  data: Employee[];
+  message: string;
+}
+
 export interface Employee {
     id: number;
-    firstName: string;
-    lastName: string;
+    FirstName: string;
+    LastName: string;
+    age:number;
+    EmployeeImage:string; //??
+    Evalute: number;
+    StartWork:Date;
+    
     personalPhotos: string;
-    valid: number;
     position: string;
     jobDescription: string;
-    age:number;
     image:File | null;
     birthDate:Date;
-    imagePath:string;
-    //startDate:Date;
+    //imagePath:string;
+    
     //companyId: number;
     //nationality: string;
     //passportPhotos: string[];
     //passportNumber: string;
     //phone: string;
+
   }
   

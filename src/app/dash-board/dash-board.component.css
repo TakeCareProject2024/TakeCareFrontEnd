@@ -41,4 +41,18 @@
   strong {
     color: #333;
   }
+
+  [class^="col"]{
+    padding: 5px;
+  }
+
+  .text-success {
+    color: green;
+    font-weight: bold;
+  }
+  
+  .text-danger {
+    color: red;
+    font-weight: bold;
+  }
   

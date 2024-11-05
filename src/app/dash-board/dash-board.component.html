@@ -7,7 +7,7 @@
                 <div class="card">
                     <div class="card-content">
                         <h2 class="card-title">{{ generalInfo.companyName }} <i><small> - {{ generalInfo.phone1 }}</small></i></h2>
-                            <p class="card-description">{{ generalInfo.companyName }} is <strong>Location in </strong> {{ generalInfo.address }}</p>
+                            <p class="card-description">{{ generalInfo.companyName }} is <strong>Location in </strong> {{ generalInfo.Address }}</p>
                             <p class="card-description">{{ generalInfo.companyName }} is <br>{{ generalInfo.description }}</p>
                         <p class="card-description">{{ generalInfo.companyName }} is <strong>is service :</strong><br> {{ generalInfo.services }}</p>              
                         <p class="card-description">{{ generalInfo.companyName }} is <strong>have feedback :</strong><br> {{ generalInfo.comments }}</p>
@@ -71,49 +71,52 @@
                             <input type="text" class="form-control" id="description" [(ngModel)]="generalInfo.description" name="description" />
                         </div>                          
                     </div>
-                </div>
 
-                <div class="row">
-                    <div class="col-md-6">
+
+                    <div class="col-md-12">
                         <div class="mb-3">
-                            <label for="servicesa" class="form-label">Services 1</label>
-                            <input type="text" class="form-control" id="services" [(ngModel)]="generalInfo.services" name="servicesa" />
-                          </div>                          
+                            <label for="Address" class="form-label">Address</label>
+                            <input type="text" class="form-control" placeholder="Address" id="Address" [(ngModel)]="generalInfo.Address" name="Address" />
+                        </div>                          
                     </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-6">
+
+                    <div class="col-md-12">
                         <div class="mb-3">
-                            <label for="comments" class="form-label">Commant 1</label>
-                            <input type="text" class="form-control" id="comments" [(ngModel)]="generalInfo.comments" name="comments" />
-                          </div>
+                            <label for="services" class="form-label">services</label>
+                            <input type="text" class="form-control" placeholder="services" id="services" [(ngModel)]="generalInfo.services" name="services" />
+                        </div>                          
                     </div>
                 </div>
 
-                <label for="commanta" class="form-label">connect</label>
+                
+                <label for="commanta" class="form-label">Connect</label>
                 <div class="row">
                     <div class="col-md-6">
-                        <input type="text" class="form-control" id="phone1" [(ngModel)]="generalInfo.phone1" name="phone1" />
+                        <input type="text" class="form-control" placeholder="phone1" id="phone1" [(ngModel)]="generalInfo.phone1" name="phone1" />
                     </div>
                     <div class="col-md-6">
-                        <input type="text" class="form-control" id="phone2" [(ngModel)]="generalInfo.phone2" name="phone2" />
+                        <input type="text" class="form-control" id="phone2" placeholder="phone2"  [(ngModel)]="generalInfo.phone2" name="phone2" />
                     </div>
-                    <div class="col-md-6">    
-                        <input type="text" class="form-control" id="Email" [(ngModel)]="generalInfo.Email" name="Email" />
+                    <div class="col-md-6">
+                        <input type="text" class="form-control" id="Email" placeholder="Email"  [(ngModel)]="generalInfo.Email" name="Email" />
                     </div>
+                    <div class="col-md-6">
+                    </div>
+                    
                 </div>
                 <div class="row">
                     <div class="col-md-6">
-                        <input type="text" class="form-control" id="facebook" [(ngModel)]="generalInfo.facebook" name="facebook" />
+                        <input type="text" class="form-control" placeholder="faceBook Link" id="facebook" [(ngModel)]="generalInfo.facebook" name="facebook" />
                     </div>
                     <div class="col-md-6">
-                        <input type="text" class="form-control" id="instagram" [(ngModel)]="generalInfo.instagram" name="instagram" />
+                        <input type="text" class="form-control" placeholder="instagram Link" id="instagram" [(ngModel)]="generalInfo.instagram" name="instagram" />
                     </div>
                 </div>
                 
             </form>
           </div>
           <div class="modal-footer">
+            <p [id]="msgResponse" [ngClass]="msgClass">{{ msgResponse }}</p>
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
             <button type="button" class="btn btn-primary" (click)="saveChanges()">Save changes</button>
           </div>

@@ -44,12 +44,12 @@
   <!-- Title and Content Overlay -->
   <div class="carousel-overlay">
     <div class="container text-center text-white">
-      <h1 class="display-3">Welcome to Our Cleaning Company</h1>
-      <p class="lead">Your trusted partner for residential and commercial cleaning services.</p>
+      <h1 class="display-3">Welcome to {{generalInfo.companyName}}</h1>
+      <p class="lead">{{generalInfo.description}}.</p>
 
       <!-- Social Media Icons Row -->
       <div class="social-icons mt-4" style="z-index: 100px;">
-        <a href="https://wa.me/123456789" target="_blank" class="text-white mx-2">
+        <a href="https://wa.me/{{generalInfo.phone1}}" target="_blank" class="text-white mx-2">
           <i class="fab fa-whatsapp fa-2x"></i>
         </a>
         <a href="https://www.facebook.com/yourpage" target="_blank" class="text-white mx-2">

@@ -13,13 +13,8 @@ export class AboutComponent implements OnInit {
   constructor(private apiService: ApiService) { }
 
   ngOnInit(): void {
-    this.apiService.getMainInfo().subscribe(
-      (data) => {
-        this.companyInfo = data;
-      },
-      (error) => {
-        console.error('Error fetching company info', error);
-      }
-    );
+    this.apiService.data$.subscribe(data => {
+      this.companyInfo = data;
+    });
   }
 }

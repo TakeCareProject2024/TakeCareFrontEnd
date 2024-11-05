@@ -4,7 +4,7 @@ import { HttpClient ,HttpParams} from '@angular/common/http';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
 
-import { Employee } from '../models/Employee';
+import { Employee, EmployeeResponse } from '../models/Employee';
 import { MainInfo, MainInfoResponse } from '../models/MainInfo';
 import { Request } from  '../models/Request';
 
@@ -14,8 +14,6 @@ import { Request } from  '../models/Request';
 export class ApiService {
 
   constructor(private http: HttpClient) {}
-
-  private apiUrlEmployee = 'your-api-url/employees';
 
   //---------------------------------------------------------
   
@@ -46,9 +44,10 @@ export class ApiService {
     return localStorage.getItem('isAdmin') === 'true';
   }
   //-----------------------
-
-  getEmployees(search?: string, valid?: number): Observable<Employee[]> {
-    return this.http.get<Employee[]>(`${this.apiUrlEmployee}?search=${search}&valid=${valid}`);
+  private apiUrlEmployee   = 'http://137.184.119.246/api/employees';
+  
+  getEmployees(search?: string, valid?: number): Observable<EmployeeResponse> {
+    return this.http.get<EmployeeResponse>(`${this.apiUrlEmployee}?search=${search}&valid=${valid}`);
   }
   
 
@@ -70,7 +69,12 @@ export class ApiService {
 
   //maininfo
   private apiUrlMainInfo = 'http://137.184.119.246/api/companies';
+  private companyInfo = new BehaviorSubject<any>({});
+  data$ = this.companyInfo.asObservable();
   
+  setData(data: any) {
+    this.companyInfo.next(data);
+  }
   getMainInfo(): Observable<MainInfoResponse> {
     return this.http.get<MainInfoResponse>(this.apiUrlMainInfo+"/1");
   }
@@ -79,9 +83,9 @@ export class ApiService {
     return this.http.put<MainInfoResponse>(`${this.apiUrlMainInfo}/${mainInfo.id}`, mainInfo);
   }
 
-
+  //----------------------------
   //request
-  private apiUrlRequest = 'your-api-url/employees';
+  private apiUrlRequest = 'http://137.184.119.246/api/orders';
   
   getRequest(criteria: any): Observable<Request[]> {
     let params = new HttpParams();

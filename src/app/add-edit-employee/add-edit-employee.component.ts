@@ -18,15 +18,18 @@ export class AddEditEmployeeComponent implements OnInit {
   imagePreview: string | ArrayBuffer | null = null; // To store the preview image URL
   selectedFile: File | null = null; // To store the actual image file
   defaultImage= '../assets/defaultimage.jpg'; // Path to your default image
-  
+  msgResponse: string = '';
+  msgClass: string = '';
+
   constructor(private fb: FormBuilder, private employeeService: ApiService, public activeModal: NgbActiveModal) { 
     //this.employee = { id:1 , firstName: 'John',lastName:"Doe",age:22,personalPhotos:"",valid:3,position:"cleaner",jobDescription:"employee to clean company ", birthDate:new Date("2002-5-5"),image:"" };
 
     this.employeeForm = this.fb.group({
-      firstName: ['', Validators.required],    // Example fields
-      lastName: ['', Validators.required],
-      birthDate: ['', Validators.required],
-      valid: ['', Validators.required],
+      FirstName: ['', Validators.required],    // Example fields
+      LastName: ['', Validators.required],
+      age: ['', Validators.required],
+      Evalute: ['', Validators.required],
+      StartWork: ['', Validators.required],
       image: [null],
       imagePath:"../assets/defaultimage.jpg"
     });
@@ -49,10 +52,11 @@ export class AddEditEmployeeComponent implements OnInit {
 
   initForm(): void {
     this.employeeForm = this.fb.group({
-      firstName: ['', Validators.required],
-      lastName: ['', Validators.required],
-      birthdate: ['', Validators.required],
-      valid: [1, [Validators.required, Validators.min(1), Validators.max(5)]],
+      FirstName: ['', Validators.required],    // Example fields
+      LastName: ['', Validators.required],
+      age: ['', Validators.required],
+      Evalute:[1, [Validators.required, Validators.min(1), Validators.max(5)]],
+      StartWork: ['', Validators.required],
       image: [null, Validators.required],
       imagePath:this.defaultImage
     });
@@ -86,12 +90,23 @@ export class AddEditEmployeeComponent implements OnInit {
       const employeeData: Employee = this.employeeForm.value;
 
       if (this.employeeForm.valid) {
-        // Logic to handle employee save
-        console.log(this.employeeForm.value);
-      } else  if (this.isEditMode) {
         employeeData.id = this.employee.id;
-        //this.employeeService.updateEmployee(employeeData).subscribe(() => this.activeModal.close('edited'));
+        this.employeeService.updateEmployee(employeeData).subscribe((rs) => {
+          if(rs){
+            this.activeModal.close('employeeModal');
+            this.msgResponse = 'Changes saved successfully!';
+        this.msgClass = 'text-success'; // apply success styling
+        
+          }else{
+            this.msgResponse = 'Failed to save changes. Please try again.';
+            this.msgClass = 'text-danger'; 
+          }
+            
+          
+        });
       } else {
+        this.msgResponse = 'not valid';
+        this.msgClass = 'text-danger'; 
         //this.employeeService.addEmployee(employeeData).subscribe(() => this.activeModal.close('added'));
       }
     }

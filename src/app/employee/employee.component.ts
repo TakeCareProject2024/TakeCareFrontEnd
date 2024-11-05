@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ApiService } from '../services/api.service';
-import { Employee } from '../models/Employee';
+import { Employee, EmployeeResponse } from '../models/Employee';
 import { AddEditEmployeeComponent } from '../add-edit-employee/add-edit-employee.component';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
@@ -34,8 +34,8 @@ export class EmployeeComponent  implements OnInit{
   }
 
   getEmployees(): void {
-    this.apiService.getEmployees(this.searchName, this.searchValid).subscribe((data: Employee[]) => {
-      this.employees = data;
+    this.apiService.getEmployees(this.searchName, this.searchValid).subscribe((data: EmployeeResponse) => {
+      this.employees = data.data;
     });
   }
 
@@ -103,15 +103,7 @@ export class EmployeeComponent  implements OnInit{
   }
 
  ngOnInit(): void {
-   /*
-   this.apiService.getMainInfo().subscribe(
-     (data) => {
-       this.generalInfo = data;
-     },
-     (error) => {
-       console.error('Error fetching general info', error);
-     }
-   );*/
- }
+  this.getEmployees();
+  }
  
 }

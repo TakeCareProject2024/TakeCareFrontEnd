@@ -10,7 +10,7 @@ export interface MainInfo {
     phone1: string;
     phone2: string;
     Email: string;
-    address: string;
+    Address: string;
   
     comments: string;  
   

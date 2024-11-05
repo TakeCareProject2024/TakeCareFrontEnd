@@ -1,5 +1,5 @@
 <!-- add-edit-employee.component.html -->
-<div class="modal-header">
+<div class="modal-header" id="employeeModal">
     <h4 class="modal-title">{{ isEditMode ? 'Edit Employee' : 'Add Employee' }}</h4>
   </div>
   
@@ -23,15 +23,16 @@
       <div class="form-group" >
         <div class="input-group" style="padding: 5px;">
             <span class="btn" style="background-color: #2ecc71;color: white;"><i class="fa fa-user"></i></span>
-            <input class="form-control"  type="text" placeholder="first name" formControlName="firstName">
-            <input class="form-control"  type="text" placeholder="last name" formControlName="lastName">
+            <input class="form-control"  type="text" placeholder="first name" formControlName="FirstName">
+            <input class="form-control"  type="text" placeholder="last name" formControlName="LastName">
         </div>
 
         <div class="input-group" style="padding: 5px;">
-            <span class="btn" style="background-color: #2ecc71;color: white;"><i class="fa fa-calendar"></i></span>
-            <input class="form-control"  type="date" placeholder="birthdate" formControlName="birthdate">
-            <span class="btn" style="background-color: #2ecc71;color: white;"><i class="fa fa-star"></i></span>
-            <input type="number" class="form-control" formControlName="valid" min="1" max="5">
+            <span class="btn" style="background-color: #2ecc71;color: white; width: 10%;"><i class="fa fa-calendar"></i></span>
+            <input class="form-control"  style="width: 50%;" type="date" placeholder="StartWork" formControlName="StartWork">
+            <input type="number" class="form-control" style="width: 15%;" formControlName="age" placeholder="age" min="18" max="65" value="20">
+            <span class="btn" style="background-color: #2ecc71;color: white;width: 10%;"><i class="fa fa-star"></i></span>
+            <input type="number" class="form-control" style="width: 15%;" formControlName="Evalute" min="1" max="5">
         </div>
         <input type="file" #fileInput accept="image/*" (change)="onFileSelected($event)" hidden>
       
@@ -41,6 +42,7 @@
   </div>
 
   <div class="modal-footer">
+    <p [id]="msgResponse" [ngClass]="msgClass">{{ msgResponse }}</p>
     <button class="btn" style="background-color: #2ecc71;color: white;" (click)="saveEmployee()">Save</button>
     <button class="btn btn-secondary" (click)="closeModal()">Cancel</button>
   </div>

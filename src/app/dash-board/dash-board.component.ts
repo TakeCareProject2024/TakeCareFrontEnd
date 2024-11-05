@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ApiService } from '../services/api.service';
 import { MainInfo } from '../models/MainInfo';
@@ -9,14 +9,16 @@ import { MainInfo } from '../models/MainInfo';
   styleUrls: ['./dash-board.component.css']
 })
 
-export class DashBoardComponent {
-  @Input() generalInfo!: MainInfo;
+export class DashBoardComponent implements OnInit {
+  generalInfo!: MainInfo;
   newPassword="";
   oldPassword="";
   confirmPassword="";
   showEditModal = false;
   showPasswordModal = false;
   isAdmin: boolean= false;
+  msgResponse: string = '';
+  msgClass: string = '';
 
   constructor(private router: Router,private apiService: ApiService) {
     this.isAdmin=apiService.getIsAdminFromLocalStorage();
@@ -37,13 +39,26 @@ export class DashBoardComponent {
     }
   }
 
+  ngOnInit(){
+    this.apiService.data$.subscribe(data => {
+      this.generalInfo = data;
+    });
+  }
+
   saveChanges() {
      this.apiService.updateMainInfo(this.generalInfo).subscribe((isValid) => {
       if (isValid.message=="Company updated successfully.") {
-        alert(isValid.message);
+        
+        //alert(isValid.message);
         this.generalInfo=isValid.data;
+        this.apiService.setData(isValid.data);
+        this.msgResponse = 'Changes saved successfully!';
+        this.msgClass = 'text-success'; // apply success styling
+        this.closeModal(); // close modal if successful
+
       } else {
-        alert('Company information not saved');
+        this.msgResponse = 'Failed to save changes. Please try again.';
+        this.msgClass = 'text-danger'; 
       }
     });
   }
@@ -53,6 +68,12 @@ export class DashBoardComponent {
     window.location.assign('/');
   } 
 
+  closeModal() {
+    setTimeout(() => {
+      const closeModalButton = document.querySelector('[data-bs-dismiss="modal"]') as HTMLElement;
+      if (closeModalButton) closeModalButton.click();
+    }, 2000); // optional delay before closing
+  }
   //---------------------------------------------
   submitPassword() {
     
@@ -74,7 +95,4 @@ export class DashBoardComponent {
       console.log('Password changed successfully!');
     }
   }
-  
-  
-  
 }

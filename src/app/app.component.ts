@@ -35,7 +35,7 @@ export class AppComponent  implements OnInit{
       description: "",     
       comments: "",  
       services: "",
-      address: "",
+      Address: "",
       phone1: "",
       phone2: "",
       Email: "",      
@@ -58,44 +58,7 @@ export class AppComponent  implements OnInit{
     this.apiService.getMainInfo().subscribe(
       (data) => {
         this.generalInfo = data.data;
-        
-        //serivces
-        if(this.generalInfo.services!=undefined){
-          var servecisList =this.generalInfo.services.split(",");
-          servecisList.forEach(element => {
-            var servecisInfo =element.split(":");
-
-            if(servecisInfo.length==2){
-              this.services.push
-              ({
-                title: servecisInfo[0],
-                description: servecisInfo[1]
-              });
-            }
-          });          
-        }
-        
-        //comments
-        if(this.generalInfo.comments!=undefined){
-          var commentsStr =this.generalInfo.comments.split(",");
-          commentsStr.forEach(element => {
-            var servecisInfo =element.split(":");
-
-            if(servecisInfo.length==3){
-              this.customerComments.push
-              ({
-                name:servecisInfo[0],
-                title: servecisInfo[1],
-                description: servecisInfo[2]
-              });
-            }
-          });  
-        }
-        
-        //whtasapp
-        this.whatsAppLink="https://wa.me/"+this.generalInfo.phone1+"?text=مرحبا, أود الاستفسار عن خدمات التنظيف لديكم"
-        //this.src="https://www.google.com/maps/embed/v1/view?key=AIzaSyBnmKPsTtY_JF3N74MIBVq5xg62P97tt_g&center="+this.generalInfo.lang+", "+this.generalInfo.lang+"&zoom=16";    
-      
+        this.apiService.setData(data.data);      
       },
       (error) => {
         console.error('Error fetching general info', error);
