@@ -5,12 +5,12 @@
         <!-- Request Main Info -->
         <div class="row">
           <div class="col-md-4">
-            <h5>{{ request.firstName }} {{ request.lastName }}</h5>
+            <h5>{{ request.CustomerFirstName }} {{ request.CustomerLastName }}</h5>
             <p>
-              <a [href]="'mailto:' + request.Email"> {{ request.Email }}</a> <!-- Click to email -->
+              <a [href]="'mailto:' + request.CustomerEmail"> {{ request.CustomerEmail }}</a> <!-- Click to email -->
             </p>
             <p>
-              <a [href]="'https://wa.me/' + request.Whatsapp" target="_blank"> {{ request.Whatsapp }}</a> <!-- Click to WhatsApp -->
+              <a [href]="'https://wa.me/' + request.CustomerPhone" target="_blank"> {{ request.CustomerPhone }}</a> <!-- Click to WhatsApp -->
             </p>
             <p>
               <a [href]="'https://www.google.com/maps/search/?api=1&query=' + request.address" target="_blank">
@@ -23,14 +23,13 @@
 
           <!-- Request Info -->
           <div class="col-md-4">
-            <p><strong>Date Added:</strong> {{ request.dateRequest | date }}</p>
-            <p><strong>Date of Service:</strong> {{ request.dateExecute | date }}</p>
-            <p><strong>Period:</strong> {{ request.period }} hours</p>
+            <p><strong>Order Date:</strong> {{ request.OrderDate | date }}</p>
+            <p><strong>Service from :</strong> {{ request.start_time |  date: 'shortTime' }} <strong> to </strong> {{ request.end_time |  date: 'shortTime' }}</p>
             
             <p><strong>Valid: &nbsp; </strong>
               <span *ngFor="let star of stars;let i = index"> 
               <i class="fa fae"
-                [ngClass]="i > request.evalute ? 'fa-star-o fastaro' : 'fa-star fastar'"
+                [ngClass]="i > request.Evalute ? 'fa-star-o fastaro' : 'fa-star fastar'"
               
                  (click)="changeValid(request, i)"
                  style="cursor: pointer; font-size: 24px;"
@@ -41,13 +40,13 @@
           <div class="col-md-4">
             <p><strong>Status:</strong></p>
             <button class="btn btn-sm"
-                    [ngClass]="{'btn-success': request.state === 3, 'btn-warning': request.state === 2, 'btn-info': request.state === 1}"
-                    (click)="changeState(request, 'add')">Add</button>
+                    [ngClass]="{'btn-success': request.OrderState === 'done', 'btn-warning': request.OrderState === 'pending', 'btn-info': request.OrderState === 'inprogress'}"
+                    (click)="changeState(request, 'pending')">pending</button>
             <button class="btn btn-sm"
-                    [ngClass]="{'btn-success': request.state === 3, 'btn-warning': request.state === 2, 'btn-info': request.state === 1}"
-                    (click)="changeState(request, 'in')">In Progress</button>
+                    [ngClass]="{'btn-success': request.OrderState === 'done', 'btn-warning': request.OrderState === 'pending', 'btn-info': request.OrderState === 'inprogress'}"
+                    (click)="changeState(request, 'inprogress')">In Progress</button>
             <button class="btn btn-sm"
-                    [ngClass]="{'btn-success': request.state === 3, 'btn-warning': request.state === 2, 'btn-info': request.state === 1}"
+                    [ngClass]="{'btn-success': request.OrderState === 'done', 'btn-warning': request.OrderState === 'pending', 'btn-info': request.OrderState === 'inprogress'}"
                     (click)="changeState(request, 'done')">Done</button>
           </div>
         </div>

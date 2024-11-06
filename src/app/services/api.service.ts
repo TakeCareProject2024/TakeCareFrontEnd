@@ -6,7 +6,7 @@ import { tap } from 'rxjs/operators';
 
 import { Employee, EmployeeResponse } from '../models/Employee';
 import { MainInfo, MainInfoResponse } from '../models/MainInfo';
-import { Request } from  '../models/Request';
+import { Request, RequestResponse } from  '../models/Request';
 
 @Injectable({
   providedIn: 'root'
@@ -87,7 +87,7 @@ export class ApiService {
   //request
   private apiUrlRequest = 'http://137.184.119.246/api/orders';
   
-  getRequest(criteria: any): Observable<Request[]> {
+  getRequest(criteria: any): Observable<RequestResponse> {
     let params = new HttpParams();
 
     if (criteria.name) {
@@ -100,7 +100,7 @@ export class ApiService {
       params = params.append('state', criteria.state);
     }
 
-    return this.http.get<Request[]>(this.apiUrlRequest,  { params });
+    return this.http.get<RequestResponse>(this.apiUrlRequest,  { params });
   }
 
   getRequestId(id: number): Observable<Request> {
@@ -115,7 +115,7 @@ export class ApiService {
     return this.http.put<Request>(`${this.apiUrlRequest}/${request.id}`, request);
   }
 
-  deleteRequest(id: number): Observable<void> {
-    return this.http.delete<void>(`${this.apiUrlRequest}/${id}`);
+  deleteRequest(id: number): Observable<boolean> {
+    return this.http.delete<boolean>(`${this.apiUrlRequest}/${id}`);
   }
 }

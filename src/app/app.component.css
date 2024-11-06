@@ -164,6 +164,6 @@
   box-sizing: border-box; 
   direction: rtl; 
   position: fixed !important; 
-  z-index: 16000160 !important;
+  z-index: 5 !important;
 }
 

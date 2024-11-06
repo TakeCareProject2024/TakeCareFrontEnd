@@ -31,4 +31,14 @@
   .btn-icon i {
     font-size: 18px;
   }
+
+  .text-success {
+    color: green;
+    font-weight: bold;
+  }
+  
+  .text-danger {
+    color: red;
+    font-weight: bold;
+  }
   

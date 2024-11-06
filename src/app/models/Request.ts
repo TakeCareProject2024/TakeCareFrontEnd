@@ -1,18 +1,27 @@
+export interface RequestResponse {
+  data: Request[];
+  message: string;
+  
+}
+
 export interface Request {
+
     id: number;
-    dateRequest: Date;
-    dateExecute: Date;
-    period: number;
-    state: number;
-    //employeeId: string[];
-    evalute:number;
+    CustomerFirstName: string;
+    CustomerLastName: string;
+    CustomerPhone: string;
+    CustomerEmail: string;
 
-    lastName: string;
-    firstName: string;
-    Phone: string;
-    Whatsapp: string;
-    Email: string;
+    OrderDate: Date;
+    start_time: string;
+    end_time: string;
 
+    EmployeeNumber: number;
+    Evalute:number;
+    OrderState: string;
+
+   
+    
     lat: string;
     lang: string;
     address: string;

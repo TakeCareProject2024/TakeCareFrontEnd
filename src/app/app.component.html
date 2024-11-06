@@ -69,7 +69,7 @@
 <router-outlet></router-outlet>
 
 <!-- Footer Section -->
-<footer class="footer bg-dark text-white py-2">
+<footer class="footer bg-dark text-white py-5">
   <div class="container text-center">
     <p>Contact Us:
       <a href="mailto:{{generalInfo.Email}}" style="font-size:medium ;">{{generalInfo.Email}}</a> | Follow us: 
@@ -81,15 +81,25 @@
 </footer>
 
  <!--whats app -->
- <div id="whatsApp" class="fixedButton" style="right: 25px; text-align: right;">
-  <a href="{{whatsAppLink}}" target="_blank" color="#4dc247">
-    <img src="../../assets/WhatsApp.svg" width="18%" alt="Image" title="" loading="lazy" >
-  </a>
-</div>
+ <div class="row">
+    
+    <div class="col-1">
+      <div id="whatsApp" class="fixedButton" style="right: 25px; text-align: right;">
+        <a href="{{whatsAppLink}}" target="_blank" color="#4dc247">
+          <img src="../../assets/WhatsApp.svg" width="18%" alt="Image" title="" loading="lazy" >
+        </a>
+      </div>
+    </div>
 
-<!--whats app -->
-<div id="AddRequest" class="fixedButton" style="left: 25px; text-align: left;" >
-  <a color="#4dc247" (click)="openAddRequestPopup()">
-    <img src="../../assets/plus.png" width="18%" alt="Image" title="" loading="lazy" >
-  </a>
+    <div class="col-10"></div>
+    <div class="col-1">
+    <div id="AddRequest" class="fixedButton" style="left: 25px; text-align: left;" >
+      <a color="#4dc247" (click)="openAddRequestPopup()">
+        <img src="../../assets/plus.png" width="18%" alt="Image" title="" loading="lazy" >
+      </a>
+    </div>
+    </div>
+
 </div>
+ 
+

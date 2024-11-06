@@ -4,52 +4,51 @@
   </div>
   
   <div class="modal-body">  
-    <ngForm [formGroup]="employeeForm">
-
+    <ngForm [formGroup]="requestForm">
+      
       <div class="form-group" >
         <h6>personal information:</h6>
         <div class="input-group" style="padding: 5px;">
             <span class="btn" style="background-color: #2ecc71;color: white;"><i class="fa fa-user"></i></span>
-            <input class="form-control"  type="text" placeholder="first name" formControlName="firstName" required>
-            <input class="form-control"  type="text" placeholder="last name" formControlName="lastName" required>
+            <input class="form-control"  type="text" placeholder="first name" formControlName="CustomerFirstName" required>
+            <input class="form-control"  type="text" placeholder="last name" formControlName="CustomerLastName" required>
         </div>
 
         <div class="input-group" style="padding: 5px;">
           <span class="btn" style="background-color: #2ecc71;color: white;"><i >@</i></span>
-          <input class="form-control"  type="email" placeholder="Email" formControlName="Email" required>
+          <input class="form-control"  type="email" placeholder="Email" formControlName="CustomerEmail" required>
           <span class="btn" style="background-color: #2ecc71;color: white;"><i class="fa fa-whatsapp"></i></span>
-          <input class="form-control"  type="number" placeholder="whatsApp number" formControlName="Number" required>
+          <input class="form-control"  type="number" placeholder="whatsApp number" formControlName="CustomerPhone" required>
       </div>
       <br>
       <h6>services information:</h6>
         
         <div class="input-group" style="display: flex; align-items: center; padding: 5px;">
-              <span class="btn"  style="background-color: #2ecc71;color: white;width: 10%;" ><i class="fa fa-calendar"></i></span>
-              <input class="form-control"  type="date" placeholder="service date" style="width: 60%;" [min]="minDate"  [value]="minDate"  formControlName="birthdate" required>
+              <span class="btn"  style="background-color: #2ecc71;color: white;width: 7%;" ><i class="fa fa-calendar"></i></span>
+              <input class="form-control"  type="date" placeholder="service date" style="width: 30%;" [min]="minDate"  [value]="minDate"  formControlName="OrderDate" required>
               
-              <span class="btn" style="background-color: #2ecc71;color: white;width: 10%;"><i class="fas fa-stopwatch	"></i></span>
-              <input type="number" class="form-control" placeholder="period service" style="width: 20%;" value="6" formControlName="valid" min="0" max="100" required>  
-            
+              <span class="btn" style="background-color: #2ecc71;color: white;width: 8%;"><i class="fas fa-stopwatch	"></i></span>
+              <input class="form-control"  type="time" placeholder="from" style="width: 27%;"   formControlName="start_time" required>
+              <input class="form-control"  type="time" placeholder="to" style="width: 28%;"   formControlName="end_time" required> 
         </div>
 
         <div class="input-group" style="display: flex; align-items: center; padding: 5px;">
 
           <span class="btn" style="background-color: #2ecc71;color: white;width: 10%;"><i class="fa fa-map-marker-alt"></i></span>
-          <input type="text" class="form-control" value="" placeholder="address" style="width: 60%;" formControlName="valid" required> 
+          <input type="text" class="form-control" value="" placeholder="address" style="width: 65%;" formControlName="Evalute" required> 
           <span class="btn" style="background-color: #2ecc71;color: white;width: 10%;"><i class="fa fa-users"></i></span>
-            <input class="form-control"  type="number" placeholder="number Employee" style="width: 20%;" value="3" formControlName="" required>                
+            <input class="form-control"  type="number" placeholder="Employee Number" style="width: 15%;" value="3" formControlName="EmployeeNumber" required>                
       </div>
 
-        <input type="file" #fileInput accept="image/*" (change)="onFileSelected($event)" hidden>
       </div>
-
-      <app-my-map></app-my-map>
+      <!--<app-my-map></app-my-map>-->
       
     </ngForm>
   </div>
 
   <div class="modal-footer">
-    <button class="btn" style="background-color: #2ecc71;color: white;" (click)="saveEmployee()">Save</button>
-    <button class="btn btn-secondary" (click)="closeModal()">Cancel</button>
+    <p [id]="msgResponse" [ngClass]="msgClass">{{ msgResponse }}</p>
+    <button class="btn" style="background-color: #2ecc71;color: white;" (click)="saveRequest()">Save</button>
+    <button class="btn btn-secondary" (click)="closeModal(null)">Cancel</button>
   </div>
   

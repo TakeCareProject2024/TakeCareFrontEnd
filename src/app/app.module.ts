@@ -20,6 +20,7 @@ import { MyMapComponent } from './my-map/my-map.component';
 import { CommonModule } from '@angular/common';
 import { RequestElementComponent } from './request-element/request-element.component';
 import { DashBoardComponent } from './dash-board/dash-board.component';
+import { DatePipe } from '@angular/common'; // Import DatePipe here
 
 @NgModule({
   declarations: [
@@ -44,7 +45,7 @@ import { DashBoardComponent } from './dash-board/dash-board.component';
     GoogleMapsModule,
     CommonModule
   ],
-  providers: [],
+  providers: [DatePipe],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

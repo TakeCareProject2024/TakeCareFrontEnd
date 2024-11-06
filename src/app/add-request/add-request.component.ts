@@ -3,6 +3,9 @@ import { FormGroup, FormBuilder, Validators,FormControl } from '@angular/forms';
 import { Employee } from '../models/Employee';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { ApiService } from '../services/api.service';
+import { formatDate } from '@angular/common';
+import { Request } from '../models/Request';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-add-request',
@@ -12,27 +15,37 @@ import { ApiService } from '../services/api.service';
 
 
 export class AddRequestComponent implements OnInit {
-  @Input() employee: any;
-  isEditMode = false;
-  employeeForm: FormGroup;
+  requestForm: FormGroup;
   
   imagePreview: string | ArrayBuffer | null = null; // To store the preview image URL
   selectedFile: File | null = null; // To store the actual image file
   defaultImage= '../assets/defaultimage.jpg'; // Path to your default image
   minDate: string; 
+  msgResponse: string = '';
+  msgClass: string = '';
   
-  constructor(private fb: FormBuilder, private employeeService: ApiService, public activeModal: NgbActiveModal) { 
+  constructor(private fb: FormBuilder, private employeeService: ApiService, 
+    public activeModal: NgbActiveModal,
+    private datePipe: DatePipe) { 
     //this.employee = { id:1 , firstName: 'John',lastName:"Doe",age:22,personalPhotos:"",valid:3,position:"cleaner",jobDescription:"employee to clean company ", birthDate:new Date("2002-5-5"),image:"" };
 
-    this.employeeForm = this.fb.group({
-      firstName: ['', Validators.required],    // Example fields
-      lastName: ['', Validators.required],
-      birthDate: ['', Validators.required],
-      valid: ['', Validators.required],
+    this.requestForm = this.fb.group({
+      CustomerFirstName: ['', Validators.required],
+      CustomerLastName: ['', Validators.required],
+      OrderDate: [formatDate(new Date(), 'yyyy-MM-dd', 'en'), Validators.required],
+      end_time: ['', Validators.required],
+      start_time: ['', Validators.required],
+      CustomerEmail:['',Validators.required],
+      CustomerPhone:['',Validators.required],
+
+      EmployeeNumber:[3,Validators.required],
+      OrderState:['pending'],
+      Evalute: [3],
+      
       image: [null],
-      lat:['', Validators.required],
-      lang:['', Validators.required],
-      imagePath:"../assets/defaultimage.jpg"
+      lat: ["40.73061"],
+      lng: ["-73.935242 "],
+      imagePath:this.defaultImage
     });
 
     const today = new Date();
@@ -40,93 +53,81 @@ export class AddRequestComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.isEditMode = !!this.employee;
     this.initForm();
-
-    if(this.employee.imagePath!="")
-      this.defaultImage=this.employee.imagePath;
-    else
-      this.defaultImage="../assets/defaultimage.jpg";
-
-      
-    if (this.isEditMode) {
-      this.employeeForm.patchValue(this.employee);
-    }
   }
 
- 
+  formatDateForAPI(datestr:Date, dateString: string): string {
+    const [hours, minutes] = dateString.split(':').map(Number);
+    var date=new Date(datestr);
+    date.setHours(hours, minutes, 0);
+    var res= this.datePipe.transform(date, 'yyyy-MM-dd HH:mm:ss');
+    
+    if(res==null) return '';
+    return res;
+  } 
+  public getFromStorage(key:string): string {
+    var value=localStorage.getItem(key);
+    if(value==undefined)
+      return '';
+    return value;
+  }
 
+  setStorage(key :string,value: string): void {
+    localStorage.setItem(key, value.toString());
+  }
   initForm(): void {
-    this.employeeForm = this.fb.group({
-      firstName: ['', Validators.required],
-      lastName: ['', Validators.required],
-      birthdate: ['', Validators.required],
-      valid: [1, [Validators.required, Validators.min(1), Validators.max(5)]],
-      image: [null, Validators.required],
-      lat: ["40.73061", Validators.required],
-      lng: ["-73.935242 ", Validators.required],
+    
+    this.requestForm = this.fb.group({
+      CustomerFirstName: [this.getFromStorage('CustomerFirstName'), Validators.required],
+      CustomerLastName: [this.getFromStorage('CustomerLastName'), Validators.required],
+      OrderDate: [formatDate(new Date(), 'yyyy-MM-dd', 'en'), Validators.required],
+      start_time: ['', Validators.required],
+      end_time: ['', Validators.required],
+      CustomerEmail:[this.getFromStorage('CustomerEmail'),Validators.required],
+      CustomerPhone:[this.getFromStorage('CustomerPhone'),Validators.required],
+      EmployeeNumber:[3,Validators.required],
+      OrderState:['pending'],
+      Evalute: [3],
+      
+      image: [null],
+      lat: ["40.73061"],
+      lng: ["-73.935242 "],
       imagePath:this.defaultImage
     });
   }
-  
-  onFileSelected(event: any): void {
-    const file = event.target.files[0];
-
-    if (file) {
-      this.selectedFile = file;
-
-      // Display the selected image in the image preview
-      const reader = new FileReader();
-      reader.onload = () => {
-        this.imagePreview = reader.result; // Set the preview image to the FileReader result
-      };
-      reader.readAsDataURL(file); // Convert image to base64 string for preview
-
-      // Set the image value in the form
-      this.employeeForm.patchValue({
-        image: this.selectedFile
-      });
-      this.employeeForm.get('image')?.updateValueAndValidity();
-    }
-  }
-
-
-  saveEmployee(): void {
+ 
+  saveRequest(): void {
     
-    if (this.employeeForm.valid) {
-      const employeeData: Employee = this.employeeForm.value;
-
-      if (this.employeeForm.valid) {
-        // Logic to handle employee save
-        console.log(this.employeeForm.value);
-      } else  if (this.isEditMode) {
-        employeeData.id = this.employee.id;
-        //this.employeeService.updateEmployee(employeeData).subscribe(() => this.activeModal.close('edited'));
-      } else {
-        //this.employeeService.addEmployee(employeeData).subscribe(() => this.activeModal.close('added'));
-      }
+    const newRequets: Request = this.requestForm.value;
+    this.setStorage('CustomerPhone',this.requestForm.value.CustomerPhone);
+    this.setStorage('CustomerEmail',this.requestForm.value.CustomerEmail);
+    this.setStorage('CustomerLastName',this.requestForm.value.CustomerLastName);
+    this.setStorage('CustomerFirstName',this.requestForm.value.CustomerFirstName);
+    
+    newRequets.start_time = this.formatDateForAPI(newRequets.OrderDate,newRequets.start_time); 
+    newRequets.end_time = this.formatDateForAPI(newRequets.OrderDate,newRequets.end_time); 
+    
+    if (this.requestForm.valid) {
+      this.employeeService.addRequest(newRequets).subscribe((result) =>{
+        if(result){
+          this.msgResponse = 'saved successfully!';
+          this.msgClass = 'text-success'; // apply success styling
+          setTimeout(()=>this.closeModal(newRequets),2000);
+        }
+        else{
+          this.msgResponse = 'Failed to save changes. Please try again.';
+          this.msgClass = 'text-danger'; 
+        }
+      });
+    }else{
+      this.requestForm.markAllAsTouched();
     }
-
-    /*
-      if (this.employeeForm.invalid) {
-      return;
-    }
-
-    const formData = new FormData();
-    formData.append('firstName', this.employeeForm.get('firstName')?.value);
-    formData.append('lastName', this.employeeForm.get('lastName')?.value);
-    formData.append('birthdate', this.employeeForm.get('birthdate')?.value);
-    formData.append('valid', this.employeeForm.get('valid')?.value);
-
-    // Add the image if it's selected
-    if (this.selectedFile) {
-      formData.append('image', this.selectedFile); // Attach the image file
-    }
-    */
   }
 
-  closeModal(): void {
-    this.activeModal.dismiss();
+  closeModal(newRequets:Request|null): void {
+    this.activeModal.close(newRequets);
+    this.msgResponse = '';
+    this.msgClass = ''; 
   }
   
 }

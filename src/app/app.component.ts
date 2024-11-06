@@ -68,15 +68,15 @@ export class AppComponent  implements OnInit{
 
   openAddRequestPopup(): void {
     const modalRef = this.modalService.open(AddRequestComponent, { size: '10px' });
-    modalRef.componentInstance.request = null; // No employee data for add
+    //modalRef.componentInstance.request = null; // No employee data for add
 
     modalRef.result.then((result) => {
       if (result) {
         // Handle the new employee data and add to the array
-        alert("ok"); 
+        //alert("ok"); 
       }
     }).catch((error) => {
-      console.log('Add employee modal dismissed');
+      //console.log('Add employee modal dismissed');
     });
   }
 
@@ -92,24 +92,5 @@ export class AppComponent  implements OnInit{
     { src: 'assets/d.jpg', alt: 'Image 2' },
     { src: 'assets/e.jpg', alt: 'Image 3' }
   ];
-
-  request:Request ={
-    id: 2,
-    dateRequest: new Date('2024-10-01'),
-    dateExecute: new Date('2024-10-15'),
-    period: 5,
-    state:1,
-    evalute:5,
-
-    lastName: '',
-    firstName: '',
-    Phone: "",
-    Whatsapp: '', // WhatsApp number (international format)
-    Email: '',
-    
-    lat: "",
-    lang: "",
-    address: ""
-  };
 
 }

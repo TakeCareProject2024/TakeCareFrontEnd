@@ -5,6 +5,7 @@ import { Employee } from '../models/Employee';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 
 import { ApiService } from '../services/api.service';
+import { formatDate } from '@angular/common';
 
 @Component({
   selector: 'app-add-edit-employee',
@@ -15,6 +16,9 @@ export class AddEditEmployeeComponent implements OnInit {
   isEditMode = false;
   employeeForm: FormGroup;
   
+  currentdate = new Date(); 
+  datetime:string = "";
+
   imagePreview: string | ArrayBuffer | null = null; // To store the preview image URL
   selectedFile: File | null = null; // To store the actual image file
   defaultImage= '../assets/defaultimage.jpg'; // Path to your default image
@@ -22,16 +26,17 @@ export class AddEditEmployeeComponent implements OnInit {
   msgClass: string = '';
 
   constructor(private fb: FormBuilder, private employeeService: ApiService, public activeModal: NgbActiveModal) { 
-    //this.employee = { id:1 , firstName: 'John',lastName:"Doe",age:22,personalPhotos:"",valid:3,position:"cleaner",jobDescription:"employee to clean company ", birthDate:new Date("2002-5-5"),image:"" };
-
+    
     this.employeeForm = this.fb.group({
+      id:[undefined],
       FirstName: ['', Validators.required],    // Example fields
       LastName: ['', Validators.required],
-      age: ['', Validators.required],
-      Evalute: ['', Validators.required],
-      StartWork: ['', Validators.required],
+      age: [18, Validators.required],
+      Evalute: [3, Validators.required],
+      StartWork: [formatDate(this.currentdate, 'yyyy-MM-dd', 'en'), Validators.required],
+
       image: [null],
-      imagePath:"../assets/defaultimage.jpg"
+      EmployeeImage:"../assets/defaultimage.jpg"
     });
   }
 
@@ -39,8 +44,8 @@ export class AddEditEmployeeComponent implements OnInit {
     this.isEditMode = !!this.employee;
     this.initForm();
 
-    if(this.employee.imagePath!="")
-      this.defaultImage=this.employee.imagePath;
+    if(this.employee!=undefined &&  this.employee.EmployeeImage!=undefined)
+      this.defaultImage=this.employee.EmployeeImage;
     else
       this.defaultImage="../assets/defaultimage.jpg";
 
@@ -52,13 +57,14 @@ export class AddEditEmployeeComponent implements OnInit {
 
   initForm(): void {
     this.employeeForm = this.fb.group({
+      id:[undefined],
       FirstName: ['', Validators.required],    // Example fields
       LastName: ['', Validators.required],
-      age: ['', Validators.required],
-      Evalute:[1, [Validators.required, Validators.min(1), Validators.max(5)]],
-      StartWork: ['', Validators.required],
-      image: [null, Validators.required],
-      imagePath:this.defaultImage
+      age: [18, Validators.required],
+      Evalute:[3, [Validators.required, Validators.min(1), Validators.max(5)]],
+      StartWork: [formatDate(this.currentdate, 'yyyy-MM-dd', 'en'), Validators.required],
+      image: [null],
+      EmployeeImage:this.defaultImage
     });
   }
   
@@ -85,30 +91,38 @@ export class AddEditEmployeeComponent implements OnInit {
 
 
   saveEmployee(): void {
-    
     if (this.employeeForm.valid) {
       const employeeData: Employee = this.employeeForm.value;
-
-      if (this.employeeForm.valid) {
+      
+      if (employeeData.id!=undefined) {
         employeeData.id = this.employee.id;
-        this.employeeService.updateEmployee(employeeData).subscribe((rs) => {
-          if(rs){
-            this.activeModal.close('employeeModal');
+        this.employeeService.updateEmployee(employeeData).subscribe((result) => {
+          if(result){
+            //this.activeModal.close('employeeModal');
             this.msgResponse = 'Changes saved successfully!';
-        this.msgClass = 'text-success'; // apply success styling
-        
-          }else{
+            this.msgClass = 'text-success'; // apply success styling
+            setTimeout(()=>this.closeModal(this.employeeForm.value),2000);
+            
+          }
+          else{
             this.msgResponse = 'Failed to save changes. Please try again.';
             this.msgClass = 'text-danger'; 
-          }
-            
-          
-        });
+          } });
       } else {
-        this.msgResponse = 'not valid';
-        this.msgClass = 'text-danger'; 
-        //this.employeeService.addEmployee(employeeData).subscribe(() => this.activeModal.close('added'));
+
+        this.employeeService.addEmployee(employeeData).subscribe((result) => {
+          if(result){
+            this.msgResponse = 'saved successfully!';
+            this.msgClass = 'text-success'; // apply success styling
+            setTimeout(()=>this.closeModal(this.employeeForm.value),2000);
+          }
+          else{
+            this.msgResponse = 'Failed to save changes. Please try again.';
+            this.msgClass = 'text-danger'; 
+          } });
       }
+    }else{
+      this.employeeForm.markAllAsTouched();
     }
 
     /*
@@ -129,8 +143,10 @@ export class AddEditEmployeeComponent implements OnInit {
     */
   }
 
-  closeModal(): void {
-    this.activeModal.dismiss();
+  closeModal(employee:Employee): void {
+    this.activeModal.close(employee);
+    this.msgResponse = '';
+    this.msgClass = '';
   }
   
 }

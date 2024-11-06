@@ -1,5 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { Request } from '../models/Request';
+import { ApiService } from '../services/api.service';
 
 @Component({
   selector: 'app-request-element',
@@ -11,20 +12,21 @@ export class RequestElementComponent {
 
  stars: number[] = [1, 2, 3, 4, 5]; // Array for 5 stars
 
- constructor(){
+ constructor(private requestService: ApiService){
   this.request={
-    id: 0,
-    dateRequest: new Date('0000-01-01'),
-    dateExecute: new Date('0000-01-01'),
-    period: 0,
-    state:0,
-    evalute:0,
+    id:0,
   
-    lastName: '',
-    firstName: '',
-    Phone: "",
-    Whatsapp: '', // WhatsApp number (international format)
-    Email: '',
+    CustomerLastName: '',
+    CustomerFirstName: '',
+    CustomerPhone: "",
+    CustomerEmail: '',
+
+    OrderDate: new Date(),
+    start_time: "",
+    end_time: "",
+    OrderState:"",
+    Evalute:0,
+    EmployeeNumber:1,
     
     lat: "",
     lang: "",
@@ -32,48 +34,26 @@ export class RequestElementComponent {
   };
  }
 
-
  // Function to change request state
  changeState(request:Request, newState:string) {
-  const previousState = request.state;
-  console.log(newState);
-  if(newState=="in")
-    request.state = 2;
-  else if(newState=="done")
-    request.state = 3;
-  else
-    request.state = 1;
+  const previousState = request.OrderDate;
+  request.OrderState = newState;
 
     // Call the service to update the request state in the backend
-    /*  
     this.requestService.updateRequest(request).subscribe({
-    next: (response) => {
-      console.log('Request state updated successfully:', response);
-    },
-    error: (error) => {
-      console.error('Error updating request state:', error);
-      // If the request fails, revert to the previous state
-      request.state = previousState;
-    }
-  });*/
+    next: (response) => {       },
+    error: (error) => {request.OrderDate = previousState;}
+  });
 }
 
 changeValid(request:Request, evalute:number) {
-  const previousNumber = request.evalute;
-  request.evalute = evalute;
+  const previousNumber = request.Evalute;
+  request.Evalute = evalute;
 
     // Call the service to update the request state in the backend
-  /*
-    this.requestService.updateRequest(request).subscribe({
-    next: (response) => {
-      console.log('Request state updated successfully:', response);
-    },
-    error: (error) => {
-      console.error('Error updating request state:', error);
-      // If the request fails, revert to the previous state
-      request.evalute = evalute;
-    }
-  });*/
+  this.requestService.updateRequest(request).subscribe({
+    next: (response) => {},
+    error: (error) => {request.Evalute = evalute;}
+  });
 }
-
 }
