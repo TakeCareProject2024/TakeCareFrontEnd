@@ -35,7 +35,7 @@ export class AddEditEmployeeComponent implements OnInit {
       Evalute: [3, Validators.required],
       StartWork: [formatDate(this.currentdate, 'yyyy-MM-dd', 'en'), Validators.required],
 
-      image: [null],
+      image: this.fb.group({}),
       EmployeeImage:"../assets/defaultimage.jpg"
     });
   }
@@ -63,7 +63,7 @@ export class AddEditEmployeeComponent implements OnInit {
       age: [18, Validators.required],
       Evalute:[3, [Validators.required, Validators.min(1), Validators.max(5)]],
       StartWork: [formatDate(this.currentdate, 'yyyy-MM-dd', 'en'), Validators.required],
-      image: [null],
+      image: this.fb.group({}),
       EmployeeImage:this.defaultImage
     });
   }
