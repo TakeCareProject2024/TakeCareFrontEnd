@@ -15,6 +15,12 @@
           <li *ngIf="isAdmin" class="nav-item"><a class="nav-link" href="dashboard">dashboard</a></li>
         </ul>
       </div>
+
+      <div>
+        <button (click)="switchLanguage('en')">English</button>
+        <button (click)="switchLanguage('ar')">Arabic</button>
+      </div>
+      
     </div>
   </nav>
 </header>
@@ -71,6 +77,9 @@
 <!-- Footer Section -->
 <footer class="footer bg-dark text-white py-5">
   <div class="container text-center">
+    <h1>{{ 'HELLO' | translate }}</h1>
+      <p>{{ 'WELCOME_MESSAGE' | translate }}</p>
+      
     <p>Contact Us:
       <a href="mailto:{{generalInfo.Email}}" style="font-size:medium ;">{{generalInfo.Email}}</a> | Follow us: 
       <a href="https://wa.me/{{generalInfo.phone1}}" target="_blank" class="text-white"><i class="fab fa-whatsapp"></i></a>

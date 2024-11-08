@@ -4,6 +4,7 @@ import { MainInfo } from './models/MainInfo';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { AddRequestComponent } from './add-request/add-request.component';
 import { Request } from '../app/models/Request';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-root',
@@ -27,8 +28,13 @@ export class AppComponent  implements OnInit{
 
   }
 
-  constructor(private apiService: ApiService,private modalService: NgbModal) {
+  constructor(private apiService: ApiService,private modalService: NgbModal,
+    private translate: TranslateService) {
   
+      const savedLang = localStorage.getItem('lang') || 'en';
+      this.translate.use(savedLang);
+      document.documentElement.dir = savedLang === 'ar' ? 'rtl' : 'ltr';
+
     this.generalInfo= {
       id: 1,
       companyName: "",
@@ -66,6 +72,13 @@ export class AppComponent  implements OnInit{
     );
   }
 
+  switchLanguage(language: string) {
+    this.translate.use(language);
+    document.documentElement.dir = language === 'ar' ? 'rtl' : 'ltr';
+    localStorage.setItem('lang', language); 
+  }
+
+
   openAddRequestPopup(): void {
     const modalRef = this.modalService.open(AddRequestComponent, { size: '10px' });
     //modalRef.componentInstance.request = null; // No employee data for add
@@ -79,6 +92,7 @@ export class AppComponent  implements OnInit{
       //console.log('Add employee modal dismissed');
     });
   }
+  
 
   images = [
     { src: 'assets/d.png', alt: 'Image 2' },

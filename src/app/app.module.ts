@@ -1,7 +1,7 @@
 // src/app/app.module.ts
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { HttpClientModule } from '@angular/common/http';  // Import HttpClientModule
+import { HttpClient, HttpClientModule } from '@angular/common/http';  // Import HttpClientModule
 import { FormsModule } from '@angular/forms';  // For forms, if needed
 import { GoogleMapsModule } from '@angular/google-maps';
 
@@ -21,6 +21,12 @@ import { CommonModule } from '@angular/common';
 import { RequestElementComponent } from './request-element/request-element.component';
 import { DashBoardComponent } from './dash-board/dash-board.component';
 import { DatePipe } from '@angular/common'; // Import DatePipe here
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
+
+export function HttpLoaderFactory(http: HttpClient) {
+  return new TranslateHttpLoader(http, './assets/i18n/', '.json');
+}
 
 @NgModule({
   declarations: [
@@ -43,7 +49,14 @@ import { DatePipe } from '@angular/common'; // Import DatePipe here
     FormsModule, NgbModule,
     ReactiveFormsModule,
     GoogleMapsModule,
-    CommonModule
+    CommonModule,
+    TranslateModule.forRoot({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: HttpLoaderFactory,
+        deps: [HttpClient]
+      }
+    })
   ],
   providers: [DatePipe],
   bootstrap: [AppComponent]
