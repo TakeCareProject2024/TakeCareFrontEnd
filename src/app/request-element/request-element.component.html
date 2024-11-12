@@ -23,10 +23,10 @@
 
           <!-- Request Info -->
           <div class="col-md-4">
-            <p><strong>Order Date:</strong> {{ request.OrderDate | date }}</p>
-            <p><strong>Service from :</strong> {{ request.start_time |  date: 'shortTime' }} <strong> to </strong> {{ request.end_time |  date: 'shortTime' }}</p>
+            <p><strong>{{ 'Order_Date' | translate }}:</strong> {{ request.OrderDate | date }}</p>
+            <p><strong>{{ 'Service_From' | translate }} :</strong> {{ request.start_time |  date: 'shortTime' }} <strong> to </strong> {{ request.end_time |  date: 'shortTime' }}</p>
             
-            <p><strong>Valid: &nbsp; </strong>
+            <p><strong>{{ 'VAlid' | translate }}: &nbsp; </strong>
               <span *ngFor="let star of stars;let i = index"> 
               <i class="fa fae"
                 [ngClass]="i > request.Evalute ? 'fa-star-o fastaro' : 'fa-star fastar'"
@@ -41,13 +41,13 @@
             <p><strong>Status:</strong></p>
             <button class="btn btn-sm"
                     [ngClass]="{'btn-success': request.OrderState === 'done', 'btn-warning': request.OrderState === 'pending', 'btn-info': request.OrderState === 'inprogress'}"
-                    (click)="changeState(request, 'pending')">pending</button>
+                    (click)="changeState(request, 'pending')">{{ 'Pendding' | translate }}</button>
             <button class="btn btn-sm"
                     [ngClass]="{'btn-success': request.OrderState === 'done', 'btn-warning': request.OrderState === 'pending', 'btn-info': request.OrderState === 'inprogress'}"
-                    (click)="changeState(request, 'inprogress')">In Progress</button>
+                    (click)="changeState(request, 'inprogress')">{{ 'In_Progress' | translate }}</button>
             <button class="btn btn-sm"
                     [ngClass]="{'btn-success': request.OrderState === 'done', 'btn-warning': request.OrderState === 'pending', 'btn-info': request.OrderState === 'inprogress'}"
-                    (click)="changeState(request, 'done')">Done</button>
+                    (click)="changeState(request, 'done')">{{ 'Done' | translate }}</button>
           </div>
         </div>
       </div>

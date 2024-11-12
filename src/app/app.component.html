@@ -7,20 +7,18 @@
       </button>
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav ml-auto">
-          <li class="nav-item"><a class="nav-link" href="home#about">Home</a></li>
-          <li class="nav-item"><a class="nav-link" href="employees#headEmpl">Employees</a></li>
+          <li class="nav-item"><a class="nav-link" href="home#about">{{ 'Home' | translate }}</a></li>
+          <li class="nav-item"><a class="nav-link" href="employees#headEmpl">{{ 'Employees' | translate }}</a></li>
 
-          <li *ngIf="isAdmin" class="nav-item"><a class="nav-link" href="requests#about">Requests</a></li>
-          <li class="nav-item"><a class="nav-link" href="about#services">About Us</a></li>
-          <li *ngIf="isAdmin" class="nav-item"><a class="nav-link" href="dashboard">dashboard</a></li>
+          <li *ngIf="isAdmin" class="nav-item"><a class="nav-link" href="requests#about">{{ 'Requests' | translate }}</a></li>
+          <li class="nav-item"><a class="nav-link" href="about#services">{{ 'About_Us' | translate }}</a></li>
+          <li *ngIf="isAdmin" class="nav-item"><a class="nav-link" href="dashboard">{{ 'Dashboard' | translate }}</a></li>
         </ul>
       </div>
 
-      <div>
-        <button (click)="switchLanguage('en')">English</button>
-        <button (click)="switchLanguage('ar')">Arabic</button>
-      </div>
-      
+      <button *ngIf="useEnglish"   style="background-color: white;color: gray;border-radius: 5px;" (click)="switchLanguage('ar')">En</button>
+      <button  *ngIf="!useEnglish"  style="background-color:white;color: green;border-radius: 5px;"(click)="switchLanguage('en')">عر</button>
+    
     </div>
   </nav>
 </header>
@@ -50,7 +48,7 @@
   <!-- Title and Content Overlay -->
   <div class="carousel-overlay">
     <div class="container text-center text-white">
-      <h1 class="display-3">Welcome to {{generalInfo.companyName}}</h1>
+      <h1 class="display-3">{{ 'Welcome_To' | translate }} {{generalInfo.companyName}}</h1>
       <p class="lead">{{generalInfo.description}}.</p>
 
       <!-- Social Media Icons Row -->
@@ -77,12 +75,12 @@
 <!-- Footer Section -->
 <footer class="footer bg-dark text-white py-5">
   <div class="container text-center">
-    <h1>{{ 'HELLO' | translate }}</h1>
-      <p>{{ 'WELCOME_MESSAGE' | translate }}</p>
-      
-    <p>Contact Us:
-      <a href="mailto:{{generalInfo.Email}}" style="font-size:medium ;">{{generalInfo.Email}}</a> | Follow us: 
+    <p>
+      {{ 'Conntact_Us' | translate }}:
+      <a href="mailto:{{generalInfo.Email}}" style="font-size:medium ;">{{generalInfo.Email}}</a> 
       <a href="https://wa.me/{{generalInfo.phone1}}" target="_blank" class="text-white"><i class="fab fa-whatsapp"></i></a>
+      
+      |  {{ 'Follow_Us' | translate }}: 
       <a href="{{generalInfo.facebook}}" class="text-white"><i class="fab fa-facebook"></i></a>
       <a href="{{generalInfo.instagram}}" class="text-white"><i class="fab fa-instagram"></i></a>
     </p>

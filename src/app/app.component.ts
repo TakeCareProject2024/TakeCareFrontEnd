@@ -16,7 +16,8 @@ export class AppComponent  implements OnInit{
   
   title = 'cleaner-app';
   isAdmin = false;
-  
+  useEnglish=true;
+
   generalInfo: MainInfo;
   services:any[]=[];
   customerComments:any[]=[];
@@ -33,6 +34,7 @@ export class AppComponent  implements OnInit{
   
       const savedLang = localStorage.getItem('lang') || 'en';
       this.translate.use(savedLang);
+      this.useEnglish=true;
       document.documentElement.dir = savedLang === 'ar' ? 'rtl' : 'ltr';
 
     this.generalInfo= {
@@ -73,8 +75,10 @@ export class AppComponent  implements OnInit{
   }
 
   switchLanguage(language: string) {
+    debugger;
     this.translate.use(language);
     document.documentElement.dir = language === 'ar' ? 'rtl' : 'ltr';
+    this.useEnglish= language === 'ar' ? false : true;
     localStorage.setItem('lang', language); 
   }
 

@@ -1,5 +1,65 @@
 {
     "HELLO": "مرحبا",
-    "WELCOME_MESSAGE": "مرحبًا بكم في موقعنا!"
+    "WELCOME_MESSAGE": "مرحبًا بكم في موقعنا!",
+    "Home":"الرئيسية",
+    "Employees":"الموظفين",
+    
+    "Requests":"الطلبات",
+    "About_Us":"حول",
+    "Dashboard":"الإعدادات",
+    "Welcome_To":"أهلا بكم في",
+    "Our_Services":"حدماتنا",
+    "Our_Location":"عنواننا",
+    "Conntact_Us":"تواصل معنا",
+    "Follow_Us":"تابعنا",
+    
+    "First_Name":"الاسم الأول",
+    "Last_Name":"الاسم الأخير",
+    "Address":"العنوان",
+    "Whats_Number":"رقم الوتس",
+    "Email":"الإيميل",
+    "Save":"حفظ",
+    "Cancel":"الغاء",
+    
+    "Our_Employees":"موظفينا",
+    "Edit_Employee":"تعديل موظف",
+    "Add_Employee":"إضاف موظف",
+    "Add_Request":"إضاف طلب",
+    
+    "Status":"الحالة",
+    "Valid":"التقييم",
+    "Service_From":"تبدأ الخدمة من",
+    "To":"إلى",
+    "Order_Date":"تاريخ الطلب",
+    "Pendding":"انتظار",
+    "Done":"تم",
+    "In_Progress":"في المعالجة",
+
+    "PLeaseEnter":"الرجاء ادخال كلمة السر",
+    "Error_Password":"كلمة السر خاطئة",
+    "Personal_Information":"المعلومات الشخصية",
+    "Services_Information":"معلومات الخدمة",
+    "Employee_Number":"عدد الموظفين",
+    "Our_Profile":"معرضنا",
+
+    "Location_In":"عنواننا",
+    "Is_Service":"تخدم",
+    "Feedback":"التعليقات",
+    "Log_Out":"تسجيل خروج",
+    "Set_Password":"تعديل كلمة السر",
+    "Edit":"تعديل",
+    "Confirm_New_Password":"تأكدي كلمسة السر",
+    "New_Password":"كلمة السر الجديدة",
+    "Old_Password":"كلمة السر القديمة",
+    "Change_Password":"تغير كلمة السر",
+    "Company_Name":"اسم الشركة",
+    "Description":"التوصيف",
+    "Connect":"تواصل",
+"services":"خدماتنا",
+"FaceBook":"الفيس",
+"Instagram":"الانستغرام",
+"Phone":"الهاتف",
+"No_Data":"لا يوجد معلومات للعرض"
+    
   }
   

@@ -1,4 +1,65 @@
 {
-    "HELLO": "Hello",
-    "WELCOME_MESSAGE": "Welcome to our website!"
+  "HELLO": "HELLO",
+  "WELCOME_MESSAGE": "Welcome to",
+  "Home":"Home",
+  "Employees":"Employees",
+  
+  "Requests":"Requests",
+  "About_Us":"About us",
+  "Dashboard":"Dashboard",
+  "Welcome_To":"Welcome to ",
+  "Our_Services":"Our Services",
+  "Our_Location":"Our Location",
+  "Conntact_Us":"Conntact us",
+  "Follow_Us":"Follow us",
+  "No_Data":"No Data to show",
+  
+  "First_Name":"First name",
+  "Last_Name":"Last name",
+  "Address":"Address",
+  "Whats_Number":"Whats number",
+  "Email":"Email",
+  "Save":"Save",
+  "Cancel":"Cancel",
+  
+
+  "Our_Employees":"Our employees",
+  "Edit_Employee":"Edit employee",
+  "Add_Employee":"Add employee",
+  
+  "Add_Request":"Add Request",
+  "Status":"Status",
+  "Valid":"Valid",
+  "Service_From":"Service from",
+  "To":"to",
+  "Order_Date":"Order date",
+  "Pendding":"Pendding",
+  "Done":"Done",
+  "In_Progress":"In progress",
+
+  "PLease_Enter":"PLease enter password",
+  "Error_Password":"Error Password",
+  "Personal_Information":"اPersonal information",
+  "Services_Information":"Services iInformation",
+  "Employee_Number":"Employee number",
+  "Our_Profile":"Our profile",
+
+  "Location":"Location",
+  "Is_Service":"Is service",
+  "Feedback":"Feedback",
+  "Log_Out":"Log out",
+  "Set_Password":"Set password",
+  "Edit":"Edit",
+  "Confirm_New_Password":"Confirm new password",
+  "New_Password":"New password",
+  "Old_Password":"Old password",
+  "Change_Password":"Change password",
+  "Company_Name":"Company name",
+  "Description":"Description",
+  "Connect":"Connect",
+"services":"services",
+"FaceBook":"FaceBook",
+"Instagram":"Instagram",
+"Phone":"Phone"
+
   }

@@ -7,21 +7,21 @@
                 <div class="card">
                     <div class="card-content">
                         <h2 class="card-title">{{ generalInfo.companyName }} <i><small> - {{ generalInfo.phone1 }}</small></i></h2>
-                            <p class="card-description">{{ generalInfo.companyName }} is <strong>Location in </strong> {{ generalInfo.Address }}</p>
-                            <p class="card-description">{{ generalInfo.companyName }} is <br>{{ generalInfo.description }}</p>
-                        <p class="card-description">{{ generalInfo.companyName }} is <strong>is service :</strong><br> {{ generalInfo.services }}</p>              
-                        <p class="card-description">{{ generalInfo.companyName }} is <strong>have feedback :</strong><br> {{ generalInfo.comments }}</p>
-                        <p class="card-description"><strong>To Contact  </strong> 
-                            <a [href]="generalInfo.Email" target="_blank"> Email</a> |
-                            <a [href]="generalInfo.facebook" target="_blank"> Facebook</a> |
-                            <a [href]="generalInfo.instagram" target="_blank"> Instagram</a>
+                            <p class="card-description"><strong>{{'Location_In'|translate}} :</strong><br> {{ generalInfo.Address }}</p>
+                            <p class="card-description">{{ generalInfo.companyName }} {{'is'|translate}} <br>{{ generalInfo.description }}</p>
+                        <p class="card-description"><strong>{{'Is_Service'|translate}} :</strong><br> {{ generalInfo.services }}</p>              
+                        <p class="card-description"><strong>{{'Feedback'|translate}} :</strong><br> {{ generalInfo.comments }}</p>
+                        <p class="card-description"><strong>{{'Conntact_Us'|translate}}  </strong> 
+                            <a [href]="generalInfo.Email" target="_blank"> {{'Email'|translate}}</a> |
+                            <a [href]="generalInfo.facebook" target="_blank"> {{'Facebook'|translate}}</a> |
+                            <a [href]="generalInfo.instagram" target="_blank"> {{'Instagram'|translate}}</a>
                         </p>
                     </div>
                     <div class="text-align:center">
                     <div class="input-group" style="padding: 20px;">
-                        <a class="btn btn-success"  data-bs-toggle="modal" data-bs-target="#editModal" style="background-color: #2ecc71;">Edit</a>
-                        <a class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#changePasswordModal" >set password</a>
-                        <a class="btn btn-danger" (click)="logout()" >Logout</a>
+                        <a class="btn btn-success"  data-bs-toggle="modal" data-bs-target="#editModal" style="background-color: #2ecc71;">{{'Edit'|translate}}</a>
+                        <a class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#changePasswordModal" >{{'Set_Password'|translate}}</a>
+                        <a class="btn btn-danger" (click)="logout()" >{{'Log_Out'|translate}}</a>
                     </div>
                     </div>
                     
@@ -37,7 +37,7 @@
             <br>
             <div class="col-12">
                 <i class="fas fa-info-circle"></i>
-                <p>No data available to display.</p>
+                <p>{{'No_data'|translate}}</p>
                
             </div>
             <br>
@@ -52,7 +52,7 @@
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title" id="editModalLabel">Edit Company Information</h5>
+            <h5 class="modal-title" id="editModalLabel">{{'Edit_Company_Information'|translate}}</h5>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <div class="modal-body">
@@ -60,14 +60,14 @@
                 <div class="row">
                     <div class="col-md-6">
                         <div class="mb-3">
-                            <label for="companyName" class="form-label">Company Name</label>
+                            <label for="companyName" class="form-label">{{'Company_Name' | translate}}</label>
                             <input type="text" class="form-control" id="companyName" [(ngModel)]="generalInfo.companyName" name="companyName" />
                           </div>                          
                     </div>
 
                     <div class="col-md-6">
                         <div class="mb-3">
-                            <label for="description" class="form-label">Description</label>
+                            <label for="description" class="form-label">{{'Description'|translate}}</label>
                             <input type="text" class="form-control" id="description" [(ngModel)]="generalInfo.description" name="description" />
                         </div>                          
                     </div>
@@ -75,21 +75,21 @@
 
                     <div class="col-md-12">
                         <div class="mb-3">
-                            <label for="Address" class="form-label">Address</label>
+                            <label for="Address" class="form-label">{{'Address'|translate}}</label>
                             <input type="text" class="form-control" placeholder="Address" id="Address" [(ngModel)]="generalInfo.Address" name="Address" />
                         </div>                          
                     </div>
 
                     <div class="col-md-12">
                         <div class="mb-3">
-                            <label for="services" class="form-label">services</label>
+                            <label for="services" class="form-label">{{'services'|translate}}</label>
                             <input type="text" class="form-control" placeholder="services" id="services" [(ngModel)]="generalInfo.services" name="services" />
                         </div>                          
                     </div>
                 </div>
 
                 
-                <label for="commanta" class="form-label">Connect</label>
+                <label for="commanta" class="form-label">{{'Connect'|translate}}</label>
                 <div class="row">
                     <div class="col-md-6">
                         <input type="text" class="form-control" placeholder="phone1" id="phone1" [(ngModel)]="generalInfo.phone1" name="phone1" />
@@ -117,8 +117,8 @@
           </div>
           <div class="modal-footer">
             <p [id]="msgResponse" [ngClass]="msgClass">{{ msgResponse }}</p>
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-            <button type="button" class="btn btn-primary" (click)="saveChanges()">Save changes</button>
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">{{'Cancel'|translate}}</button>
+            <button type="button" class="btn btn-primary" (click)="saveChanges()">{{'Save'|translate}}</button>
           </div>
         </div>
       </div>

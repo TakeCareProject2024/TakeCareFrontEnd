@@ -1,24 +1,24 @@
 <!-- add-edit-employee.component.html -->
 <div class="modal-header">
-    <h4 class="modal-title">Add Request</h4>
+    <h4 class="modal-title">{{ 'Add_Request' | translate }}</h4>
   </div>
   
   <div class="modal-body">  
     <ngForm [formGroup]="requestForm">
       
       <div class="form-group" >
-        <h6>personal information:</h6>
+        <h6>{{ 'Personal_Information' | translate }}:</h6>
         <div class="input-group" style="padding: 5px;">
             <span class="btn" style="background-color: #2ecc71;color: white;"><i class="fa fa-user"></i></span>
-            <input class="form-control"  type="text" placeholder="first name" formControlName="CustomerFirstName" required>
-            <input class="form-control"  type="text" placeholder="last name" formControlName="CustomerLastName" required>
+            <input class="form-control"  type="text" placeholder="{{ 'First_Name' | translate }}" formControlName="CustomerFirstName" required>
+            <input class="form-control"  type="text" placeholder="{{ 'Last_Name' | translate }}" formControlName="CustomerLastName" required>
         </div>
 
         <div class="input-group" style="padding: 5px;">
           <span class="btn" style="background-color: #2ecc71;color: white;"><i >@</i></span>
-          <input class="form-control"  type="email" placeholder="Email" formControlName="CustomerEmail" required>
+          <input class="form-control"  type="email" placeholder="{{ 'Email' | translate }}" formControlName="CustomerEmail" required>
           <span class="btn" style="background-color: #2ecc71;color: white;"><i class="fa fa-whatsapp"></i></span>
-          <input class="form-control"  type="number" placeholder="whatsApp number" formControlName="CustomerPhone" required>
+          <input class="form-control"  type="number" placeholder="{{ 'Whats_Number' | translate }}" formControlName="CustomerPhone" required>
       </div>
       <br>
       <h6>services information:</h6>
@@ -35,9 +35,9 @@
         <div class="input-group" style="display: flex; align-items: center; padding: 5px;">
 
           <span class="btn" style="background-color: #2ecc71;color: white;width: 10%;"><i class="fa fa-map-marker-alt"></i></span>
-          <input type="text" class="form-control" value="" placeholder="address" style="width: 65%;" formControlName="Evalute" required> 
+          <input type="text" class="form-control" value="" placeholder="{{ 'Address' | translate }}" style="width: 65%;" formControlName="Evalute" required> 
           <span class="btn" style="background-color: #2ecc71;color: white;width: 10%;"><i class="fa fa-users"></i></span>
-            <input class="form-control"  type="number" placeholder="Employee Number" style="width: 15%;" value="3" formControlName="EmployeeNumber" required>                
+            <input class="form-control"  type="number" placeholder="{{ 'Employee_Number' | translate }}" style="width: 15%;" value="3" formControlName="EmployeeNumber" required>                
       </div>
 
       </div>
@@ -48,7 +48,7 @@
 
   <div class="modal-footer">
     <p [id]="msgResponse" [ngClass]="msgClass">{{ msgResponse }}</p>
-    <button class="btn" style="background-color: #2ecc71;color: white;" (click)="saveRequest()">Save</button>
-    <button class="btn btn-secondary" (click)="closeModal(null)">Cancel</button>
+    <button class="btn" style="background-color: #2ecc71;color: white;" (click)="saveRequest()">{{ 'Save' | translate }}</button>
+    <button class="btn btn-secondary" (click)="closeModal(null)">{{ 'Cancel' | translate }}</button>
   </div>
   
