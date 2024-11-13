@@ -5,8 +5,10 @@
     <div class="col-md-1 "></div>  
     <div class="col-md-10" style="padding: 20px;">
       <div class="container text-center" >
-        <h2>{{'Our_Employees'|translate}} </h2>
-
+        <h2><small> <a *ngIf="isAdmin" class="btn btn-success" style="padding-left: 10px;" (click)="openAddEmployeePopup()"><i class="fa fa-plus"></i></a></small>
+          {{'Our_Employees'|translate}}
+        </h2>
+        
         <!--
         <div class="input-group" style="padding: 30px;">
           <span class="btn" style="background-color: #2ecc71;color: white;"><i class="fa fa-user"></i></span>
@@ -32,8 +34,7 @@
   <br>
   <br>
 
-<div *ngIf="isAdmin && employees && employees.length > 0; else  noDataTemplate">
-
+<div *ngIf="employees && employees.length > 0; else  noDataTemplate">
 
   <div *ngFor="let row of employees | slice:0:(employees.length/4 | ceil); let rowIndex = index" class="row">
     <div *ngFor="let employee of employees | slice:(rowIndex * 4):(rowIndex * 4 + 4)" class="col-md-3">
@@ -58,6 +59,7 @@
       </div>
     </div>
 </div>
+
 </div>
 
   <!-- Template for no data -->

@@ -16,9 +16,12 @@
         </ul>
       </div>
 
-      <button *ngIf="useEnglish"   style="background-color: white;color: gray;border-radius: 5px;" (click)="switchLanguage('ar')">En</button>
-      <button  *ngIf="!useEnglish"  style="background-color:white;color: green;border-radius: 5px;"(click)="switchLanguage('en')">عر</button>
-    
+      <a *ngIf="useEnglish" (click)="switchLanguage('ar')">
+        <i  class="fa fa-language" aria-hidden="true" ></i>
+      </a>
+      <a *ngIf="!useEnglish" (click)="switchLanguage('en')">
+        <i  class="fa fa-language" aria-hidden="true" ></i>
+      </a>
     </div>
   </nav>
 </header>

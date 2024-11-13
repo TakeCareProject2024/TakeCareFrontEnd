@@ -7,15 +7,13 @@
                 <div class="card">
                     <div class="card-content">
                         <h2 class="card-title">{{ generalInfo.companyName }} <i><small> - {{ generalInfo.phone1 }}</small></i></h2>
-                            <p class="card-description"><strong>{{'Location_In'|translate}} :</strong><br> {{ generalInfo.Address }}</p>
-                            <p class="card-description">{{ generalInfo.companyName }} {{'is'|translate}} <br>{{ generalInfo.description }}</p>
-                        <p class="card-description"><strong>{{'Is_Service'|translate}} :</strong><br> {{ generalInfo.services }}</p>              
-                        <p class="card-description"><strong>{{'Feedback'|translate}} :</strong><br> {{ generalInfo.comments }}</p>
-                        <p class="card-description"><strong>{{'Conntact_Us'|translate}}  </strong> 
-                            <a [href]="generalInfo.Email" target="_blank"> {{'Email'|translate}}</a> |
-                            <a [href]="generalInfo.facebook" target="_blank"> {{'Facebook'|translate}}</a> |
-                            <a [href]="generalInfo.instagram" target="_blank"> {{'Instagram'|translate}}</a>
-                        </p>
+                            <p class="card-description">{{ generalInfo.description }}</p>
+                            <p class="card-description"><strong>{{'Location_In'|translate}}</strong><br> {{ generalInfo.Address }}</p>
+                            <p class="card-description"><strong>{{'Conntact_Us'|translate}}  </strong> 
+                                <a [href]="generalInfo.Email" target="_blank"> {{'Email'|translate}}</a> |
+                                <a [href]="generalInfo.facebook" target="_blank"> {{'Facebook'|translate}}</a> |
+                                <a [href]="generalInfo.instagram" target="_blank"> {{'Instagram'|translate}}</a>
+                            </p>
                     </div>
                     <div class="text-align:center">
                     <div class="input-group" style="padding: 20px;">
@@ -53,7 +51,7 @@
         <div class="modal-content">
           <div class="modal-header">
             <h5 class="modal-title" id="editModalLabel">{{'Edit_Company_Information'|translate}}</h5>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+           <!--  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> -->
           </div>
           <div class="modal-body">
             <form>
@@ -76,7 +74,7 @@
                     <div class="col-md-12">
                         <div class="mb-3">
                             <label for="Address" class="form-label">{{'Address'|translate}}</label>
-                            <input type="text" class="form-control" placeholder="Address" id="Address" [(ngModel)]="generalInfo.Address" name="Address" />
+                            <input type="text" class="form-control" id="Address" [(ngModel)]="generalInfo.Address" name="Address" />
                         </div>                          
                     </div>
 
@@ -92,13 +90,13 @@
                 <label for="commanta" class="form-label">{{'Connect'|translate}}</label>
                 <div class="row">
                     <div class="col-md-6">
-                        <input type="text" class="form-control" placeholder="phone1" id="phone1" [(ngModel)]="generalInfo.phone1" name="phone1" />
+                        <input type="text" class="form-control" placeholder="{{'Whats_Number'|translate}}" id="phone1" [(ngModel)]="generalInfo.phone1" name="phone1" />
                     </div>
                     <div class="col-md-6">
                         <input type="text" class="form-control" id="phone2" placeholder="phone2"  [(ngModel)]="generalInfo.phone2" name="phone2" />
                     </div>
                     <div class="col-md-6">
-                        <input type="text" class="form-control" id="Email" placeholder="Email"  [(ngModel)]="generalInfo.Email" name="Email" />
+                        <input type="text" class="form-control" id="Email" placeholder="{{'Email'|translate}}"  [(ngModel)]="generalInfo.Email" name="Email" />
                     </div>
                     <div class="col-md-6">
                     </div>
@@ -106,10 +104,10 @@
                 </div>
                 <div class="row">
                     <div class="col-md-6">
-                        <input type="text" class="form-control" placeholder="faceBook Link" id="facebook" [(ngModel)]="generalInfo.facebook" name="facebook" />
+                        <input type="text" class="form-control" placeholder="{{'FaceBook'|translate}}" id="facebook" [(ngModel)]="generalInfo.facebook" name="facebook" />
                     </div>
                     <div class="col-md-6">
-                        <input type="text" class="form-control" placeholder="instagram Link" id="instagram" [(ngModel)]="generalInfo.instagram" name="instagram" />
+                        <input type="text" class="form-control" placeholder="{{'Instagram'|translate}}" id="instagram" [(ngModel)]="generalInfo.instagram" name="instagram" />
                     </div>
                 </div>
                 
@@ -129,28 +127,27 @@
         <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
-            <h5 class="modal-title" id="changePasswordModalLabel">Change Password</h5>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            <h5 class="modal-title" id="changePasswordModalLabel">{{'Change_Password'|translate}}</h5>
             </div>
             <div class="modal-body">
             <form>
                 <div class="mb-3">
-                <label for="oldPassword" class="form-label">Old Password</label>
+                <label for="oldPassword" class="form-label">{{'Old_Password'|translate}}</label>
                 <input type="password" class="form-control" id="oldPassword" [(ngModel)]="oldPassword" name="oldPassword" />
                 </div>
                 <div class="mb-3">
-                <label for="newPassword" class="form-label">New Password</label>
+                <label for="newPassword" class="form-label">{{'New_Password'|translate}}</label>
                 <input type="password" class="form-control" id="newPassword" [(ngModel)]="newPassword" name="newPassword" />
                 </div>
                 <div class="mb-3">
-                <label for="confirmPassword" class="form-label">Confirm New Password</label>
+                <label for="confirmPassword" class="form-label">{{'Confirm_New_Password'|translate}}</label>
                 <input type="password" class="form-control" id="confirmPassword" [(ngModel)]="confirmPassword" name="confirmPassword" />
                 </div>
             </form>
             </div>
             <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-            <button type="button" class="btn btn-primary" (click)="changePassword()">Change Password</button>
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">{{'Cancel'|translate}}</button>
+            <button type="button" class="btn btn-primary" (click)="changePassword()">{{'Save'|translate}}</button>
             </div>
         </div>
         </div>

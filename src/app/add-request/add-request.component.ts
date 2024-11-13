@@ -39,6 +39,7 @@ export class AddRequestComponent implements OnInit {
       CustomerPhone:['',Validators.required],
 
       EmployeeNumber:[3,Validators.required],
+      Address:['',Validators.required],
       OrderState:['pending'],
       Evalute: [3],
       
@@ -86,6 +87,7 @@ export class AddRequestComponent implements OnInit {
       CustomerEmail:[this.getFromStorage('CustomerEmail'),Validators.required],
       CustomerPhone:[this.getFromStorage('CustomerPhone'),Validators.required],
       EmployeeNumber:[3,Validators.required],
+      Address:['',Validators.required],
       OrderState:['pending'],
       Evalute: [3],
       

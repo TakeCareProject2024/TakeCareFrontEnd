@@ -59,8 +59,8 @@ export class ApiService {
     return this.http.post<Employee>(this.apiUrlEmployee, employee);
   }
 
-  updateEmployee(employee: Employee): Observable<Employee> {
-    return this.http.put<Employee>(`${this.apiUrlEmployee}/${employee.id}`, employee);
+  updateEmployee(employee: FormData,id:number): Observable<Employee> {
+    return this.http.put<Employee>(`${this.apiUrlEmployee}/${id}`, employee);
   }
 
   deleteEmployee(id: number): Observable<boolean> {

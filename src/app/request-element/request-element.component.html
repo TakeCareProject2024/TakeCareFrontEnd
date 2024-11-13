@@ -24,9 +24,9 @@
           <!-- Request Info -->
           <div class="col-md-4">
             <p><strong>{{ 'Order_Date' | translate }}:</strong> {{ request.OrderDate | date }}</p>
-            <p><strong>{{ 'Service_From' | translate }} :</strong> {{ request.start_time |  date: 'shortTime' }} <strong> to </strong> {{ request.end_time |  date: 'shortTime' }}</p>
+            <p><strong>{{ 'Service_From' | translate }} :</strong> {{ request.start_time |  date: 'shortTime' }} <strong> {{'To'|translate}} </strong> {{ request.end_time |  date: 'shortTime' }}</p>
             
-            <p><strong>{{ 'VAlid' | translate }}: &nbsp; </strong>
+            <p><strong>{{ 'Valid' | translate }}: &nbsp; </strong>
               <span *ngFor="let star of stars;let i = index"> 
               <i class="fa fae"
                 [ngClass]="i > request.Evalute ? 'fa-star-o fastaro' : 'fa-star fastar'"
@@ -38,16 +38,19 @@
 
           <!-- Request State and Actions -->
           <div class="col-md-4">
-            <p><strong>Status:</strong></p>
+            <p><strong>{{ 'Status' | translate }}:</strong></p>
             <button class="btn btn-sm"
-                    [ngClass]="{'btn-success': request.OrderState === 'done', 'btn-warning': request.OrderState === 'pending', 'btn-info': request.OrderState === 'inprogress'}"
+                    [ngClass]="{'btn-secondary': request.OrderState === 'cancelled','btnLight': request.OrderState != 'cancelled'}"
+                    (click)="changeState(request, 'cancelled')">{{ 'Cancel' | translate }}</button>
+            <button class="btn btn-sm"
+                    [ngClass]="{'btn-warning': request.OrderState === 'pending','btnLight': request.OrderState != 'pending'}"
                     (click)="changeState(request, 'pending')">{{ 'Pendding' | translate }}</button>
             <button class="btn btn-sm"
-                    [ngClass]="{'btn-success': request.OrderState === 'done', 'btn-warning': request.OrderState === 'pending', 'btn-info': request.OrderState === 'inprogress'}"
-                    (click)="changeState(request, 'inprogress')">{{ 'In_Progress' | translate }}</button>
+                    [ngClass]="{'btn-warning': request.OrderState === 'processing','btnLight': request.OrderState != 'processing'}"
+                    (click)="changeState(request, 'processing')">{{ 'In_Progress' | translate }}</button>
             <button class="btn btn-sm"
-                    [ngClass]="{'btn-success': request.OrderState === 'done', 'btn-warning': request.OrderState === 'pending', 'btn-info': request.OrderState === 'inprogress'}"
-                    (click)="changeState(request, 'done')">{{ 'Done' | translate }}</button>
+                    [ngClass]="{'btn-success': request.OrderState === 'completed','btnLight': request.OrderState != 'completed'}"
+                    (click)="changeState(request, 'completed')">{{ 'Done' | translate }}</button>
           </div>
         </div>
       </div>

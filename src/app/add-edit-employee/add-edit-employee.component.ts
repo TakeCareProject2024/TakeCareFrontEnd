@@ -69,6 +69,7 @@ export class AddEditEmployeeComponent implements OnInit {
   }
   
   onFileSelected(event: any): void {
+    debugger;
     const file = event.target.files[0];
 
     if (file) {
@@ -91,12 +92,19 @@ export class AddEditEmployeeComponent implements OnInit {
 
 
   saveEmployee(): void {
+    debugger;
+    const formData = new FormData();
     if (this.employeeForm.valid) {
       const employeeData: Employee = this.employeeForm.value;
-      
+      formData.append('employee', JSON.stringify(employeeData));
+      var imageFile= this.employeeForm.get('image')?.value;
+      if (imageFile!=undefined) {
+        formData.append('image',imageFile);
+      }
+
       if (employeeData.id!=undefined) {
         employeeData.id = this.employee.id;
-        this.employeeService.updateEmployee(employeeData).subscribe((result) => {
+        this.employeeService.updateEmployee(formData,employeeData.id).subscribe((result) => {
           if(result){
             //this.activeModal.close('employeeModal');
             this.msgResponse = 'Changes saved successfully!';

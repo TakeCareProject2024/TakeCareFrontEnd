@@ -48,7 +48,7 @@
     "Log_Out":"تسجيل خروج",
     "Set_Password":"تعديل كلمة السر",
     "Edit":"تعديل",
-    "Confirm_New_Password":"تأكدي كلمسة السر",
+    "Confirm_New_Password":"تأكيد كلمة السر",
     "New_Password":"كلمة السر الجديدة",
     "Old_Password":"كلمة السر القديمة",
     "Change_Password":"تغير كلمة السر",
@@ -59,7 +59,8 @@
 "FaceBook":"الفيس",
 "Instagram":"الانستغرام",
 "Phone":"الهاتف",
-"No_Data":"لا يوجد معلومات للعرض"
+"No_Data":"لا يوجد معلومات للعرض",
+"Edit_Company_Information":"تعديل معلومات الشركة"
     
   }
   

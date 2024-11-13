@@ -34,7 +34,7 @@ export class AppComponent  implements OnInit{
   
       const savedLang = localStorage.getItem('lang') || 'en';
       this.translate.use(savedLang);
-      this.useEnglish=true;
+      this.useEnglish=savedLang === 'ar' ? false : true;
       document.documentElement.dir = savedLang === 'ar' ? 'rtl' : 'ltr';
 
     this.generalInfo= {
