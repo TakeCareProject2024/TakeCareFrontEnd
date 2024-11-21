@@ -48,10 +48,10 @@ export class AppComponent  implements OnInit{
       phone2: "",
       Email: "",      
       
-      lat: "24.48723641360933",
-      lang: "54.37462243953436",
-      facebook: "",
-      instagram: "",
+      Lat: 24.48723641360933,
+      Lang: 54.37462243953436,
+      facebookLink: "",
+      instagramLink: "",
       youtube: '',
 
       Profile: ["Commercial Cleaning,Keep your workspace clean and healthy with our specialized commercial cleaning services.", 
@@ -66,7 +66,9 @@ export class AppComponent  implements OnInit{
     this.apiService.getMainInfo().subscribe(
       (data) => {
         this.generalInfo = data.data;
-        this.apiService.setData(data.data);      
+        this.apiService.setData(data.data); 
+        localStorage.setItem("Lat",this.generalInfo.Lat.toString()); 
+        localStorage.setItem("Lang",this.generalInfo.Lang.toString());     
       },
       (error) => {
         console.error('Error fetching general info', error);
@@ -85,8 +87,7 @@ export class AppComponent  implements OnInit{
 
   openAddRequestPopup(): void {
     const modalRef = this.modalService.open(AddRequestComponent, { size: '10px' });
-    //modalRef.componentInstance.request = null; // No employee data for add
-
+    
     modalRef.result.then((result) => {
       if (result) {
         // Handle the new employee data and add to the array

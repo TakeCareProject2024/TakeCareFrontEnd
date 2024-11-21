@@ -61,6 +61,15 @@
 "FaceBook":"FaceBook",
 "Instagram":"Instagram",
 "Phone":"Phone",
-"Edit_Company_Information":"Edit Company Information"
+"Edit_Company_Information":"Edit Company Information" ,
+"CompanyInfo":"Company Info",
+"CompanyServies":"Company Servies",
+"CompanyComments":"Company Comments",
+"title":"title",
+"description":"description",
+"user":"user",
+"msgconfirm":"New password and confirmation dont match",
+"msgeqpass":"New password equal old",
+"saved":"saved infomation"
 
   }

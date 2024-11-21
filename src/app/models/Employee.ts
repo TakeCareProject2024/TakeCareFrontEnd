@@ -8,7 +8,7 @@ export interface Employee {
     FirstName: string;
     LastName: string;
     age:number;
-    EmployeeImage:string; //??
+    EmployeeImage:string;
     Evalute: number;
     StartWork:Date;
     

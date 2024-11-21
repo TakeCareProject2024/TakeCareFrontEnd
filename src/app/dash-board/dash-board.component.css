@@ -56,3 +56,6 @@
     font-weight: bold;
   }
   
+  .custom-modal-width {
+    min-width: 50px; /* Set the desired width */
+  }

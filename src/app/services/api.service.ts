@@ -2,7 +2,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient ,HttpParams} from '@angular/common/http';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { tap } from 'rxjs/operators';
+import { map, tap } from 'rxjs/operators';
 
 import { Employee, EmployeeResponse } from '../models/Employee';
 import { MainInfo, MainInfoResponse } from '../models/MainInfo';
@@ -16,29 +16,54 @@ export class ApiService {
   constructor(private http: HttpClient) {}
 
   //---------------------------------------------------------
-  
+  //maininfo
+  private apiUrlMainInfo = 'http://137.184.119.246/api/companies';
+  private companyInfo = new BehaviorSubject<any>({});
+  data$ = this.companyInfo.asObservable();
+
+  setData(data: any) {
+    this.companyInfo.next(data);
+  }
+  getMainInfo(): Observable<MainInfoResponse> {
+    return this.http.get<MainInfoResponse>(this.apiUrlMainInfo+"/1");
+  }
+
+  updateMainInfo(mainInfo: MainInfo): Observable<MainInfoResponse> {
+    return this.http.put<MainInfoResponse>(`${this.apiUrlMainInfo}/${mainInfo.id}`, mainInfo);
+  }
+
   setIsAdmin(isAdmin: boolean): void {
     localStorage.setItem('isAdmin', isAdmin.toString());
   }
 
-  checkPassword(password: string): boolean {
-    if(password=="12345"){
-      this.setIsAdmin(true);
-      return true;
-    }
-    else{
-      this.setIsAdmin(false);
-      return false;
-    } 
+  checkPassword(data: any): boolean {
+   this.http.post(`${this.apiUrlMainInfo}/login`, data,{ observe: 'response' }).subscribe(response => {
+    debugger;
+      if (response.status == 200) {
+          return true;
+      } else {
+          return false;
+      }
+  },err => {
+    return false;
+  });
+
+  return false;
   }
 
-  /*checkPassword(password: string): Observable<boolean> {
-    return this.http.post<boolean>('/api/check-password', { password }).pipe(
-      tap((isValid) => {
-        this.setIsAdmin(isValid);
-      })
-    );
-  }*/
+  changePassword(data: any): boolean {
+    this.http.patch(`${this.apiUrlMainInfo}/changePassword`, data,{ observe: 'response' }).subscribe(response => {
+       if (response.status == 200) {
+           return true;
+       } else {
+           return false;
+       }
+   },err => {
+     return false;
+   });
+ 
+   return false;
+   }
 
   public getIsAdminFromLocalStorage(): boolean {
     return localStorage.getItem('isAdmin') === 'true';
@@ -55,7 +80,7 @@ export class ApiService {
     return this.http.get<Employee>(`${this.apiUrlEmployee}/${id}`);
   }
 
-  addEmployee(employee: Employee): Observable<Employee> {
+  addEmployee(employee: FormData): Observable<Employee> {
     return this.http.post<Employee>(this.apiUrlEmployee, employee);
   }
 
@@ -65,22 +90,6 @@ export class ApiService {
 
   deleteEmployee(id: number): Observable<boolean> {
     return this.http.delete<boolean>(`${this.apiUrlEmployee}/${id}`);
-  }
-
-  //maininfo
-  private apiUrlMainInfo = 'http://137.184.119.246/api/companies';
-  private companyInfo = new BehaviorSubject<any>({});
-  data$ = this.companyInfo.asObservable();
-  
-  setData(data: any) {
-    this.companyInfo.next(data);
-  }
-  getMainInfo(): Observable<MainInfoResponse> {
-    return this.http.get<MainInfoResponse>(this.apiUrlMainInfo+"/1");
-  }
-  
-  updateMainInfo(mainInfo: MainInfo): Observable<MainInfoResponse> {
-    return this.http.put<MainInfoResponse>(`${this.apiUrlMainInfo}/${mainInfo.id}`, mainInfo);
   }
 
   //----------------------------

@@ -1,14 +1,15 @@
-<div style="height: 150px;border-radius: 5px;">
+<div >
     
   <google-map
-    height="150px"
-    width="100%"
+
+    [height]="height"
+    [width]="width"
     [center]="center"
     [zoom]="zoom"
-    (mapClick)="onMapClick($event)">
+    (mapClick)="onMapClick($event)"    
+    >
     
       <map-marker
-        
         [position]="markerPosition" >
       </map-marker>
   </google-map>

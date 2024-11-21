@@ -16,7 +16,9 @@ import { DatePipe } from '@angular/common';
 
 export class AddRequestComponent implements OnInit {
   requestForm: FormGroup;
-  
+  @Input() Lat!: number;
+  @Input() Lang!: number;
+
   imagePreview: string | ArrayBuffer | null = null; // To store the preview image URL
   selectedFile: File | null = null; // To store the actual image file
   defaultImage= '../assets/defaultimage.jpg'; // Path to your default image
@@ -28,7 +30,17 @@ export class AddRequestComponent implements OnInit {
     public activeModal: NgbActiveModal,
     private datePipe: DatePipe) { 
     //this.employee = { id:1 , firstName: 'John',lastName:"Doe",age:22,personalPhotos:"",valid:3,position:"cleaner",jobDescription:"employee to clean company ", birthDate:new Date("2002-5-5"),image:"" };
+    this.Lat=2.48723641360933;
+    this.Lang=54.37462243953436;
 
+    var tempNum=Number(localStorage.getItem("Lat"));
+    if(tempNum!=undefined)
+      this.Lat=tempNum;
+    
+    tempNum=Number(localStorage.getItem("Lang"));
+    if(tempNum!=undefined)
+      this.Lang=tempNum;
+    
     this.requestForm = this.fb.group({
       CustomerFirstName: ['', Validators.required],
       CustomerLastName: ['', Validators.required],
@@ -44,8 +56,8 @@ export class AddRequestComponent implements OnInit {
       Evalute: [3],
       
       image: [null],
-      lat: ["40.73061"],
-      lng: ["-73.935242 "],
+      Lat: [this.Lat],
+      Lang: [this.Lang],
       imagePath:this.defaultImage
     });
 
@@ -92,14 +104,13 @@ export class AddRequestComponent implements OnInit {
       Evalute: [3],
       
       image: [null],
-      lat: ["40.73061"],
-      lng: ["-73.935242 "],
+      Lat: [this.Lat],
+      Lang: [this.Lang],
       imagePath:this.defaultImage
     });
   }
  
   saveRequest(): void {
-    
     const newRequets: Request = this.requestForm.value;
     this.setStorage('CustomerPhone',this.requestForm.value.CustomerPhone);
     this.setStorage('CustomerEmail',this.requestForm.value.CustomerEmail);

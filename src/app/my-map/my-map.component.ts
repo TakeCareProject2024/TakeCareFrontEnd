@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, ViewChild } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, SimpleChanges, ViewChild } from '@angular/core';
 import {  MapInfoWindow, MapMarker, GoogleMap } from '@angular/google-maps';
 
 @Component({
@@ -8,40 +8,71 @@ import {  MapInfoWindow, MapMarker, GoogleMap } from '@angular/google-maps';
 })
 export class MyMapComponent implements OnInit {
 
-  @Input() employeeForm: any;
-
-  center: google.maps.LatLngLiteral = { lat: 24.48723641360933, lng: 54.37462243953436 };
-  zoom = 12;
-  markerPosition: any = { lat: 24.48723641360933, lng: 54.37462243953436};
+  @Input() requestForm: any;
   
-  ngOnInit(){ 
-    navigator.geolocation.getCurrentPosition((position) => {
-      this.center = {
-        lat: position.coords.latitude,
-        lng: position.coords.longitude,
-      };
-    });
+  @Input() Lat!: number;
+  @Input() Lang!: number;
+  @Input() height: string;
+  @Input() width: string;
 
+  @Output() LatChange = new EventEmitter<number>(); // Notify parent of latitude change
+  @Output() LangChange = new EventEmitter<number>(); // Notify parent of longitude change
+
+  center: google.maps.LatLngLiteral;
+  zoom = 12;
+  markerPosition: any;
+  
+constructor(){
+
+  //this.Lat=2.48723641360933;
+  //this.Lang=54.37462243953436;
+  this.height="150px";
+  this.width="100%";
+
+  this.center={ lat: this.Lat, lng: this.Lang };
+  this.markerPosition={ lat: this.Lat, lng: this.Lang};  
+  /*navigator.geolocation.getCurrentPosition((position) => {
+    this.center = {
+      lat: position.coords.latitude,
+      lng: position.coords.longitude,
+    };
+  });*/
+
+}
+
+  ngOnInit(){   }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    // Check if Lat or Lang has changed
+    if ((changes['Lat'] || changes['Lang']) && (this.Lat!=undefined && this.Lang!=undefined)) {
+      this.Lat=Number(this.Lat);
+      this.Lang=Number(this.Lang);
+      
+      this.center = { lat: this.Lat, lng: this.Lang };
+      this.markerPosition={ lat: this.Lat, lng: this.Lang}; 
+    }
   }
 
   onMapClick(event: google.maps.MapMouseEvent) {
     if (event.latLng) {
-      this.markerPosition = {
-        lat: event.latLng.lat(),
-        lng: event.latLng.lng()
-      };
-      this.updateFormCoordinates(event.latLng.lat(), event.latLng.lng());
+
+      this.LatChange.emit( event.latLng.lat());
+      this.LangChange.emit( event.latLng.lng());
+
+      if(this.requestForm!=undefined){
+        this.markerPosition = {
+          lat: event.latLng.lat(),
+          lng: event.latLng.lng()
+        };
+  
+        this.requestForm.patchValue({
+          Lat: event.latLng.lat(),
+          Lang: event.latLng.lng()
+        });
+      }
+      
     }
   }
-
-  updateFormCoordinates(lat: number, lng: number) {
-    this.employeeForm.patchValue({
-      lat: lat,
-      lng: lng
-    });
-  }
-
-  
  
   /*
   markerOptions: google.maps.MarkerOptions = { draggable: true };

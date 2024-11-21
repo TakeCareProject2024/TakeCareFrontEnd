@@ -8,7 +8,7 @@
     "About_Us":"حول",
     "Dashboard":"الإعدادات",
     "Welcome_To":"أهلا بكم في",
-    "Our_Services":"حدماتنا",
+    "Our_Services":"خدماتنا",
     "Our_Location":"عنواننا",
     "Conntact_Us":"تواصل معنا",
     "Follow_Us":"تابعنا",
@@ -60,7 +60,16 @@
 "Instagram":"الانستغرام",
 "Phone":"الهاتف",
 "No_Data":"لا يوجد معلومات للعرض",
-"Edit_Company_Information":"تعديل معلومات الشركة"
+"Edit_Company_Information":"تعديل معلومات الشركة",
+"CompanyInfo":"معلومات الشركة",
+"CompanyServies":"خدمات الشركة",
+"CompanyComments":"تعليقات الزبائن",
+"title":"العنوان",
+"description":"النص",
+"user":"الزبون",
+"msgconfirm":"كلمة السر وتأكيدها غير متساويين",
+"msgeqpass":"كلمة السر الجديدة نفسها القديمة",
+"saved":"تم حغظ المعلومات"
     
   }
   

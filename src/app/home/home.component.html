@@ -24,38 +24,38 @@
     <br>
     <div class="row">
       <div class="col-md-6 service">
-        <h3>Residential Cleaning</h3>
-        <p>Professional cleaning services for your home including deep cleaning and regular maintenance.</p>
+        <h3>{{services[0].title}}</h3>
+        <p>{{services[0].description}}</p>
         <img src="../../assets/dd.png" alt="Residential Cleaning" class="img-fluid rounded">
       </div>
       <div class="col-md-6 service">
         <img src="../../assets/ff.jpeg" alt="Commercial Cleaning" class="img-fluid rounded">
-        <h3>Commercial Cleaning</h3>
-        <p>Keep your workspace clean and healthy with our specialized commercial cleaning services.</p>
+        <h3>{{services[1].title}}</h3>
+        <p>{{services[1].description}}</p>
       </div>
 
       <div class="col-md-6 service">
-        <h3>Residential Cleaning</h3>
-        <p>Professional cleaning services for your home including deep cleaning and regular maintenance.</p>
-        <img src="../../assets/dd.png" alt="Residential Cleaning" class="img-fluid rounded">
-      </div>
-
-      <div class="col-md-6 service">
-        <img src="../../assets/ff.jpeg" alt="Commercial Cleaning" class="img-fluid rounded">
-        <h3>Commercial Cleaning</h3>
-        <p>Keep your workspace clean and healthy with our specialized commercial cleaning services.</p>
-      </div>
-
-      <div class="col-md-6 service">
-        <h3>Residential Cleaning</h3>
-        <p>Professional cleaning services for your home including deep cleaning and regular maintenance.</p>
+        <h3>{{services[2].title}}</h3>
+        <p>{{services[2].description}}</p>
         <img src="../../assets/dd.png" alt="Residential Cleaning" class="img-fluid rounded">
       </div>
 
       <div class="col-md-6 service">
         <img src="../../assets/ff.jpeg" alt="Commercial Cleaning" class="img-fluid rounded">
-        <h3>Commercial Cleaning</h3>
-        <p>Keep your workspace clean and healthy with our specialized commercial cleaning services.</p>
+        <h3>{{services[3].title}}</h3>
+        <p>{{services[3].description}}</p>
+      </div>
+
+      <div class="col-md-6 service">
+        <h3>{{services[4].title}}</h3>
+        <p>{{services[4].description}}</p>
+        <img src="../../assets/dd.png" alt="Residential Cleaning" class="img-fluid rounded">
+      </div>
+
+      <div class="col-md-6 service">
+        <img src="../../assets/ff.jpeg" alt="Commercial Cleaning" class="img-fluid rounded">
+        <h3>{{services[5].title}}</h3>
+        <p>{{services[5].description}}</p>
       </div>
 
     </div>
@@ -68,7 +68,10 @@
   <div class="container">
     <h2 class="text-center">{{ 'Our_Location' | translate }}  <a><i class="fa fa-map-marker-alt"></i></a></h2>
     <p>{{generalInfo.Address}}</p>
-    <iframe src="https://www.google.com/maps/embed/v1/view?key=AIzaSyBnmKPsTtY_JF3N74MIBVq5xg62P97tt_g&center=24.48723641360933, 54.37462243953436&zoom=12" width="90%" height="400" style="border:5px;border-radius:5px ;" allowfullscreen="" loading="lazy"></iframe>
+    
+    <app-my-map [Lat]="generalInfo.Lat" [Lang]="generalInfo.Lang"  [width]="'100%'" [height]="'400px'" allowfullscreen="" loading="lazy"></app-my-map>
+    
+    <!--   <iframe src="https://www.google.com/maps/embed/v1/view?key=AIzaSyBnmKPsTtY_JF3N74MIBVq5xg62P97tt_g&center=24.48723641360933, 54.37462243953436&zoom=12" width="90%" height="400" style="border:5px;border-radius:5px ;" allowfullscreen="" loading="lazy"></iframe> -->
   </div>
   <br>
   <br>
@@ -76,12 +79,30 @@
 
 <section class="comments-section">
   
-  <div *ngFor="let item of customerComments"  class="comment">
-    <h3>{{item.title}}</h3>
-    <p>{{item.description}}.</p>
+  <div class="comment">
+    <!-- <h3>{{item.title}}</h3>-->
+    <p>{{customerComments[0].description}}.</p>
     <div class="customer-info">
-      <img src="https://via.placeholder.com/40" alt="Customer Avatar">
-      <span>{{item.name}}</span>
+      <img src="../../assets/defaultimage.jpg" alt="Customer Avatar">
+      <span>{{customerComments[0].name}}</span>
+    </div>
+  </div>
+
+  <div class="comment">
+    <!-- <h3>{{item.title}}</h3>-->
+    <p>{{customerComments[1].description}}.</p>
+    <div class="customer-info">
+      <img src="../../assets/defaultimage.jpg" alt="Customer Avatar">
+      <span>{{customerComments[1].name}}</span>
+    </div>
+  </div>
+
+  <div class="comment">
+    <!-- <h3>{{item.title}}</h3>-->
+    <p>{{customerComments[2].description}}.</p>
+    <div class="customer-info">
+      <img src="../../assets/defaultimage.jpg" alt="Customer Avatar">
+      <span>{{customerComments[2].name}}</span>
     </div>
   </div>
 

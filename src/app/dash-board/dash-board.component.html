@@ -11,8 +11,8 @@
                             <p class="card-description"><strong>{{'Location_In'|translate}}</strong><br> {{ generalInfo.Address }}</p>
                             <p class="card-description"><strong>{{'Conntact_Us'|translate}}  </strong> 
                                 <a [href]="generalInfo.Email" target="_blank"> {{'Email'|translate}}</a> |
-                                <a [href]="generalInfo.facebook" target="_blank"> {{'Facebook'|translate}}</a> |
-                                <a [href]="generalInfo.instagram" target="_blank"> {{'Instagram'|translate}}</a>
+                                <a [href]="generalInfo.facebookLink" target="_blank"> {{'Facebook'|translate}}</a> |
+                                <a [href]="generalInfo.instagramLink" target="_blank"> {{'Instagram'|translate}}</a>
                             </p>
                     </div>
                     <div class="text-align:center">
@@ -24,6 +24,7 @@
                     </div>
                     
                 </div>
+
             </div>
            
         </div>
@@ -47,14 +48,44 @@
     
     <!-- Edit Information Modal -->
     <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
-      <div class="modal-dialog">
+      <div class="modal-dialog" style="min-width: 600px;">
         <div class="modal-content">
+
           <div class="modal-header">
             <h5 class="modal-title" id="editModalLabel">{{'Edit_Company_Information'|translate}}</h5>
            <!--  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> -->
           </div>
+
           <div class="modal-body">
             <form>
+
+
+                <ul class="nav nav-tabs" id="tabMenu" role="tablist">
+                    <li class="nav-item" role="presentation">
+                      <button class="nav-link active" id="tabMainInfo-tab" data-bs-toggle="tab" data-bs-target="#tabMainInfo" type="button" role="tab" aria-controls="tab1" aria-selected="true">
+                        {{'CompanyInfo'|translate}}
+                      </button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                      <button class="nav-link" id="tabServices-tab" data-bs-toggle="tab" data-bs-target="#tabServices" type="button" role="tab" aria-controls="tab2" aria-selected="false">
+                        {{'CompanyServies'|translate}}
+                      </button>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="tabComments-tab" data-bs-toggle="tab" data-bs-target="#tabComments" type="button" role="tab" aria-controls="tab2" aria-selected="false">
+                          {{'CompanyComments'|translate}}
+                        </button>
+                      </li>
+                      <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="Address-tab" data-bs-toggle="tab" data-bs-target="#tabAddress" type="button" role="tab" aria-controls="tab2" aria-selected="false">
+                          {{'Address'|translate}}
+                        </button>
+                      </li>
+                  </ul>
+          
+                <!-- Tab Content -->
+          <div class="tab-content" id="tabContent">
+            <div class="tab-pane fade show active" id="tabMainInfo" role="tabpanel" aria-labelledby="tab1-tab">
                 <div class="row">
                     <div class="col-md-6">
                         <div class="mb-3">
@@ -69,21 +100,7 @@
                             <input type="text" class="form-control" id="description" [(ngModel)]="generalInfo.description" name="description" />
                         </div>                          
                     </div>
-
-
-                    <div class="col-md-12">
-                        <div class="mb-3">
-                            <label for="Address" class="form-label">{{'Address'|translate}}</label>
-                            <input type="text" class="form-control" id="Address" [(ngModel)]="generalInfo.Address" name="Address" />
-                        </div>                          
-                    </div>
-
-                    <div class="col-md-12">
-                        <div class="mb-3">
-                            <label for="services" class="form-label">{{'services'|translate}}</label>
-                            <input type="text" class="form-control" placeholder="services" id="services" [(ngModel)]="generalInfo.services" name="services" />
-                        </div>                          
-                    </div>
+                    
                 </div>
 
                 
@@ -104,15 +121,143 @@
                 </div>
                 <div class="row">
                     <div class="col-md-6">
-                        <input type="text" class="form-control" placeholder="{{'FaceBook'|translate}}" id="facebook" [(ngModel)]="generalInfo.facebook" name="facebook" />
+                        <input type="text" class="form-control" placeholder="{{'FaceBook'|translate}}" id="facebook" [(ngModel)]="generalInfo.facebookLink" name="facebook" />
                     </div>
                     <div class="col-md-6">
-                        <input type="text" class="form-control" placeholder="{{'Instagram'|translate}}" id="instagram" [(ngModel)]="generalInfo.instagram" name="instagram" />
+                        <input type="text" class="form-control" placeholder="{{'Instagram'|translate}}" id="instagram" [(ngModel)]="generalInfo.instagramLink" name="instagram" />
                     </div>
                 </div>
+          
+            </div>
+
+            <div class="tab-pane fade" id="tabServices" role="tabpanel" aria-labelledby="tab2-tab">
+               
+                <div class="row">
+                    <div class="col-md-6">
+                        <label for="services" class="form-label">{{'title'|translate}} 1 </label>
+                        <input type="text" class="form-control" placeholder="title" id="servecisListtitle0" [(ngModel)]="services[0].title" name="servecisListtitle0" />
+                    </div>          
+                    <div class="col-md-6">
+                        <label for="services" class="form-label">{{'description'|translate}}  1</label>
+                        <input type="text" class="form-control" placeholder="description" id="servecisListdescription0" [(ngModel)]="services[0].description" name="servecisListdescription0" />
+                    </div>  
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <label for="services" class="form-label">{{'title'|translate}} 2 </label>
+                        <input type="text" class="form-control" placeholder="title" id="servecisListtitle1" [(ngModel)]="services[1].title" name="servecisListtitle1" />
+                    </div>          
+                    <div class="col-md-6">
+                        <label for="services" class="form-label">{{'description'|translate}}  2</label>
+                        <input type="text" class="form-control" placeholder="description" id="servecisListdescription1" [(ngModel)]="services[1].description" name="servecisListdescription1" />
+                    </div>                          
                 
+                </div>
+                
+                <div class="row">
+                    <div class="col-md-6">
+                        <label for="services" class="form-label">{{'title'|translate}} 3 </label>
+                        <input type="text" class="form-control" placeholder="title" id="servecisListtitle2" [(ngModel)]="services[2].title" name="servecisListtitle2" />
+                    </div>          
+                    <div class="col-md-6">
+                        <label for="services" class="form-label">{{'description'|translate}}  3</label>
+                        <input type="text" class="form-control" placeholder="description" id="servecisListdescription2" [(ngModel)]="services[2].description" name="servecisListdescription2" />
+                    </div>               
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <label for="services" class="form-label">{{'title'|translate}} 4 </label>
+                        <input type="text" class="form-control" placeholder="title" id="servecisListtitle3" [(ngModel)]="services[3].title" name="servecisListtitle3" />
+                    </div>          
+                    <div class="col-md-6">
+                        <label for="services" class="form-label">{{'description'|translate}}  4</label>
+                        <input type="text" class="form-control" placeholder="description" id="servecisListdescription3" [(ngModel)]="services[3].description" name="servecisListdescription3" />
+                    </div>  
+                </div>
+              
+                <div class="row">
+                    <div class="col-md-6">
+                        <label for="services" class="form-label">{{'title'|translate}} 5 </label>
+                        <input type="text" class="form-control" placeholder="title" id="servecisListtitle4" [(ngModel)]="services[4].title" name="servecisListtitle4" />
+                    </div>          
+                    <div class="col-md-6">
+                        <label for="services" class="form-label">{{'description'|translate}}  5</label>
+                        <input type="text" class="form-control" placeholder="description" id="servecisListdescription4" [(ngModel)]="services[4].description" name="servecisListdescription4" />
+                    </div>  
+                </div>
+                
+                <div class="row">
+                    <div class="col-md-6">
+                        <label for="services" class="form-label">{{'title'|translate}} 6 </label>
+                        <input type="text" class="form-control" placeholder="title" id="servecisListtitle5" [(ngModel)]="services[5].title" name="servecisListtitle5" />
+                    </div>          
+                    <div class="col-md-6    ">
+                        <label for="services" class="form-label">{{'description'|translate}}  6</label>
+                        <input type="text" class="form-control" placeholder="description" id="servecisListdescription5" [(ngModel)]="services[5].description" name="servecisListdescription5" />
+                    </div>                          
+                </div>
+
+            </div>
+
+            <div class="tab-pane fade" id="tabComments" role="tabpanel" aria-labelledby="tab2-tab">
+                
+                <div class="row">
+                    <div class="col-md-6">
+                        <label for="services" class="form-label">{{'user'|translate}} 1 </label>
+                        <input type="text" class="form-control" placeholder="user" id="commnetUser0" [(ngModel)]="customerComments[0].name" name="commnetUser0" />
+                    </div>          
+                    <div class="col-md-6">
+                        <label for="services" class="form-label">{{'description'|translate}}  1</label>
+                        <input type="text" class="form-control" placeholder="description" id="commnetdescription0" [(ngModel)]="customerComments[0].description" name="commnetdescription0" />
+                    </div>  
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <label for="services" class="form-label">{{'user'|translate}} 2 </label>
+                        <input type="text" class="form-control" placeholder="user" id="commnetUser1" [(ngModel)]="customerComments[1].name" name="commnetUser1" />
+                    </div>          
+                    <div class="col-md-6">
+                        <label for="services" class="form-label">{{'description'|translate}}  2</label>
+                        <input type="text" class="form-control" placeholder="description" id="commnetdescription1" [(ngModel)]="customerComments[1].description" name="commnetdescription1" />
+                    </div>  
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <label for="services" class="form-label">{{'user'|translate}} 3 </label>
+                        <input type="text" class="form-control" placeholder="user" id="commnetUser2" [(ngModel)]="customerComments[2].name" name="commnetUser2" />
+                    </div>          
+                    <div class="col-md-6">
+                        <label for="services" class="form-label">{{'description'|translate}}  3</label>
+                        <input type="text" class="form-control" placeholder="description" id="commnetdescription2" [(ngModel)]="customerComments[2].description" name="commnetdescription2" />
+                    </div>  
+                </div>
+
+
+              </div>
+
+              <div class="tab-pane fade" id="tabAddress" role="tabpanel" aria-labelledby="tab2-tab">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="mb-3">
+                        <label for="Address" class="form-label">{{'Address'|translate}}</label>
+                        <input type="text" class="form-control" id="Address" [(ngModel)]="generalInfo.Address" name="Address" />
+                    </div>                          
+                </div>
+                <div>
+                    <app-my-map [(Lat)]="generalInfo.Lat" [(Lang)]="generalInfo.Lang"  [width]="'100%'" [height]="'250px'"></app-my-map>  
+                </div>
+             
+            </div>  
+            </div>
+          </div>
+
             </form>
           </div>
+          
           <div class="modal-footer">
             <p [id]="msgResponse" [ngClass]="msgClass">{{ msgResponse }}</p>
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">{{'Cancel'|translate}}</button>
@@ -146,7 +291,8 @@
             </form>
             </div>
             <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">{{'Cancel'|translate}}</button>
+            <p [ngClass]="msgClass">{{ msgResponse }}</p>
+            <button id="closeChange" type="button" class="btn btn-secondary" data-bs-dismiss="modal">{{'Cancel'|translate}}</button>
             <button type="button" class="btn btn-primary" (click)="changePassword()">{{'Save'|translate}}</button>
             </div>
         </div>

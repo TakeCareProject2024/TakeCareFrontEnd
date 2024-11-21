@@ -28,8 +28,8 @@ export class RequestElementComponent {
     Evalute:0,
     EmployeeNumber:1,
     
-    lat: "",
-    lang: "",
+    Lat: 24.48723641360933,
+    Lang: 54.37462243953436,
     address: ""
   };
  }

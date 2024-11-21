@@ -14,11 +14,11 @@ export interface MainInfo {
   
     comments: string;  
   
-    lat: string;
-    lang: string;
-    facebook: string;
+    Lat: number;
+    Lang: number;
+    facebookLink: string;
     youtube: string;
-    instagram: string;
+    instagramLink: string;
 
     Profile:string[];
   }

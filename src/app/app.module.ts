@@ -58,7 +58,9 @@ export function HttpLoaderFactory(http: HttpClient) {
       }
     })
   ],
-  providers: [DatePipe],
+  providers: [DatePipe,
+    { provide: 'google-maps-api-key', useValue: "AIzaSyBnmKPsTtY_JF3N74MIBVq5xg62P97tt_g" }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

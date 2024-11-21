@@ -40,7 +40,7 @@
     <div *ngFor="let employee of employees | slice:(rowIndex * 4):(rowIndex * 4 + 4)" class="col-md-3">
       <div class="card">
         <div class="card-image">
-            <img src="../../assets/defaultimage.jpg" alt="Employee Image">
+            <img src="{{ employee.EmployeeImage }}" alt="Employee Image">
         </div>
         <div class="card-content">
             <h2 class="card-title">{{ employee.FirstName }} {{ employee.LastName }} <i><small> - {{ employee.age }}</small></i> </h2>

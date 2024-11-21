@@ -35,7 +35,7 @@ export class AddEditEmployeeComponent implements OnInit {
       Evalute: [3, Validators.required],
       StartWork: [formatDate(this.currentdate, 'yyyy-MM-dd', 'en'), Validators.required],
 
-      image: this.fb.group({}),
+      image: [null],
       EmployeeImage:"../assets/defaultimage.jpg"
     });
   }
@@ -63,18 +63,16 @@ export class AddEditEmployeeComponent implements OnInit {
       age: [18, Validators.required],
       Evalute:[3, [Validators.required, Validators.min(1), Validators.max(5)]],
       StartWork: [formatDate(this.currentdate, 'yyyy-MM-dd', 'en'), Validators.required],
-      image: this.fb.group({}),
+      image:  [null],
       EmployeeImage:this.defaultImage
     });
   }
   
   onFileSelected(event: any): void {
-    debugger;
     const file = event.target.files[0];
 
     if (file) {
       this.selectedFile = file;
-
       // Display the selected image in the image preview
       const reader = new FileReader();
       reader.onload = () => {
@@ -83,42 +81,47 @@ export class AddEditEmployeeComponent implements OnInit {
       reader.readAsDataURL(file); // Convert image to base64 string for preview
 
       // Set the image value in the form
-      this.employeeForm.patchValue({
-        image: this.selectedFile
-      });
+      this.employeeForm.patchValue({ image: file });
       this.employeeForm.get('image')?.updateValueAndValidity();
     }
   }
 
 
   saveEmployee(): void {
-    debugger;
-    const formData = new FormData();
+  
     if (this.employeeForm.valid) {
+     
+      //set Date
+      const formData = new FormData();
       const employeeData: Employee = this.employeeForm.value;
-      formData.append('employee', JSON.stringify(employeeData));
+      formData.append('FirstName', employeeData.FirstName);
+      formData.append('LastName', employeeData.LastName);
+      formData.append('age', employeeData.age.toString());
+      formData.append('Evalute', employeeData.Evalute.toString());
+      
+      formData.append('StartWork', employeeData.StartWork.toString());
+      formData.append('EmployeeImage', employeeData.EmployeeImage.toString());
+
       var imageFile= this.employeeForm.get('image')?.value;
       if (imageFile!=undefined) {
-        formData.append('image',imageFile);
+        formData.append('EmployeeImage',imageFile);
       }
 
       if (employeeData.id!=undefined) {
-        employeeData.id = this.employee.id;
+      
+        formData.append('id', employeeData.id.toString());
         this.employeeService.updateEmployee(formData,employeeData.id).subscribe((result) => {
           if(result){
-            //this.activeModal.close('employeeModal');
             this.msgResponse = 'Changes saved successfully!';
             this.msgClass = 'text-success'; // apply success styling
             setTimeout(()=>this.closeModal(this.employeeForm.value),2000);
-            
-          }
-          else{
+          }else{
             this.msgResponse = 'Failed to save changes. Please try again.';
             this.msgClass = 'text-danger'; 
           } });
       } else {
 
-        this.employeeService.addEmployee(employeeData).subscribe((result) => {
+        this.employeeService.addEmployee(formData).subscribe((result) => {
           if(result){
             this.msgResponse = 'saved successfully!';
             this.msgClass = 'text-success'; // apply success styling

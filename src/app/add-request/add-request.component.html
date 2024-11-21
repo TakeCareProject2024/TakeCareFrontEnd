@@ -35,13 +35,13 @@
         <div class="input-group" style="display: flex; align-items: center; padding: 5px;">
 
           <span class="btn" style="background-color: #2ecc71;color: white;width: 10%;"><i class="fa fa-map-marker-alt"></i></span>
-          <input type="text" class="form-control" value="" placeholder="{{ 'Address' | translate }}" style="width: 65%;" formControlName="Evalute" required> 
+          <input type="text" class="form-control" value="" placeholder="{{ 'Address' | translate }}" style="width: 65%;" formControlName="Address" required> 
           <span class="btn" style="background-color: #2ecc71;color: white;width: 10%;"><i class="fa fa-users"></i></span>
             <input class="form-control"  type="number" placeholder="{{ 'Employee_Number' | translate }}" style="width: 15%;" value="3" formControlName="EmployeeNumber" required>                
       </div>
 
       </div>
-      <!--<app-my-map></app-my-map>-->
+      <app-my-map [requestForm]="requestForm" [Lat]="Lat" [Lang]="Lang" ></app-my-map>
       
     </ngForm>
   </div>
