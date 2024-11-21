@@ -24,6 +24,6 @@ export interface Request {
     
     Lat: number;
     Lang: number;
-    address: string;
+    Address: string;
     
   }

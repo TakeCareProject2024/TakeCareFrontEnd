@@ -30,7 +30,7 @@ export class RequestElementComponent {
     
     Lat: 24.48723641360933,
     Lang: 54.37462243953436,
-    address: ""
+    Address: ""
   };
  }
 
