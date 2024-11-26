@@ -24,8 +24,13 @@ export class HomeComponent implements OnInit{
       this.generalInfo = data;
 
       //serivces
-      if(this.generalInfo.services!=undefined){
-        var servecisList =this.generalInfo.services.split(",");
+      var lang=localStorage.getItem('lang'); 
+      var services=this.generalInfo.services;
+      if(lang!="en")
+        services=this.generalInfo.Arabicservices;
+
+      if(services!=undefined){
+        var servecisList =services.split(",");
         var index=0;
         servecisList.forEach(element => {
           var servecisInfo =element.split(":");
@@ -71,6 +76,7 @@ export class HomeComponent implements OnInit{
       companyName: "",
       description: "",
       services: "",
+      Arabicservices:"",
       Profile: [],
       comments: "",
       Address: "",

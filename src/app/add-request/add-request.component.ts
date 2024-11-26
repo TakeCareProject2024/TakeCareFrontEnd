@@ -111,11 +111,8 @@ export class AddRequestComponent implements OnInit {
   }
  
   saveRequest(): void {
+    debugger;
     const newRequets: Request = this.requestForm.value;
-    this.setStorage('CustomerPhone',this.requestForm.value.CustomerPhone);
-    this.setStorage('CustomerEmail',this.requestForm.value.CustomerEmail);
-    this.setStorage('CustomerLastName',this.requestForm.value.CustomerLastName);
-    this.setStorage('CustomerFirstName',this.requestForm.value.CustomerFirstName);
     
     newRequets.start_time = this.formatDateForAPI(newRequets.OrderDate,newRequets.start_time); 
     newRequets.end_time = this.formatDateForAPI(newRequets.OrderDate,newRequets.end_time); 
@@ -135,6 +132,12 @@ export class AddRequestComponent implements OnInit {
     }else{
       this.requestForm.markAllAsTouched();
     }
+
+    this.setStorage('CustomerPhone',this.requestForm.value.CustomerPhone);
+    this.setStorage('CustomerEmail',this.requestForm.value.CustomerEmail);
+    this.setStorage('CustomerLastName',this.requestForm.value.CustomerLastName);
+    this.setStorage('CustomerFirstName',this.requestForm.value.CustomerFirstName);
+    
   }
 
   closeModal(newRequets:Request|null): void {

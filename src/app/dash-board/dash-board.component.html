@@ -56,9 +56,10 @@
            <!--  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> -->
           </div>
 
-          <div class="modal-body">
-            <form>
+          <form>
 
+          <div class="modal-body">
+          
 
                 <ul class="nav nav-tabs" id="tabMenu" role="tablist">
                     <li class="nav-item" role="presentation">
@@ -90,7 +91,7 @@
                     <div class="col-md-6">
                         <div class="mb-3">
                             <label for="companyName" class="form-label">{{'Company_Name' | translate}}</label>
-                            <input type="text" class="form-control" id="companyName" [(ngModel)]="generalInfo.companyName" name="companyName" />
+                            <input type="text" class="form-control" id="companyName" [(ngModel)]="generalInfo.companyName" name="companyName" required />
                           </div>                          
                     </div>
 
@@ -107,13 +108,13 @@
                 <label for="commanta" class="form-label">{{'Connect'|translate}}</label>
                 <div class="row">
                     <div class="col-md-6">
-                        <input type="text" class="form-control" placeholder="{{'Whats_Number'|translate}}" id="phone1" [(ngModel)]="generalInfo.phone1" name="phone1" />
+                        <input type="text" class="form-control" placeholder="{{'Whats_Number'|translate}}" id="phone1" [(ngModel)]="generalInfo.phone1" name="phone1" required />
                     </div>
                     <div class="col-md-6">
                         <input type="text" class="form-control" id="phone2" placeholder="phone2"  [(ngModel)]="generalInfo.phone2" name="phone2" />
                     </div>
                     <div class="col-md-6">
-                        <input type="text" class="form-control" id="Email" placeholder="{{'Email'|translate}}"  [(ngModel)]="generalInfo.Email" name="Email" />
+                        <input type="text" class="form-control" id="Email" placeholder="{{'Email'|translate}}"  [(ngModel)]="generalInfo.Email" name="Email" required/>
                     </div>
                     <div class="col-md-6">
                     </div>
@@ -244,7 +245,7 @@
                 <div class="col-md-12">
                     <div class="mb-3">
                         <label for="Address" class="form-label">{{'Address'|translate}}</label>
-                        <input type="text" class="form-control" id="Address" [(ngModel)]="generalInfo.Address" name="Address" />
+                        <input type="text" class="form-control" id="Address" [(ngModel)]="generalInfo.Address" name="Address" required/>
                     </div>                          
                 </div>
                 <div>
@@ -255,14 +256,16 @@
             </div>
           </div>
 
-            </form>
           </div>
           
           <div class="modal-footer">
-            <p [id]="msgResponse" [ngClass]="msgClass">{{ msgResponse }}</p>
+            <p [ngClass]="msgClass">{{ msgResponse1 }}</p>
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">{{'Cancel'|translate}}</button>
-            <button type="button" class="btn btn-primary" (click)="saveChanges()">{{'Save'|translate}}</button>
+            <button type="button" class="btn btn-primary" (click)="saveChanges()" [disabled]="generalInfo.companyName=='' || generalInfo.Email=='' || generalInfo.phone1==''|| generalInfo.Address==''">{{'Save'|translate}}</button>
           </div>
+
+        </form>
+
         </div>
       </div>
     </div>
@@ -278,22 +281,22 @@
             <form>
                 <div class="mb-3">
                 <label for="oldPassword" class="form-label">{{'Old_Password'|translate}}</label>
-                <input type="password" class="form-control" id="oldPassword" [(ngModel)]="oldPassword" name="oldPassword" />
+                <input type="password" class="form-control" id="oldPassword" [(ngModel)]="oldPassword"  name="oldPassword" required/>
                 </div>
                 <div class="mb-3">
                 <label for="newPassword" class="form-label">{{'New_Password'|translate}}</label>
-                <input type="password" class="form-control" id="newPassword" [(ngModel)]="newPassword" name="newPassword" />
+                <input type="password" class="form-control" id="newPassword" [(ngModel)]="newPassword" name="newPassword" required />
                 </div>
                 <div class="mb-3">
                 <label for="confirmPassword" class="form-label">{{'Confirm_New_Password'|translate}}</label>
-                <input type="password" class="form-control" id="confirmPassword" [(ngModel)]="confirmPassword" name="confirmPassword" />
+                <input type="password" class="form-control" id="confirmPassword" [(ngModel)]="confirmPassword" name="confirmPassword" required/>
                 </div>
             </form>
             </div>
             <div class="modal-footer">
-            <p [ngClass]="msgClass">{{ msgResponse }}</p>
+            <p [ngClass]="msgClass">{{ msgResponse2 }}</p>
             <button id="closeChange" type="button" class="btn btn-secondary" data-bs-dismiss="modal">{{'Cancel'|translate}}</button>
-            <button type="button" class="btn btn-primary" (click)="changePassword()">{{'Save'|translate}}</button>
+            <button type="button" class="btn btn-primary" (click)="changePassword()" [disabled]="oldPassword=='' ||  newPassword=='' || newPassword!= confirmPassword" >{{'Save'|translate}}</button>
             </div>
         </div>
         </div>

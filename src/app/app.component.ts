@@ -42,6 +42,7 @@ export class AppComponent  implements OnInit{
       companyName: "",
       description: "",     
       comments: "",  
+      Arabicservices:"",
       services: "",
       Address: "",
       phone1: "",
@@ -77,7 +78,6 @@ export class AppComponent  implements OnInit{
   }
 
   switchLanguage(language: string) {
-    debugger;
     this.translate.use(language);
     document.documentElement.dir = language === 'ar' ? 'rtl' : 'ltr';
     this.useEnglish= language === 'ar' ? false : true;

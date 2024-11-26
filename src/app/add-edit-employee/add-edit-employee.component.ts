@@ -36,6 +36,7 @@ export class AddEditEmployeeComponent implements OnInit {
       StartWork: [formatDate(this.currentdate, 'yyyy-MM-dd', 'en'), Validators.required],
 
       image: [null],
+      imagePreview:[""],
       EmployeeImage:"../assets/defaultimage.jpg"
     });
   }
@@ -64,6 +65,7 @@ export class AddEditEmployeeComponent implements OnInit {
       Evalute:[3, [Validators.required, Validators.min(1), Validators.max(5)]],
       StartWork: [formatDate(this.currentdate, 'yyyy-MM-dd', 'en'), Validators.required],
       image:  [null],
+      imagePreview:[""],
       EmployeeImage:this.defaultImage
     });
   }
@@ -125,6 +127,11 @@ export class AddEditEmployeeComponent implements OnInit {
           if(result){
             this.msgResponse = 'saved successfully!';
             this.msgClass = 'text-success'; // apply success styling
+            debugger;
+            if(this.imagePreview!=''){
+              this.employeeForm.value.imagePreview= this.imagePreview ;
+              this.employeeForm.value.EmployeeImage= '';            
+            }
             setTimeout(()=>this.closeModal(this.employeeForm.value),2000);
           }
           else{

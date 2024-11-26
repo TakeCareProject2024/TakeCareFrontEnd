@@ -17,6 +17,7 @@ export interface Employee {
     jobDescription: string;
     image:File | null;
     birthDate:Date;
+    imagePreview:string;
     //imagePath:string;
     
     //companyId: number;

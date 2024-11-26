@@ -7,6 +7,7 @@ export interface MainInfo {
     companyName: string;
     description: string;
     services: string;
+    Arabicservices: string;
     phone1: string;
     phone2: string;
     Email: string;

@@ -48,6 +48,7 @@ export class EmployeeComponent  implements OnInit{
     modalRef.result.then(
       (result) => {
         if (result) {
+          debugger;
           this.employees.push(result); 
         }
       },

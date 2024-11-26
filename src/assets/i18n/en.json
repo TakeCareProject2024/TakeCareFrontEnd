@@ -39,8 +39,8 @@
 
   "PLease_Enter":"PLease enter password",
   "Error_Password":"Error Password",
-  "Personal_Information":"اPersonal information",
-  "Services_Information":"Services iInformation",
+  "Personal_Information":"Personal information",
+  "Services_Information":"Services information",
   "Employee_Number":"Employee number",
   "Our_Profile":"Our profile",
 
@@ -70,6 +70,7 @@
 "user":"user",
 "msgconfirm":"New password and confirmation dont match",
 "msgeqpass":"New password equal old",
-"saved":"saved infomation"
+"saved":"saved infomation",
+"AddRequest":"Add Request"
 
   }
