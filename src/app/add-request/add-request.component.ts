@@ -6,6 +6,7 @@ import { ApiService } from '../services/api.service';
 import { formatDate } from '@angular/common';
 import { Request } from '../models/Request';
 import { DatePipe } from '@angular/common';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-add-request',
@@ -28,7 +29,8 @@ export class AddRequestComponent implements OnInit {
   
   constructor(private fb: FormBuilder, private employeeService: ApiService, 
     public activeModal: NgbActiveModal,
-    private datePipe: DatePipe) { 
+    private datePipe: DatePipe,
+    private translate: TranslateService) { 
     //this.employee = { id:1 , firstName: 'John',lastName:"Doe",age:22,personalPhotos:"",valid:3,position:"cleaner",jobDescription:"employee to clean company ", birthDate:new Date("2002-5-5"),image:"" };
     this.Lat=2.48723641360933;
     this.Lang=54.37462243953436;
@@ -117,15 +119,23 @@ export class AddRequestComponent implements OnInit {
     newRequets.start_time = this.formatDateForAPI(newRequets.OrderDate,newRequets.start_time); 
     newRequets.end_time = this.formatDateForAPI(newRequets.OrderDate,newRequets.end_time); 
     
-    if (this.requestForm.valid) {
+    if(this.requestForm.value.end_time<=this.requestForm.value.start_time){
+      this.msgResponse = this.translate.instant('endSmallStart');
+      this.msgClass = 'text-danger';
+      setTimeout(() => {
+        this.msgResponse = '';
+      this.msgClass = '';
+      }, 2000);
+    }
+    else if (this.requestForm.valid) {
       this.employeeService.addRequest(newRequets).subscribe((result) =>{
         if(result){
-          this.msgResponse = 'saved successfully!';
+          this.msgResponse = this.translate.instant('saved');
           this.msgClass = 'text-success'; // apply success styling
           setTimeout(()=>this.closeModal(newRequets),2000);
         }
         else{
-          this.msgResponse = 'Failed to save changes. Please try again.';
+          this.msgResponse =this.translate.instant('FaildTry');
           this.msgClass = 'text-danger'; 
         }
       });

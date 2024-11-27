@@ -1,8 +1,8 @@
 // src/app/services/api.service.ts
 import { Injectable } from '@angular/core';
 import { HttpClient ,HttpParams} from '@angular/common/http';
-import { BehaviorSubject, Observable } from 'rxjs';
-import { map, tap } from 'rxjs/operators';
+import { BehaviorSubject, Observable, of } from 'rxjs';
+import { catchError, map, tap } from 'rxjs/operators';
 
 import { Employee, EmployeeResponse } from '../models/Employee';
 import { MainInfo, MainInfoResponse } from '../models/MainInfo';
@@ -36,20 +36,20 @@ export class ApiService {
     localStorage.setItem('isAdmin', isAdmin.toString());
   }
 
-  checkPassword(data: any): boolean {
-   this.http.post(`${this.apiUrlMainInfo}/login`, data,{ observe: 'response' }).subscribe(response => {
-    debugger;
-      if (response.status == 200) {
-          return true;
-      } else {
-          return false;
-      }
-  },err => {
-    return false;
-  });
+  checkPassword(data: any):  Observable<boolean>  {
 
-  return false;
-  }
+    return this.http.post<boolean>(`${this.apiUrlMainInfo}/login`, data, { observe: 'response' }).pipe(
+      map((response) => {
+        // Map the response to a boolean
+        return response.status === 200;
+      }),
+      catchError((error) => {
+        // Handle errors and return false
+        console.error('Error in checkPassword:', error);
+        return of(false); // Use `of` to return an Observable<boolean>
+      })
+    );
+}
 
   changePassword(data: any): boolean {
     this.http.patch(`${this.apiUrlMainInfo}/changePassword`, data,{ observe: 'response' }).subscribe(response => {

@@ -82,6 +82,7 @@ export class AppComponent  implements OnInit{
     document.documentElement.dir = language === 'ar' ? 'rtl' : 'ltr';
     this.useEnglish= language === 'ar' ? false : true;
     localStorage.setItem('lang', language); 
+    this.apiService.setData(this.generalInfo); 
   }
 
 

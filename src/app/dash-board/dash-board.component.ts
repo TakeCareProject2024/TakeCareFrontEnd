@@ -35,17 +35,17 @@ export class DashBoardComponent implements OnInit {
       this.generalInfo = data;
     
       this.isAdmin=this.apiService.getIsAdminFromLocalStorage();
-        
-    if(!this.isAdmin){
-      const password = prompt("Please enter the admin password:");
+        debugger;
+    if(!this.isAdmin && this.generalInfo.Email!=undefined){
+      const password = prompt(this.translate.instant("enterPass"));
       if(password!=null){
         var dataLog={password:password,Email:this.generalInfo.Email};
         var result=this.apiService.checkPassword(dataLog);
         
         if(!result){
-          alert("error password");
+          alert(this.translate.instant('errorPass'));
           this.apiService.setIsAdmin(false);
-          window.location.assign('/');
+          //window.location.assign('/');
         }else{
           this.isAdmin=true;
           this.apiService.setIsAdmin(true);
@@ -189,7 +189,7 @@ export class DashBoardComponent implements OnInit {
       }, 1000);
 
     }else{
-      this.msgResponse2 = 'Failed to save changes. Please try again.';
+      this.msgResponse2 = this.translate.instant('FaildTry');
       this.msgClass = 'text-danger'; 
 
       

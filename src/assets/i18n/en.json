@@ -71,6 +71,12 @@
 "msgconfirm":"New password and confirmation dont match",
 "msgeqpass":"New password equal old",
 "saved":"saved infomation",
-"AddRequest":"Add Request"
+"AddRequest":"Add Request",
+"saved":"Changes saved successfully!",
+
+"FaildTry":"Failed to save changes. Please try again.",
+"endSmallStart":"end Time must be bigger than start Time",
+"enterPass": "Please enter the admin password:",
+"errorPass":"error password"
 
   }

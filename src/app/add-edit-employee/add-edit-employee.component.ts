@@ -6,6 +6,7 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 
 import { ApiService } from '../services/api.service';
 import { formatDate } from '@angular/common';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-add-edit-employee',
@@ -25,7 +26,8 @@ export class AddEditEmployeeComponent implements OnInit {
   msgResponse: string = '';
   msgClass: string = '';
 
-  constructor(private fb: FormBuilder, private employeeService: ApiService, public activeModal: NgbActiveModal) { 
+  constructor(private fb: FormBuilder, private employeeService: ApiService, public activeModal: NgbActiveModal,
+    private translate: TranslateService  ) { 
     
     this.employeeForm = this.fb.group({
       id:[undefined],
@@ -114,18 +116,18 @@ export class AddEditEmployeeComponent implements OnInit {
         formData.append('id', employeeData.id.toString());
         this.employeeService.updateEmployee(formData,employeeData.id).subscribe((result) => {
           if(result){
-            this.msgResponse = 'Changes saved successfully!';
+            this.msgResponse = this.translate.instant('saved');
             this.msgClass = 'text-success'; // apply success styling
             setTimeout(()=>this.closeModal(this.employeeForm.value),2000);
           }else{
-            this.msgResponse = 'Failed to save changes. Please try again.';
+            this.msgResponse = this.translate.instant('FaildTry');
             this.msgClass = 'text-danger'; 
           } });
       } else {
 
         this.employeeService.addEmployee(formData).subscribe((result) => {
           if(result){
-            this.msgResponse = 'saved successfully!';
+            this.msgResponse = 'saved';
             this.msgClass = 'text-success'; // apply success styling
             debugger;
             if(this.imagePreview!=''){
@@ -135,30 +137,13 @@ export class AddEditEmployeeComponent implements OnInit {
             setTimeout(()=>this.closeModal(this.employeeForm.value),2000);
           }
           else{
-            this.msgResponse = 'Failed to save changes. Please try again.';
+            this.msgResponse =  this.translate.instant('FaildTry');
             this.msgClass = 'text-danger'; 
           } });
       }
     }else{
       this.employeeForm.markAllAsTouched();
     }
-
-    /*
-      if (this.employeeForm.invalid) {
-      return;
-    }
-
-    const formData = new FormData();
-    formData.append('firstName', this.employeeForm.get('firstName')?.value);
-    formData.append('lastName', this.employeeForm.get('lastName')?.value);
-    formData.append('birthdate', this.employeeForm.get('birthdate')?.value);
-    formData.append('valid', this.employeeForm.get('valid')?.value);
-
-    // Add the image if it's selected
-    if (this.selectedFile) {
-      formData.append('image', this.selectedFile); // Attach the image file
-    }
-    */
   }
 
   closeModal(employee:Employee): void {

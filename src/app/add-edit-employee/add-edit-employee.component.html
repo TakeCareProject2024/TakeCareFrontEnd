@@ -24,7 +24,7 @@
       <div class="form-group" >
         <div class="input-group" style="padding: 5px;">
             <span class="btn" style="background-color: #2ecc71;color: white;"><i class="fa fa-user"></i></span>
-            <input class="form-control" required type="text" placeholder="{{ 'First_Name' | translate }}" formControlName="FirstName" aria-required="true" >
+            <input class="form-control" required type="text" placeholder="{{ 'First_Name' | translate }}" formControlName="FirstName" >
             <input class="form-control" required  type="text" placeholder="{{ 'Last_Name' | translate }}" formControlName="LastName" >
         </div>
 
@@ -44,7 +44,7 @@
 
   <div class="modal-footer">
     <p [id]="msgResponse" [ngClass]="msgClass">{{ msgResponse }}</p>
-    <button class="btn" type="submit" style="background-color: #2ecc71;color: white;" (click)="saveEmployee()">{{ 'Save' | translate }}</button>
+    <button class="btn" type="submit" style="background-color: #2ecc71;color: white;" (click)="saveEmployee()" [disabled]="employeeForm.invalid">{{ 'Save' | translate }}</button>
     <button class="btn btn-secondary" (click)="activeModal.close()">{{ 'Cancel' | translate }}</button>
   </div>
 </ngForm>

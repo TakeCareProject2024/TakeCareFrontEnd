@@ -25,26 +25,30 @@ export class HomeComponent implements OnInit{
 
       //serivces
       var lang=localStorage.getItem('lang'); 
-      var services=this.generalInfo.services;
-      if(lang!="en")
-        services=this.generalInfo.Arabicservices;
-
-      if(services!=undefined){
-        var servecisList =services.split(",");
-        var index=0;
-        servecisList.forEach(element => {
-          var servecisInfo =element.split(":");
-
-          if(servecisInfo.length==2){
-            this.services[index]={
-              title: servecisInfo[0],
-              description: servecisInfo[1]
-            };
-            index=index+1;
-          }
-        });          
-      }
+    
+    var services="";
+    if(lang=="en"){
+      services=this.generalInfo.services; 
+    }else{
+      services=this.generalInfo.Arabicservices;  
+    }
       
+    if(services!=undefined){
+      var servecisList =services.split(",");
+      var index=0;
+      servecisList.forEach(element => {
+        var servecisInfo =element.split(":");
+
+        if(servecisInfo.length==2){
+          this.services[index]={
+            title: servecisInfo[0],
+            description: servecisInfo[1]
+          };
+          index=index+1;
+        }
+      });          
+    }
+
       //comments
       if(this.generalInfo.comments!=undefined){
         var commentsStr =this.generalInfo.comments.split(",");
@@ -69,6 +73,12 @@ export class HomeComponent implements OnInit{
 
       
   }
+
+  private buildServices(){
+    
+    
+  }
+
   constructor(private apiService: ApiService) {
 
     this.generalInfo= {
