@@ -16,7 +16,7 @@ export class EmployeeComponent  implements OnInit{
   searchName: string = '';
   searchValid: number = 0;
   isAdmin: boolean= false;
-  defaultImage= '../../assets/defaultimage.jpg';
+  defaultImage= '../assets/defaultimage.jpg';
 
   constructor(private apiService: ApiService,private modalService: NgbModal) { 
     this.isAdmin=apiService.getIsAdminFromLocalStorage();
@@ -24,11 +24,13 @@ export class EmployeeComponent  implements OnInit{
 
   getEmployees(): void {
     this.apiService.getEmployees(this.searchName, this.searchValid).subscribe((data: EmployeeResponse) => {
-      this.employees = data.data;
-      this.employees.forEach(x=>{
-        if(x.EmployeeImage=="" ||this.employees ==undefined)
-          x.EmployeeImage==this.defaultImage;
+      data.data.forEach(x=>{
+        debugger;
+        if(x.EmployeeImage==null||x.EmployeeImage=="" ||x.EmployeeImage ==undefined)
+          x.EmployeeImage=this.defaultImage;
       });
+      this.employees = data.data;
+      
     });
   }
 

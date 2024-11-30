@@ -18,6 +18,7 @@ export class AppComponent  implements OnInit{
   isAdmin = false;
   useEnglish=true;
 
+  descrio:string="";
   generalInfo: MainInfo;
   services:any[]=[];
   customerComments:any[]=[];
@@ -43,6 +44,7 @@ export class AppComponent  implements OnInit{
       description: "",     
       comments: "",  
       Arabicservices:"",
+      Arabicdescription:"",
       services: "",
       Address: "",
       phone1: "",
@@ -70,6 +72,7 @@ export class AppComponent  implements OnInit{
         this.apiService.setData(data.data); 
         localStorage.setItem("Lat",this.generalInfo.Lat.toString()); 
         localStorage.setItem("Lang",this.generalInfo.Lang.toString());     
+        this.descrio=(this.useEnglish)?this.generalInfo.description:this.generalInfo.Arabicdescription;
       },
       (error) => {
         console.error('Error fetching general info', error);
@@ -83,6 +86,8 @@ export class AppComponent  implements OnInit{
     this.useEnglish= language === 'ar' ? false : true;
     localStorage.setItem('lang', language); 
     this.apiService.setData(this.generalInfo); 
+    this.descrio=(this.useEnglish)?this.generalInfo.description:this.generalInfo.Arabicdescription;
+   
   }
 
 

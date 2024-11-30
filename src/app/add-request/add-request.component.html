@@ -14,8 +14,11 @@
         </div>
 
         <div class="input-group" style="padding: 5px;">
+          <!--
           <span class="btn" style="background-color: #2ecc71;color: white;"><i >@</i></span>
           <input class="form-control"  type="email" placeholder="{{ 'Email' | translate }}" formControlName="CustomerEmail" required>
+          -->
+          
           <span class="btn" style="background-color: #2ecc71;color: white;"><i class="fa fa-whatsapp"></i></span>
           <input class="form-control"  type="number" placeholder="{{ 'Whats_Number' | translate }}" formControlName="CustomerPhone" required>
       </div>
@@ -23,20 +26,45 @@
       <h6>{{'Services_Information'|translate}}:</h6>
         
         <div class="input-group" style="display: flex; align-items: center; padding: 5px;">
-              <span class="btn"  style="background-color: #2ecc71;color: white;width: 7%;" ><i class="fa fa-calendar"></i></span>
-              <input class="form-control"  type="date" placeholder="service date" style="width: 30%;" [min]="minDate"  [value]="minDate"  formControlName="OrderDate" required>
+              <span class="btn"  style="background-color: #2ecc71;color: white;width: 10%;" ><i class="fa fa-calendar"></i></span>
+              <input class="form-control"  type="date" placeholder="service date" style="width: 34%;" [min]="minDate"  [value]="minDate"  formControlName="OrderDate" required>
               
               <span class="btn" style="background-color: #2ecc71;color: white;width: 8%;"><i class="fas fa-stopwatch	"></i></span>
+              <select id="hoursStart" name="hoursStart" style="width: 10%;" class="form-control" formControlName="hoursStart" required>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+                <option value="6">6</option>
+                <option value="7">7</option>
+                <option value="8">8</option>
+                <option value="9" selected>9</option>
+                <option value="10">10</option>
+                <option value="11">11</option>
+                <option value="12">12</option>
+              </select>
+            
+              <select id="ampmStart" name="ampmStart" class="form-control" style="width: 11%;" formControlName="ampmStart" required>
+                <option value="AM" selected>AM</option>
+                <option value="PM">PM</option>
+              </select>
+              <span class="btn" style="background-color: #2ecc71;color: white;width: 13%;">Hours</span>
+              <input class="form-control"  type="number" placeholder="{{ 'Hours' | translate }}" style="width: 13%;" formControlName="Hours" required>                
+         
+              <!--
               <input class="form-control"  type="time" placeholder="from" style="width: 27%;"   formControlName="start_time" required>
-              <input class="form-control"  type="time" placeholder="to" style="width: 28%;"   formControlName="end_time" required> 
+              <input class="form-control"  type="time" placeholder="to" style="width: 28%;"   formControlName="end_time" required>
+              -->
+               
         </div>
 
         <div class="input-group" style="display: flex; align-items: center; padding: 5px;">
 
           <span class="btn" style="background-color: #2ecc71;color: white;width: 10%;"><i class="fa fa-map-marker-alt"></i></span>
-          <input type="text" class="form-control" value="" placeholder="{{ 'Address' | translate }}" style="width: 65%;" formControlName="Address" required> 
+          <input type="text" class="form-control" value="" placeholder="{{ 'Address' | translate }}" style="width: 67%;" formControlName="Address" required> 
           <span class="btn" style="background-color: #2ecc71;color: white;width: 10%;"><i class="fa fa-users"></i></span>
-          <input class="form-control"  type="number" placeholder="{{ 'Employee_Number' | translate }}" style="width: 15%;" value="3" formControlName="EmployeeNumber" required>                
+          <input class="form-control"  type="number" placeholder="{{ 'Employee_Number' | translate }}" style="width: 13%;" value="3" formControlName="EmployeeNumber" required>                
       </div>
 
       </div>

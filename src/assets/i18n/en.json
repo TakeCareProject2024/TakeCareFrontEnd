@@ -77,6 +77,8 @@
 "FaildTry":"Failed to save changes. Please try again.",
 "endSmallStart":"end Time must be bigger than start Time",
 "enterPass": "Please enter the admin password:",
-"errorPass":"error password"
+"errorPass":"error password",
+"CompanyServiesAr":"Company Servies Ar",
+"Arabicdescription":"Arabic description"
 
   }

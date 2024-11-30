@@ -47,10 +47,17 @@ export class AddRequestComponent implements OnInit {
       CustomerFirstName: ['', Validators.required],
       CustomerLastName: ['', Validators.required],
       OrderDate: [formatDate(new Date(), 'yyyy-MM-dd', 'en'), Validators.required],
-      end_time: ['', Validators.required],
-      start_time: ['', Validators.required],
-      CustomerEmail:['',Validators.required],
-      CustomerPhone:['',Validators.required],
+      
+      end_time: [''],
+      start_time: [''],
+      
+      hoursStart:[12, Validators.required],
+      ampmStart:['PM', Validators.required],
+      
+      Hours:[3, Validators.required],
+      
+      //CustomerEmail:['',Validators.required],
+      CustomerPhone:['00975',Validators.required],
 
       EmployeeNumber:[3,Validators.required],
       Address:['',Validators.required],
@@ -70,6 +77,7 @@ export class AddRequestComponent implements OnInit {
   ngOnInit(): void {
     this.initForm();
   }
+
 
   formatDateForAPI(datestr:Date, dateString: string): string {
     const [hours, minutes] = dateString.split(':').map(Number);
@@ -96,10 +104,16 @@ export class AddRequestComponent implements OnInit {
       CustomerFirstName: [this.getFromStorage('CustomerFirstName'), Validators.required],
       CustomerLastName: [this.getFromStorage('CustomerLastName'), Validators.required],
       OrderDate: [formatDate(new Date(), 'yyyy-MM-dd', 'en'), Validators.required],
-      start_time: ['', Validators.required],
-      end_time: ['', Validators.required],
-      CustomerEmail:[this.getFromStorage('CustomerEmail'),Validators.required],
-      CustomerPhone:[this.getFromStorage('CustomerPhone'),Validators.required],
+      end_time: [''],
+      start_time: [''],
+
+      //CustomerEmail:[this.getFromStorage('CustomerEmail'),Validators.required],
+      hoursStart:[12, Validators.required],
+      ampmStart:['PM', Validators.required],      
+      Hours:[3, Validators.required],
+      
+      CustomerPhone:['00975',Validators.required],
+
       EmployeeNumber:[3,Validators.required],
       Address:['',Validators.required],
       OrderState:['pending'],
@@ -111,13 +125,34 @@ export class AddRequestComponent implements OnInit {
       imagePath:this.defaultImage
     });
   }
+
+  convertAndAddHours(dateStr:string, time: string,period: string, hoursToAdd: number): string {
+    
+    // Adjust for AM/PM
+    let hour = parseInt(time, 10);
+    if (period.toLowerCase() === 'pm' && hour !== 12) {
+        hour += 12;
+      } else if (period.toLowerCase() === 'am' && hour === 12) {
+        hour = 0; // Midnight case
+      }
+  
+    // Create a Date object for today with the given hour
+    hour=hour+hoursToAdd;
+    var date=new Date(dateStr);
+    date.setHours(hour, 0, 0, 0); // Set hours, minutes, seconds, milliseconds
+
+    var res= this.datePipe.transform(date, 'yyyy-MM-dd HH:mm:ss');
+    
+    if(res==null) return '';
+    return res;
+  }  
  
+  
   saveRequest(): void {
     debugger;
     const newRequets: Request = this.requestForm.value;
-    
-    newRequets.start_time = this.formatDateForAPI(newRequets.OrderDate,newRequets.start_time); 
-    newRequets.end_time = this.formatDateForAPI(newRequets.OrderDate,newRequets.end_time); 
+    newRequets.start_time =this.convertAndAddHours(this.requestForm.value.OrderDate,this.requestForm.value.hoursStart,this.requestForm.value.ampmStart,0);
+    newRequets.end_time = this.convertAndAddHours(this.requestForm.value.OrderDate,this.requestForm.value.hoursStart,this.requestForm.value.ampmStart,this.requestForm.value.Hours); 
     
     if(this.requestForm.value.end_time<=this.requestForm.value.start_time){
       this.msgResponse = this.translate.instant('endSmallStart');
@@ -144,7 +179,7 @@ export class AddRequestComponent implements OnInit {
     }
 
     this.setStorage('CustomerPhone',this.requestForm.value.CustomerPhone);
-    this.setStorage('CustomerEmail',this.requestForm.value.CustomerEmail);
+    //this.setStorage('CustomerEmail',this.requestForm.value.CustomerEmail);
     this.setStorage('CustomerLastName',this.requestForm.value.CustomerLastName);
     this.setStorage('CustomerFirstName',this.requestForm.value.CustomerFirstName);
     

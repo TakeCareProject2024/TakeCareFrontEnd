@@ -27,6 +27,9 @@ export class DashBoardComponent implements OnInit {
   customerComments:any[]=[{name:"",description:""},{name:"",description:""},{name:"",description:""}  ];
   services:any[]=[{title:"",description:""},{title:"",description:""},{title:"",description:""},
                   {title:"",description:""},{title:"",description:""},{title:"",description:""}];
+                  
+  servicesAr:any[]=[{title:"",description:""},{title:"",description:""},{title:"",description:""},
+    {title:"",description:""},{title:"",description:""},{title:"",description:""}];
   
   constructor(private router: Router,private apiService: ApiService,private translate: TranslateService) { }
 
@@ -62,6 +65,22 @@ export class DashBoardComponent implements OnInit {
           var servecisInfo =element.split(":");
           if(servecisInfo.length==2){
             this.services[index]={
+              title: servecisInfo[0],
+              description: servecisInfo[1]
+            };
+            index=index+1;
+          }
+        });          
+      }
+
+       //serivces
+       if(this.generalInfo.Arabicservices!=undefined){
+        var servecisList =this.generalInfo.Arabicservices.split(",");
+        var index=0;
+        servecisList.forEach(element => {
+          var servecisInfo =element.split(":");
+          if(servecisInfo.length==2){
+            this.servicesAr[index]={
               title: servecisInfo[0],
               description: servecisInfo[1]
             };
@@ -107,7 +126,14 @@ export class DashBoardComponent implements OnInit {
     this.services.forEach(element => {
       this.generalInfo.services=this.generalInfo.services+
       element.title+":"+element.description+",";
-    });   
+    });  
+    
+     //serivces
+     this.generalInfo.Arabicservices="";
+     this.servicesAr.forEach(element => {
+       this.generalInfo.Arabicservices=this.generalInfo.Arabicservices+
+       element.title+":"+element.description+",";
+     });  
 
     //comments
    this.generalInfo.comments="";

@@ -92,7 +92,6 @@ export class AddEditEmployeeComponent implements OnInit {
 
 
   saveEmployee(): void {
-  
     if (this.employeeForm.valid) {
      
       //set Date
@@ -104,7 +103,7 @@ export class AddEditEmployeeComponent implements OnInit {
       formData.append('Evalute', employeeData.Evalute.toString());
       
       formData.append('StartWork', employeeData.StartWork.toString());
-      formData.append('EmployeeImage', employeeData.EmployeeImage.toString());
+      //formData.append('EmployeeImage', employeeData.EmployeeImage.toString());
 
       var imageFile= this.employeeForm.get('image')?.value;
       if (imageFile!=undefined) {
@@ -129,7 +128,6 @@ export class AddEditEmployeeComponent implements OnInit {
           if(result){
             this.msgResponse = 'saved';
             this.msgClass = 'text-success'; // apply success styling
-            debugger;
             if(this.imagePreview!=''){
               this.employeeForm.value.imagePreview= this.imagePreview ;
               this.employeeForm.value.EmployeeImage= '';            
@@ -151,5 +149,155 @@ export class AddEditEmployeeComponent implements OnInit {
     this.msgResponse = '';
     this.msgClass = '';
   }
+
+
+  ///---------------------------------------------------
+  maxSize = 2 * 1024 * 1024; // 2MB
+
+  onImageSelect(event: Event): void {
+    
+    const file = (event.target as HTMLInputElement).files?.[0];
+    if (file) {
+      this.resizeImage(file, 800, 800, 0.8).then((resizedImage) => {
+        if (this.checkFileSize(resizedImage)) {
+          this.imagePreview = resizedImage; // Show resized image
+          this.uploadImage(resizedImage); // Send to backend
+        } else {
+          console.error('Image exceeds 2MB after resizing. Adjusting quality...');
+          this.reduceImageQuality(resizedImage).then((compressedImage) => {
+            this.imagePreview = compressedImage;
+            this.uploadImage(compressedImage);
+          });
+        }
+      });
+    }
+  }
+
+  resizeImage(
+    file: File,maxWidth: number,
+    maxHeight: number,quality: number
+  ): Promise<string> {
+    return new Promise((resolve, reject) => {
+      const img = new Image();
+      const reader = new FileReader();
+
+      reader.onload = (event: ProgressEvent<FileReader>) => {
+        if (event.target?.result) {
+          img.src = event.target.result as string;
+        }
+      };
+
+      img.onload = () => {
+        const canvas = document.createElement('canvas');
+        const ctx = canvas.getContext('2d');
+
+        if (!ctx) {
+          reject('Canvas not supported');
+          return;
+        }
+
+        // Calculate dimensions
+        let width = img.width;
+        let height = img.height;
+
+        if (width > height) {
+          if (width > maxWidth) {
+            height = (height * maxWidth) / width;
+            width = maxWidth;
+          }
+        } else {
+          if (height > maxHeight) {
+            width = (width * maxHeight) / height;
+            height = maxHeight;
+          }
+        }
+
+        canvas.width = width;
+        canvas.height = height;
+
+        // Draw resized image on canvas
+        ctx.drawImage(img, 0, 0, width, height);
+
+        // Convert to Base64 string with compression
+        resolve(canvas.toDataURL('image/jpeg', quality));
+      };
+
+      reader.onerror = (error) => reject(error);
+      reader.readAsDataURL(file);
+    });
+  }
+
+  checkFileSize(base64String: string): boolean {
+    const byteString = atob(base64String.split(',')[1]);
+    return byteString.length <= this.maxSize;
+  }
+
+  reduceImageQuality(base64String: string): Promise<string> {
+    const qualityStep = 0.1; // Reduce quality in steps
+    const maxAttempts = 5;
+
+    return new Promise((resolve, reject) => {
+      let attempts = 0;
+
+      const tryCompress = (currentQuality: number) => {
+        const img = new Image();
+        img.src = base64String;
+
+        img.onload = () => {
+          const canvas = document.createElement('canvas');
+          const ctx = canvas.getContext('2d');
+
+          if (!ctx) {
+            reject('Canvas not supported');
+            return;
+          }
+
+          canvas.width = img.width;
+          canvas.height = img.height;
+          ctx.drawImage(img, 0, 0);
+
+          const compressedBase64 = canvas.toDataURL('image/jpeg', currentQuality);
+
+          if (this.checkFileSize(compressedBase64)) {
+            resolve(compressedBase64);
+          } else if (attempts < maxAttempts) {
+            attempts++;
+            tryCompress(currentQuality - qualityStep);
+          } else {
+            reject('Unable to compress image below 2MB');
+          }
+        };
+      };
+
+      tryCompress(0.8); // Start with initial quality
+    });
+  }
+
+  uploadImage(imageBase64: string): void {
+
+    //reader.readAsDataURL(file); // Convert image to base64 string for preview
+    const blob = this.dataURLToBlob(imageBase64);
+
+    this.employeeForm.patchValue({ image: blob });
+    this.employeeForm.get('image')?.updateValueAndValidity();
+    //const formData = new FormData();
+    //formData.append('file', blob, 'resized-image.jpg');
+
+  }
+
+  dataURLToBlob(dataURL: string): Blob {
+    const parts = dataURL.split(',');
+    const mime = parts[0].match(/:(.*?);/)?.[1];
+    const bstr = atob(parts[1]);
+    let n = bstr.length;
+    const u8arr = new Uint8Array(n);
+
+    while (n--) {
+      u8arr[n] = bstr.charCodeAt(n);
+    }
+
+    return new Blob([u8arr], { type: mime });
+  }
+  ///---------------------------------------------------
   
 }

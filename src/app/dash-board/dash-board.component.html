@@ -73,6 +73,11 @@
                       </button>
                     </li>
                     <li class="nav-item" role="presentation">
+                        <button class="nav-link" id="tabServicesAr-tab" data-bs-toggle="tab" data-bs-target="#tabServicesAr" type="button" role="tab" aria-controls="tab2" aria-selected="false">
+                          {{'CompanyServiesAr'|translate}}
+                        </button>
+                      </li>
+                      <li class="nav-item" role="presentation">
                         <button class="nav-link" id="tabComments-tab" data-bs-toggle="tab" data-bs-target="#tabComments" type="button" role="tab" aria-controls="tab2" aria-selected="false">
                           {{'CompanyComments'|translate}}
                         </button>
@@ -99,6 +104,12 @@
                         <div class="mb-3">
                             <label for="description" class="form-label">{{'Description'|translate}}</label>
                             <input type="text" class="form-control" id="description" [(ngModel)]="generalInfo.description" name="description" />
+                        </div>                          
+                    </div>
+                    <div class="col-md-6">
+                        <div class="mb-3">
+                            <label for="description" class="form-label">{{'Arabicdescription'|translate}}</label>
+                            <input type="text" class="form-control" id="Arabicdescription" [(ngModel)]="generalInfo.Arabicdescription" name="Arabicdescription" />
                         </div>                          
                     </div>
                     
@@ -197,6 +208,77 @@
                     <div class="col-md-6    ">
                         <label for="services" class="form-label">{{'description'|translate}}  6</label>
                         <input type="text" class="form-control" placeholder="description" id="servecisListdescription5" [(ngModel)]="services[5].description" name="servecisListdescription5" />
+                    </div>                          
+                </div>
+
+            </div>
+
+            <div class="tab-pane fade" id="tabServicesAr" role="tabpanel" aria-labelledby="tabAr-tab">
+               
+                <div class="row">
+                    <div class="col-md-6">
+                        <label for="services" class="form-label">{{'title'|translate}} 1 </label>
+                        <input type="text" class="form-control" placeholder="title" id="servecisListtitleAr0" [(ngModel)]="servicesAr[0].title" name="servecisListtitleAr0" />
+                    </div>          
+                    <div class="col-md-6">
+                        <label for="services" class="form-label">{{'description'|translate}}  1</label>
+                        <input type="text" class="form-control" placeholder="description" id="servecisListdescriptionAr0" [(ngModel)]="servicesAr[0].description" name="servecisListdescriptionAr0" />
+                    </div>  
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <label for="services" class="form-label">{{'title'|translate}} 2 </label>
+                        <input type="text" class="form-control" placeholder="title" id="servecisListtitleAr1" [(ngModel)]="servicesAr[1].title" name="servecisListtitleAr1" />
+                    </div>          
+                    <div class="col-md-6">
+                        <label for="services" class="form-label">{{'description'|translate}}  2</label>
+                        <input type="text" class="form-control" placeholder="description" id="servecisListdescriptionAr1" [(ngModel)]="servicesAr[1].description" name="servecisListdescriptionAr1" />
+                    </div>                          
+                
+                </div>
+                
+                <div class="row">
+                    <div class="col-md-6">
+                        <label for="services" class="form-label">{{'title'|translate}} 3 </label>
+                        <input type="text" class="form-control" placeholder="title" id="servecisListtitleAr2" [(ngModel)]="servicesAr[2].title" name="servecisListtitleAr2" />
+                    </div>          
+                    <div class="col-md-6">
+                        <label for="services" class="form-label">{{'description'|translate}}  3</label>
+                        <input type="text" class="form-control" placeholder="description" id="servecisListdescriptionAr2" [(ngModel)]="servicesAr[2].description" name="servecisListdescriptionAr2" />
+                    </div>               
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <label for="services" class="form-label">{{'title'|translate}} 4 </label>
+                        <input type="text" class="form-control" placeholder="title" id="servecisListtitleAr3" [(ngModel)]="servicesAr[3].title" name="servecisListtitleAr3" />
+                    </div>          
+                    <div class="col-md-6">
+                        <label for="services" class="form-label">{{'description'|translate}}  4</label>
+                        <input type="text" class="form-control" placeholder="description" id="servecisListdescriptionAr3" [(ngModel)]="servicesAr[3].description" name="servecisListdescriptionAr3" />
+                    </div>  
+                </div>
+              
+                <div class="row">
+                    <div class="col-md-6">
+                        <label for="services" class="form-label">{{'title'|translate}} 5 </label>
+                        <input type="text" class="form-control" placeholder="title" id="servecisListtitleAr4" [(ngModel)]="servicesAr[4].title" name="servecisListtitleAr4" />
+                    </div>          
+                    <div class="col-md-6">
+                        <label for="services" class="form-label">{{'description'|translate}}  5</label>
+                        <input type="text" class="form-control" placeholder="description" id="servecisListdescriptionAr4" [(ngModel)]="servicesAr[4].description" name="servecisListdescriptionAr4" />
+                    </div>  
+                </div>
+                
+                <div class="row">
+                    <div class="col-md-6">
+                        <label for="services" class="form-label">{{'title'|translate}} 6 </label>
+                        <input type="text" class="form-control" placeholder="title" id="servecisListtitleAr5" [(ngModel)]="servicesAr[5].title" name="servecisListtitleAr5" />
+                    </div>          
+                    <div class="col-md-6    ">
+                        <label for="services" class="form-label">{{'description'|translate}}  6</label>
+                        <input type="text" class="form-control" placeholder="description" id="servecisListdescriptionAr5" [(ngModel)]="servicesAr[5].description" name="servecisListdescriptionAr5" />
                     </div>                          
                 </div>
 

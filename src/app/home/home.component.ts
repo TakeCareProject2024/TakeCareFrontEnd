@@ -14,6 +14,7 @@ export class HomeComponent implements OnInit{
   services:any[]=[{title:"",description:""},{title:"",description:""},{title:"",description:""},
     {title:"",description:""},{title:"",description:""},{title:"",description:""},
   ];
+  descrio:string="";
   whatsAppLink:string="";
   customerComments:any[]=[{name:"",description:""},{name:"",description:""},{name:"",description:""}];
   @Input() src:string="";
@@ -28,8 +29,10 @@ export class HomeComponent implements OnInit{
     
     var services="";
     if(lang=="en"){
+      this.descrio=this.generalInfo.description;
       services=this.generalInfo.services; 
     }else{
+      this.descrio=this.generalInfo.Arabicdescription;
       services=this.generalInfo.Arabicservices;  
     }
       
@@ -87,6 +90,7 @@ export class HomeComponent implements OnInit{
       description: "",
       services: "",
       Arabicservices:"",
+      Arabicdescription:"",
       Profile: [],
       comments: "",
       Address: "",
