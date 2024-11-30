@@ -30,15 +30,19 @@ export class DashBoardComponent implements OnInit {
                   
   servicesAr:any[]=[{title:"",description:""},{title:"",description:""},{title:"",description:""},
     {title:"",description:""},{title:"",description:""},{title:"",description:""}];
-  
+    useEnglish:boolean=true;
+
   constructor(private router: Router,private apiService: ApiService,private translate: TranslateService) { }
 
   ngOnInit(){
+
+    this.useEnglish = localStorage.getItem('lang')!="ar";
+    
     this.apiService.data$.subscribe(data => {
       this.generalInfo = data;
     
       this.isAdmin=this.apiService.getIsAdminFromLocalStorage();
-        debugger;
+       
     if(!this.isAdmin && this.generalInfo.Email!=undefined){
       const password = prompt(this.translate.instant("enterPass"));
       if(password!=null){

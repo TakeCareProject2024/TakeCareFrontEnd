@@ -7,7 +7,7 @@
                 <div class="card">
                     <div class="card-content">
                         <h2 class="card-title">{{ generalInfo.companyName }} <i><small> - {{ generalInfo.phone1 }}</small></i></h2>
-                            <p class="card-description">{{ generalInfo.description }}</p>
+                            <p class="card-description">{{(useEnglish)? generalInfo.description:generalInfo.Arabicdescription }}</p>
                             <p class="card-description"><strong>{{'Location_In'|translate}}</strong><br> {{ generalInfo.Address }}</p>
                             <p class="card-description"><strong>{{'Conntact_Us'|translate}}  </strong> 
                                 <a [href]="generalInfo.Email" target="_blank"> {{'Email'|translate}}</a> |
