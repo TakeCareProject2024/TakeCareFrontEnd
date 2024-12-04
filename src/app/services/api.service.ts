@@ -1,6 +1,6 @@
 // src/app/services/api.service.ts
 import { Injectable } from '@angular/core';
-import { HttpClient ,HttpParams} from '@angular/common/http';
+import { HttpClient ,HttpParams, HttpResponse} from '@angular/common/http';
 import { BehaviorSubject, Observable, of } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
 
@@ -36,9 +36,10 @@ export class ApiService {
     localStorage.setItem('isAdmin', isAdmin.toString());
   }
 
-  checkPassword(data: any):  Observable<boolean>  {
-
-    return this.http.post<boolean>(`${this.apiUrlMainInfo}/login`, data, { observe: 'response' }).pipe(
+  checkPassword(data: any): Observable<HttpResponse< MainInfoResponse>> {
+    return this.http.post<MainInfoResponse>(`${this.apiUrlMainInfo}/login`, data,{ observe: 'response' });
+    /*
+    var res= this.http.post<boolean>(`${this.apiUrlMainInfo}/login`, data, { observe: 'response' }).pipe(
       map((response) => {
         // Map the response to a boolean
         return response.status === 200;
@@ -49,6 +50,8 @@ export class ApiService {
         return of(false); // Use `of` to return an Observable<boolean>
       })
     );
+
+    return res;*/
 }
 
   changePassword(data: any): boolean {

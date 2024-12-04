@@ -1,6 +1,7 @@
 export interface MainInfoResponse {
   data: MainInfo;
   message: string;
+  status:number;
 }
 export interface MainInfo {
     id: number;

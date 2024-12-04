@@ -25,7 +25,7 @@ export class EmployeeComponent  implements OnInit{
   getEmployees(): void {
     this.apiService.getEmployees(this.searchName, this.searchValid).subscribe((data: EmployeeResponse) => {
       data.data.forEach(x=>{
-        debugger;
+        
         if(x.EmployeeImage==null||x.EmployeeImage=="" ||x.EmployeeImage ==undefined)
           x.EmployeeImage=this.defaultImage;
       });

@@ -95,19 +95,21 @@ export class AddEditEmployeeComponent implements OnInit {
     if (this.employeeForm.valid) {
      
       //set Date
+
       const formData = new FormData();
       const employeeData: Employee = this.employeeForm.value;
       formData.append('FirstName', employeeData.FirstName);
       formData.append('LastName', employeeData.LastName);
       formData.append('age', employeeData.age.toString());
       formData.append('Evalute', employeeData.Evalute.toString());
-      
       formData.append('StartWork', employeeData.StartWork.toString());
-      //formData.append('EmployeeImage', employeeData.EmployeeImage.toString());
-
+      
       var imageFile= this.employeeForm.get('image')?.value;
       if (imageFile!=undefined) {
         formData.append('EmployeeImage',imageFile);
+        employeeData.EmployeeImage="";
+      }else if(employeeData.EmployeeImage!=this.defaultImage){
+        formData.append('EmployeeImage', employeeData.EmployeeImage.toString());
       }
 
       if (employeeData.id!=undefined) {
@@ -130,7 +132,7 @@ export class AddEditEmployeeComponent implements OnInit {
             this.msgClass = 'text-success'; // apply success styling
             if(this.imagePreview!=''){
               this.employeeForm.value.imagePreview= this.imagePreview ;
-              this.employeeForm.value.EmployeeImage= '';            
+              //this.employeeForm.value.EmployeeImage= '';            
             }
             setTimeout(()=>this.closeModal(this.employeeForm.value),2000);
           }
@@ -155,7 +157,7 @@ export class AddEditEmployeeComponent implements OnInit {
   maxSize = 2 * 1024 * 1024; // 2MB
 
   onImageSelect(event: Event): void {
-    
+    debugger;
     const file = (event.target as HTMLInputElement).files?.[0];
     if (file) {
       this.resizeImage(file, 800, 800, 0.8).then((resizedImage) => {
@@ -278,7 +280,7 @@ export class AddEditEmployeeComponent implements OnInit {
     //reader.readAsDataURL(file); // Convert image to base64 string for preview
     const blob = this.dataURLToBlob(imageBase64);
 
-    this.employeeForm.patchValue({ image: blob });
+    this.employeeForm.patchValue({ image: blob, imagePreview: imageBase64});
     this.employeeForm.get('image')?.updateValueAndValidity();
     //const formData = new FormData();
     //formData.append('file', blob, 'resized-image.jpg');

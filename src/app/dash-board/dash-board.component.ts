@@ -44,21 +44,28 @@ export class DashBoardComponent implements OnInit {
       this.isAdmin=this.apiService.getIsAdminFromLocalStorage();
        
     if(!this.isAdmin && this.generalInfo.Email!=undefined){
+      debugger;
       const password = prompt(this.translate.instant("enterPass"));
       if(password!=null){
         var dataLog={password:password,Email:this.generalInfo.Email};
-        var result=this.apiService.checkPassword(dataLog);
-        
-        if(!result){
-          alert(this.translate.instant('errorPass'));
-          this.apiService.setIsAdmin(false);
-          //window.location.assign('/');
-        }else{
-          this.isAdmin=true;
-          this.apiService.setIsAdmin(true);
-          window.location.reload();
-        }
-          
+        this.apiService.checkPassword(dataLog).subscribe(
+          (data) => {
+            debugger;
+            if(data.status!=200){
+              alert(this.translate.instant('errorPass'));
+              this.apiService.setIsAdmin(false);
+              //window.location.assign('/');
+            }else{
+              this.isAdmin=true;
+              this.apiService.setIsAdmin(true);
+              window.location.reload();
+            }
+          },
+          (error) => {
+            alert(this.translate.instant('errorPass'));
+            this.apiService.setIsAdmin(false);
+          }
+        );
       }
     }
        //serivces
