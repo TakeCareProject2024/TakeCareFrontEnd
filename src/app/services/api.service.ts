@@ -4,9 +4,9 @@ import { HttpClient ,HttpParams, HttpResponse} from '@angular/common/http';
 import { BehaviorSubject, Observable, of } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
 
-import { Employee, EmployeeResponse } from '../models/Employee';
+import { Employee, EmployeeResponse, EmployeeResponseAdd } from '../models/Employee';
 import { MainInfo, MainInfoResponse } from '../models/MainInfo';
-import { Request, RequestResponse } from  '../models/Request';
+import { Request, RequestResponse, RequestResponseAdd } from  '../models/Request';
 
 @Injectable({
   providedIn: 'root'
@@ -54,19 +54,9 @@ export class ApiService {
     return res;*/
 }
 
-  changePassword(data: any): boolean {
-    this.http.patch(`${this.apiUrlMainInfo}/changePassword`, data,{ observe: 'response' }).subscribe(response => {
-       if (response.status == 200) {
-           return true;
-       } else {
-           return false;
-       }
-   },err => {
-     return false;
-   });
- 
-   return false;
-   }
+  changePassword(data: any): Observable<MainInfoResponse> {
+    return this.http.patch<MainInfoResponse>(`${this.apiUrlMainInfo}/changePassword`, data); 
+  }
 
   public getIsAdminFromLocalStorage(): boolean {
     return localStorage.getItem('isAdmin') === 'true';
@@ -83,12 +73,12 @@ export class ApiService {
     return this.http.get<Employee>(`${this.apiUrlEmployee}/${id}`);
   }
 
-  addEmployee(employee: FormData): Observable<Employee> {
-    return this.http.post<Employee>(this.apiUrlEmployee, employee);
+  addEmployee(employee: FormData): Observable<EmployeeResponseAdd> {
+    return this.http.post<EmployeeResponseAdd>(this.apiUrlEmployee, employee);
   }
 
-  updateEmployee(employee: FormData,id:number): Observable<Employee> {
-    return this.http.put<Employee>(`${this.apiUrlEmployee}/${id}`, employee);
+  updateEmployee(employee: FormData,id:number): Observable<EmployeeResponseAdd> {
+    return this.http.put<EmployeeResponseAdd>(`${this.apiUrlEmployee}/${id}`, employee);
   }
 
   deleteEmployee(id: number): Observable<boolean> {
@@ -119,12 +109,12 @@ export class ApiService {
     return this.http.get<Request>(`${this.apiUrlRequest}/${id}`);
   }
 
-  addRequest(request: Request): Observable<Request> {
-    return this.http.post<Request>(this.apiUrlRequest, request);
+  addRequest(request: Request): Observable<RequestResponseAdd> {
+    return this.http.post<RequestResponseAdd>(this.apiUrlRequest, request);
   }
 
-  updateRequest(request: Request): Observable<Request> {
-    return this.http.put<Request>(`${this.apiUrlRequest}/${request.id}`, request);
+  updateRequest(request: Request): Observable<RequestResponseAdd> {
+    return this.http.put<RequestResponseAdd>(`${this.apiUrlRequest}/${request.id}`, request);
   }
 
   deleteRequest(id: number): Observable<boolean> {

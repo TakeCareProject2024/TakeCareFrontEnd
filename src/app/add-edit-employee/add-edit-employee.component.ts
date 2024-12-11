@@ -45,11 +45,12 @@ export class AddEditEmployeeComponent implements OnInit {
 
   ngOnInit(): void {
     this.isEditMode = !!this.employee;
-    this.initForm();
+    this.initForm();  
+    this.imagePreview=this.employee.imagePreview;
 
-    if(this.employee!=undefined &&  this.employee.EmployeeImage!=undefined)
+    if(this.employee!=undefined &&  this.employee.EmployeeImage!=undefined && this.employee.EmployeeImage!="")
       this.defaultImage=this.employee.EmployeeImage;
-    else
+    else if(this.employee.imagePreview==undefined && this.employee.imagePreview=="")
       this.defaultImage="../assets/defaultimage.jpg";
 
       
@@ -93,9 +94,8 @@ export class AddEditEmployeeComponent implements OnInit {
 
   saveEmployee(): void {
     if (this.employeeForm.valid) {
-     
+      debugger;
       //set Date
-
       const formData = new FormData();
       const employeeData: Employee = this.employeeForm.value;
       formData.append('FirstName', employeeData.FirstName);
@@ -116,9 +116,11 @@ export class AddEditEmployeeComponent implements OnInit {
       
         formData.append('id', employeeData.id.toString());
         this.employeeService.updateEmployee(formData,employeeData.id).subscribe((result) => {
-          if(result){
+          if(result.message=="Employee updated successfully"){
             this.msgResponse = this.translate.instant('saved');
             this.msgClass = 'text-success'; // apply success styling
+            this.employeeForm.value.EmployeeImage=result.data.EmployeeImage;
+            
             setTimeout(()=>this.closeModal(this.employeeForm.value),2000);
           }else{
             this.msgResponse = this.translate.instant('FaildTry');
@@ -127,9 +129,11 @@ export class AddEditEmployeeComponent implements OnInit {
       } else {
 
         this.employeeService.addEmployee(formData).subscribe((result) => {
-          if(result){
+          if(result.message=="Employee created successfully"){
             this.msgResponse = 'saved';
             this.msgClass = 'text-success'; // apply success styling
+            this.employeeForm.value.id=result.data.id;
+            this.employeeForm.value.EmployeeImage=result.data.EmployeeImage;
             if(this.imagePreview!=''){
               this.employeeForm.value.imagePreview= this.imagePreview ;
               //this.employeeForm.value.EmployeeImage= '';            

@@ -3,6 +3,11 @@ export interface EmployeeResponse {
   message: string;
 }
 
+export interface EmployeeResponseAdd {
+  data: Employee;
+  message: string;
+}
+
 export interface Employee {
     id: number;
     FirstName: string;

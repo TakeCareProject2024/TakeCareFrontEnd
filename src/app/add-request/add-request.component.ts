@@ -163,17 +163,28 @@ export class AddRequestComponent implements OnInit {
       }, 2000);
     }
     else if (this.requestForm.valid) {
-      this.employeeService.addRequest(newRequets).subscribe((result) =>{
-        if(result){
-          this.msgResponse = this.translate.instant('saved');
-          this.msgClass = 'text-success'; // apply success styling
-          setTimeout(()=>this.closeModal(newRequets),2000);
-        }
-        else{
+      this.employeeService.addRequest(newRequets).subscribe(
+        
+        (result) =>{
+          if(result.message=="Order created successfully"){
+            this.msgResponse = this.translate.instant('saved');
+            this.msgClass = 'text-success'; // apply success styling
+            setTimeout(()=>this.closeModal(newRequets),2000);
+          }
+          else{
+            this.msgResponse =this.translate.instant('FaildTry');
+            this.msgClass = 'text-danger'; 
+          }
+        },
+        (error) => {
           this.msgResponse =this.translate.instant('FaildTry');
           this.msgClass = 'text-danger'; 
-        }
-      });
+        });
+
+        setTimeout(() => {
+          this.msgResponse ="";
+        this.msgClass = ''; 
+        }, 3000);
     }else{
       this.requestForm.markAllAsTouched();
     }

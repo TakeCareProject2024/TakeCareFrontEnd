@@ -44,13 +44,11 @@ export class DashBoardComponent implements OnInit {
       this.isAdmin=this.apiService.getIsAdminFromLocalStorage();
        
     if(!this.isAdmin && this.generalInfo.Email!=undefined){
-      debugger;
       const password = prompt(this.translate.instant("enterPass"));
       if(password!=null){
         var dataLog={password:password,Email:this.generalInfo.Email};
         this.apiService.checkPassword(dataLog).subscribe(
           (data) => {
-            debugger;
             if(data.status!=200){
               alert(this.translate.instant('errorPass'));
               this.apiService.setIsAdmin(false);
@@ -213,29 +211,39 @@ export class DashBoardComponent implements OnInit {
         "new_password_confirmation": this.confirmPassword
     };
 
-    var result = this.apiService.changePassword(data);
-    
-    if(result){
-      this.msgResponse2 =  this.translate.instant('saved');
-      this.msgClass = 'text-success'; // apply success styling
-      
-      setTimeout(() => {
-        const closeModalButton = document.querySelector('#closeChange') as HTMLElement;
-        if (closeModalButton) closeModalButton.click();
-        this.initPass();
-      }, 1000);
+    this.apiService.changePassword(data).subscribe(response => {
+      debugger;
+      if (response.message == "Password changed successfully") {
+        this.msgResponse2 =  this.translate.instant('saved');
+        this.msgClass = 'text-success'; // apply success styling
+        
+        setTimeout(() => {
+          const closeModalButton = document.querySelector('#closeChange') as HTMLElement;
+          if (closeModalButton) closeModalButton.click();
+          this.initPass();
+        }, 1000);
+      } 
+      else {
+        this.msgResponse2 = response.message;//this.translate.instant('FaildTry');
+        this.msgClass = 'text-danger'; 
 
-    }else{
-      this.msgResponse2 = this.translate.instant('FaildTry');
-      this.msgClass = 'text-danger'; 
+        }
 
-      
-    setTimeout(() => {
-      this.msgResponse2 = '';
-      this.msgClass = ''; 
-    }, 1000);
+        setTimeout(() => {
+          this.msgResponse2 = '';
+          this.msgClass = ''; 
+        }, 2000);
+      },err => {
+        debugger;
+        this.msgResponse2 = err.message//this.translate.instant('FaildTry');
+        this.msgClass = 'text-danger'; 
+
+        setTimeout(() => {
+          this.msgResponse2 = '';
+          this.msgClass = ''; 
+        }, 2000);
+      });
     }
-  }
-  }
 
+  }
 }

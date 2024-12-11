@@ -4,6 +4,13 @@ export interface RequestResponse {
   
 }
 
+export interface RequestResponseAdd {
+  data: Request;
+  message: string;
+  
+}
+
+
 export interface Request {
 
     id: number;
