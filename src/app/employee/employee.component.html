@@ -51,7 +51,8 @@
         </div>
         <div *ngIf="isAdmin" class="text-align:center">
           <div class="input-group" style="padding: 20px;">
-            <a class="btn btn-success" style="background-color: #2ecc71;" (click)="openEditEmployeePopup(employee)">{{ 'Edit' | translate }}</a>
+            <!-- <a class="btn btn-success" style="background-color: #2ecc71;" (click)="openEditEmployeePopup(employee)">{{ 'Edit' | translate }}</a>
+             -->
             <a class="btn btn-secondary" (click)="deleteEmployee(employee.id)"><span> <i class="fa fa-trash"></i> </span></a>
           </div>
         </div>

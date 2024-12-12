@@ -61,7 +61,7 @@ export class ApiService {
   public getIsAdminFromLocalStorage(): boolean {
     return localStorage.getItem('isAdmin') === 'true';
   }
-  //-----------------------
+  //-----------------------employees
   private apiUrlEmployee   = 'http://137.184.119.246/api/employees';
   
   getEmployees(search?: string, valid?: number): Observable<EmployeeResponse> {

@@ -74,44 +74,111 @@ export class AddEditEmployeeComponent implements OnInit {
   }
   
   onFileSelected(event: any): void {
-    const file = event.target.files[0];
-
-    if (file) {
-      this.selectedFile = file;
-      // Display the selected image in the image preview
-      const reader = new FileReader();
-      reader.onload = () => {
-        this.imagePreview = reader.result; // Set the preview image to the FileReader result
-      };
-      reader.readAsDataURL(file); // Convert image to base64 string for preview
-
-      // Set the image value in the form
-      this.employeeForm.patchValue({ image: file });
-      this.employeeForm.get('image')?.updateValueAndValidity();
+    const file = (event.target as HTMLInputElement).files?.[0];
+    if(file!=undefined && file.size>this.maxSize){
+      
+      this.msgResponse = "error size more than 2MB";
+      this.msgClass = 'text-danger'; 
+      setTimeout(() => {
+        this.msgResponse = "";
+      this.msgClass = ''; 
+      }, 4000);
+    }
+    else{
+      if (file) {
+        this.selectedFile = file;
+        // Display the selected image in the image preview
+        const reader = new FileReader();
+        reader.onload = () => {
+          this.imagePreview = reader.result; // Set the preview image to the FileReader result
+        };
+        reader.readAsDataURL(file); // Convert image to base64 string for preview
+  
+        // Set the image value in the form
+        //this.employeeForm.patchValue({ image: file });
+        //this.employeeForm.get('image')?.updateValueAndValidity();
+      }      
     }
   }
 
 
   saveEmployee(): void {
     if (this.employeeForm.valid) {
-      debugger;
+      const formData = new FormData();
+      // Handle image file
+      if (this.selectedFile) {
+        formData.append('EmployeeImage', this.selectedFile);
+      } 
+  
+      /*else if (this.isEditMode && employeeData.EmployeeImage !== this.defaultImage) {
+        formData.append('EmployeeImage', employeeData.EmployeeImage);
+      }*/
+ 
+       const employeeData: Employee = this.employeeForm.value;
+  
+      // Append other form fields
+      formData.append('FirstName', employeeData.FirstName);
+      formData.append('LastName', employeeData.LastName);
+      formData.append('age', employeeData.age.toString());
+      formData.append('Evalute', employeeData.Evalute.toString());
+      formData.append('StartWork', employeeData.StartWork.toString());
+  
+      if (this.isEditMode && employeeData.id) {
+        formData.append('id', employeeData.id.toString());
+        this.employeeService.updateEmployee(formData, employeeData.id).subscribe((result) => {
+          if (result.message === "Employee updated successfully") {
+            this.msgResponse = this.translate.instant('saved');
+            this.msgClass = 'text-success';
+            this.imagePreview = result.data.EmployeeImage; // Update preview
+            this.employeeForm.patchValue({ EmployeeImage: result.data.EmployeeImage });
+            setTimeout(() => this.closeModal(this.employeeForm.value), 2000);
+          } else {
+            this.msgResponse = this.translate.instant('FaildTry');
+            this.msgClass = 'text-danger';
+          }
+        });
+      } else {
+        this.employeeService.addEmployee(formData).subscribe((result) => {
+          if (result.message === "Employee created successfully") {
+            this.msgResponse = 'saved';
+            this.msgClass = 'text-success';
+            this.imagePreview = result.data.EmployeeImage;
+            this.employeeForm.patchValue({ id: result.data.id, EmployeeImage: result.data.EmployeeImage });
+            setTimeout(() => this.closeModal(this.employeeForm.value), 2000);
+          } else {
+            this.msgResponse = this.translate.instant('FaildTry');
+            this.msgClass = 'text-danger';
+          }
+        });
+      }
+    } else {
+      this.employeeForm.markAllAsTouched();
+    }
+  }
+  
+  saveEmployee2(): void {
+    if (this.employeeForm.valid) {
+      
       //set Date
       const formData = new FormData();
       const employeeData: Employee = this.employeeForm.value;
+      
+      //var imageFile= this.employeeForm.get('image')?.value;
+      if (this.selectedFile !=undefined) {
+        formData.append('EmployeeImage',this.selectedFile);
+        //employeeData.EmployeeImage="";
+      }
+      /*else if(employeeData.EmployeeImage!=this.defaultImage){
+        formData.append('EmployeeImage', employeeData.EmployeeImage.toString());
+      }*/
+
       formData.append('FirstName', employeeData.FirstName);
       formData.append('LastName', employeeData.LastName);
       formData.append('age', employeeData.age.toString());
       formData.append('Evalute', employeeData.Evalute.toString());
       formData.append('StartWork', employeeData.StartWork.toString());
       
-      var imageFile= this.employeeForm.get('image')?.value;
-      if (imageFile!=undefined) {
-        formData.append('EmployeeImage',imageFile);
-        employeeData.EmployeeImage="";
-      }else if(employeeData.EmployeeImage!=this.defaultImage){
-        formData.append('EmployeeImage', employeeData.EmployeeImage.toString());
-      }
-
+      
       if (employeeData.id!=undefined) {
       
         formData.append('id', employeeData.id.toString());
@@ -129,6 +196,7 @@ export class AddEditEmployeeComponent implements OnInit {
       } else {
 
         this.employeeService.addEmployee(formData).subscribe((result) => {
+          
           if(result.message=="Employee created successfully"){
             this.msgResponse = 'saved';
             this.msgClass = 'text-success'; // apply success styling
@@ -143,7 +211,19 @@ export class AddEditEmployeeComponent implements OnInit {
           else{
             this.msgResponse =  this.translate.instant('FaildTry');
             this.msgClass = 'text-danger'; 
-          } });
+            setTimeout(() => {
+              this.msgResponse = '';
+              this.msgClass = '';
+            }, 4000);
+          } },
+        (err)=> {
+          this.msgResponse =  this.translate.instant('FaildTry');
+            this.msgClass = 'text-danger';
+            setTimeout(() => {
+              this.msgResponse = '';
+              this.msgClass = '';
+            }, 4000);
+        });
       }
     }else{
       this.employeeForm.markAllAsTouched();
@@ -161,8 +241,9 @@ export class AddEditEmployeeComponent implements OnInit {
   maxSize = 2 * 1024 * 1024; // 2MB
 
   onImageSelect(event: Event): void {
-    debugger;
+    
     const file = (event.target as HTMLInputElement).files?.[0];
+    
     if (file) {
       this.resizeImage(file, 800, 800, 0.8).then((resizedImage) => {
         if (this.checkFileSize(resizedImage)) {
@@ -284,8 +365,8 @@ export class AddEditEmployeeComponent implements OnInit {
     //reader.readAsDataURL(file); // Convert image to base64 string for preview
     const blob = this.dataURLToBlob(imageBase64);
 
-    this.employeeForm.patchValue({ image: blob, imagePreview: imageBase64});
-    this.employeeForm.get('image')?.updateValueAndValidity();
+    this.employeeForm.patchValue({ imagePreview : imageBase64});
+    //this.employeeForm.get('image')?.updateValueAndValidity();
     //const formData = new FormData();
     //formData.append('file', blob, 'resized-image.jpg');
 
