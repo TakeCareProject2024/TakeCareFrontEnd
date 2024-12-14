@@ -57,7 +57,7 @@ export class AddRequestComponent implements OnInit {
       Hours:[3, Validators.required],
       
       //CustomerEmail:['',Validators.required],
-      CustomerPhone:['00975',Validators.required],
+      CustomerPhone:['00971',Validators.required],
 
       EmployeeNumber:[3,Validators.required],
       Address:['',Validators.required],
@@ -112,7 +112,7 @@ export class AddRequestComponent implements OnInit {
       ampmStart:['PM', Validators.required],      
       Hours:[3, Validators.required],
       
-      CustomerPhone:['00975',Validators.required],
+      CustomerPhone:['00971',Validators.required],
 
       EmployeeNumber:[3,Validators.required],
       Address:['',Validators.required],
